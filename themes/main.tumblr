@@ -1,0 +1,105 @@
+{block:tumblrThemr}
+<!--
+<title>{Title}</title>
+<meta name="description" content="{MetaDescription}"/>
+-->
+<h1>{Title}</h1>
+
+{block:Description}
+<section>{Description}</section>
+{/block:Description}
+
+{block:Posts}
+{block:Text}
+<article class="post text">
+    {block:Title}
+    <h3><a href="{Permalink}">{Title}</a></h3>
+    {/block:Title}
+    {Body}
+</article>
+{/block:Text}
+{block:Photo}
+<article class="post photo">
+    <img src="{PhotoURL-500}" alt="{PhotoAlt}"/>
+    {block:Caption}
+    <div class="caption">{Caption}</div>
+    {/block:Caption}
+</article>
+{/block:Photo}
+{block:Panorama}
+<article class="post panorama">
+    {LinkOpenTag}
+    <img src="{PhotoURL-Panorama}" alt="{PhotoAlt}"/>
+    {LinkCloseTag}{block:Caption}
+    <div class="caption">{Caption}</div>
+    {/block:Caption}
+</article>
+{/block:Panorama}
+{block:Photoset}
+<article class="post photoset">
+    {Photoset-500}{block:Caption}
+    <div class="caption">{Caption}</div>
+    {/block:Caption}
+</article>
+{/block:Photoset}
+{block:Quote}
+<article class="post quote">
+    "{Quote}"
+
+    {block:Source}
+    <div class="source">{Source}</div>
+    {/block:Source}
+</article>
+{/block:Quote}
+{block:Link}
+<article class="post link">
+    <a href="{URL}" class="link" {Target}>{Name}</a>
+
+    {block:Description}
+    <div class="description">{Description}</div>
+    {/block:Description}
+</article>
+{/block:Link}
+{block:Chat}
+<article class="post chat">
+    {block:Title}
+    <h3><a href="{Permalink}">{Title}</a></h3>
+    {/block:Title}
+
+    <ul class="chat">
+        {block:Lines}
+        <article class="{Alt} user_{UserNumber}">
+            {block:Label}
+            <span class="label">{Label}</span>
+            {/block:Label}{Line}
+        </article>
+        {/block:Lines}
+    </ul>
+</article>
+{/block:Chat}
+{block:Video}
+<article class="post video">
+    {Video-500}{block:Caption}
+    <div class="caption">{Caption}</div>
+    {/block:Caption}
+</article>
+{/block:Video}
+{block:Audio}
+<article class="post audio">
+    {AudioEmbed}{block:Caption}
+    <div class="caption">{Caption}</div>
+    {/block:Caption}
+</article>
+{/block:Audio}
+{/block:Posts}
+
+<p id="footer">
+    {block:PreviousPage}
+    <a href="{PreviousPage}">&#171; Previous</a>
+    {/block:PreviousPage}{block:NextPage}
+    <a href="{NextPage}">Next &#187;</a>
+    {/block:NextPage}
+
+    <a href="/archive">Archive</a>
+</p>
+{/block:tumblrThemr}
