@@ -47,10 +47,8 @@
         {/block:Photoset}
         {block:Quote}
         <!-- Quote -->
-        "{Quote}"
-        {block:Source}
-        <div class="source">&mdash; {Source}</div>
-        {/block:Source}
+        <blockquote>{Quote}</blockquote>
+        {block:Source}<cite>&mdash; {Source}</cite>{/block:Source}
         {/block:Quote}
         {block:Link}
         <!-- Link -->
@@ -90,13 +88,13 @@
         {/block:Audio}
 
         <aside>
+            <a href="{Permalink}">Notes</a>
             {block:RebloggedFrom}
             <a href="{ReblogParentURL}" data-root="{ReblogRootURL}">{ReblogParentName}</a>
             {/block:RebloggedFrom}
             {block:ContentSource}
             <a href="{SourceURL}">{lang:Source}: {SourceTitle}</a>
             {/block:ContentSource}
-            <a href="{Permalink}">Notes</a>
         </aside>
     </article>
     {/block:Posts}
