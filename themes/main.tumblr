@@ -16,8 +16,9 @@
         {block:Text}
         <!-- Text -->
         {block:Title}<h2>{Title}</h2>{/block:Title}
-        {Body}
+        <div>{Body}</div>
         {/block:Text}
+
         {block:Photo}
         <!-- Photo -->
         <figure>
@@ -27,6 +28,7 @@
             {/block:Caption}
         </figure>
         {/block:Photo}
+
         {block:Panorama}
         <!-- Paranoma -->
         <figure>
@@ -36,6 +38,7 @@
             {/block:Caption}
         </figure>
         {/block:Panorama}
+
         {block:Photoset}
         <!-- Photoset -->
         <figure>
@@ -45,47 +48,62 @@
             {/block:Caption}
         </figure>
         {/block:Photoset}
+
         {block:Quote}
         <!-- Quote -->
         <blockquote>{Quote}</blockquote>
         {block:Source}<cite>&mdash; {Source}</cite>{/block:Source}
         {/block:Quote}
+
         {block:Link}
         <!-- Link -->
-        <a href="{URL}" class="link" {Target}>{Name}</a>
-
+        <h2><a href="{URL}" {Target}>{Name}</a></h2>
         {block:Description}
-        <div class="description">{Description}</div>
+        <div>{Description}</div>
         {/block:Description}
         {/block:Link}
+
         {block:Chat}
         <!-- Chat -->
-        {block:Title}
-        <h2><a href="{Permalink}">{Title}</a></h2>
-        {/block:Title}
-
-        <ul class="chat">
+        {block:Title}<h2>{Title}</h2>{/block:Title}
+        <ul>
             {block:Lines}
-            <article class="{Alt} user_{UserNumber}">
-                {block:Label}
-                <span class="label">{Label}</span>
-                {/block:Label}{Line}
-            </article>
+            <li class="{Alt}">
+                {block:Label}<strong>{Label}</strong>{/block:Label} {Line}
+            </li>
             {/block:Lines}
         </ul>
         {/block:Chat}
+
         {block:Video}
         <!-- Video -->
-        {Video-500}{block:Caption}
-        <div class="caption">{Caption}</div>
-        {/block:Caption}
+        <figure>
+            {Video-500}
+            {block:Caption}
+            <figcaption>{Caption}</figcaption>
+            {/block:Caption}
+        </figure>
         {/block:Video}
+
         {block:Audio}
         <!-- Audio -->
-        {AudioEmbed}{block:Caption}
-        <div class="caption">{Caption}</div>
-        {/block:Caption}
+        <figure>
+            {AudioEmbed}
+            {block:Caption}
+            <figcaption>{Caption}</figcaption>
+            {/block:Caption}
+        </figure>
         {/block:Audio}
+
+        {block:Answer}
+        <!-- Answer -->
+        <div><strong>{Asker}</strong></div>
+        <div>{Question}</div>
+        {block:Answerer}
+        <div><strong>{Answerer}</strong></div>
+        {/block:Answerer}
+        <div>{Replies}</div>
+        {/block:Answer}
 
         <aside>
             <a href="{Permalink}">Notes</a>
