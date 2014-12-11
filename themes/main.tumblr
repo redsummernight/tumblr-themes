@@ -1,99 +1,108 @@
 {block:tumblrThemr}
-<!--
 <title>{Title}</title>
 <meta name="description" content="{MetaDescription}"/>
--->
-<h1>{Title}</h1>
+<!--<style type="text/css">{CustomCSS}</style>-->
+<link rel="shortcut icon" href="{Favicon}">
+<link rel="stylesheet" href="themes/main/main.css" type="text/css" media="screen"/>
 
-{block:Description}
-<section>{Description}</section>
-{/block:Description}
+<header>
+    <h1>{Title}</h1>
+    {block:Description}<p>{Description}</p>{/block:Description}
+</header>
 
-{block:Posts}
-{block:Text}
-<article class="post text">
-    {block:Title}
-    <h3><a href="{Permalink}">{Title}</a></h3>
-    {/block:Title}
-    {Body}
-</article>
-{/block:Text}
-{block:Photo}
-<article class="post photo">
-    <img src="{PhotoURL-500}" alt="{PhotoAlt}"/>
-    {block:Caption}
-    <div class="caption">{Caption}</div>
-    {/block:Caption}
-</article>
-{/block:Photo}
-{block:Panorama}
-<article class="post panorama">
-    {LinkOpenTag}
-    <img src="{PhotoURL-Panorama}" alt="{PhotoAlt}"/>
-    {LinkCloseTag}{block:Caption}
-    <div class="caption">{Caption}</div>
-    {/block:Caption}
-</article>
-{/block:Panorama}
-{block:Photoset}
-<article class="post photoset">
-    {Photoset-500}{block:Caption}
-    <div class="caption">{Caption}</div>
-    {/block:Caption}
-</article>
-{/block:Photoset}
-{block:Quote}
-<article class="post quote">
-    "{Quote}"
+<section class="posts">
+    {block:Posts}
+    <article class="{PostType}">
+        {block:Text}
+        <!-- Text -->
+        {block:Title}<h2>{Title}</h2>{/block:Title}
+        {Body}
+        {/block:Text}
+        {block:Photo}
+        <!-- Photo -->
+        <figure>
+            {LinkOpenTag}<img src="{PhotoURL-500}" alt="{PhotoAlt}"/>{LinkCloseTag}
+            {block:Caption}
+            <figcaption>{Caption}</figcaption>
+            {/block:Caption}
+        </figure>
+        {/block:Photo}
+        {block:Panorama}
+        <!-- Paranoma -->
+        <figure>
+            {LinkOpenTag}<img src="{PhotoURL-Panorama}" alt="{PhotoAlt}"/>{LinkCloseTag}
+            {block:Caption}
+            <figcaption>{Caption}</figcaption>
+            {/block:Caption}
+        </figure>
+        {/block:Panorama}
+        {block:Photoset}
+        <!-- Photoset -->
+        <figure>
+            {Photoset-500}
+            {block:Caption}
+            <figcaption>{Caption}</figcaption>
+            {/block:Caption}
+        </figure>
+        {/block:Photoset}
+        {block:Quote}
+        <!-- Quote -->
+        "{Quote}"
+        {block:Source}
+        <div class="source">&mdash; {Source}</div>
+        {/block:Source}
+        {/block:Quote}
+        {block:Link}
+        <!-- Link -->
+        <a href="{URL}" class="link" {Target}>{Name}</a>
 
-    {block:Source}
-    <div class="source">{Source}</div>
-    {/block:Source}
-</article>
-{/block:Quote}
-{block:Link}
-<article class="post link">
-    <a href="{URL}" class="link" {Target}>{Name}</a>
+        {block:Description}
+        <div class="description">{Description}</div>
+        {/block:Description}
+        {/block:Link}
+        {block:Chat}
+        <!-- Chat -->
+        {block:Title}
+        <h2><a href="{Permalink}">{Title}</a></h2>
+        {/block:Title}
 
-    {block:Description}
-    <div class="description">{Description}</div>
-    {/block:Description}
-</article>
-{/block:Link}
-{block:Chat}
-<article class="post chat">
-    {block:Title}
-    <h3><a href="{Permalink}">{Title}</a></h3>
-    {/block:Title}
+        <ul class="chat">
+            {block:Lines}
+            <article class="{Alt} user_{UserNumber}">
+                {block:Label}
+                <span class="label">{Label}</span>
+                {/block:Label}{Line}
+            </article>
+            {/block:Lines}
+        </ul>
+        {/block:Chat}
+        {block:Video}
+        <!-- Video -->
+        {Video-500}{block:Caption}
+        <div class="caption">{Caption}</div>
+        {/block:Caption}
+        {/block:Video}
+        {block:Audio}
+        <!-- Audio -->
+        {AudioEmbed}{block:Caption}
+        <div class="caption">{Caption}</div>
+        {/block:Caption}
+        {/block:Audio}
 
-    <ul class="chat">
-        {block:Lines}
-        <article class="{Alt} user_{UserNumber}">
-            {block:Label}
-            <span class="label">{Label}</span>
-            {/block:Label}{Line}
-        </article>
-        {/block:Lines}
-    </ul>
-</article>
-{/block:Chat}
-{block:Video}
-<article class="post video">
-    {Video-500}{block:Caption}
-    <div class="caption">{Caption}</div>
-    {/block:Caption}
-</article>
-{/block:Video}
-{block:Audio}
-<article class="post audio">
-    {AudioEmbed}{block:Caption}
-    <div class="caption">{Caption}</div>
-    {/block:Caption}
-</article>
-{/block:Audio}
-{/block:Posts}
+        <aside>
+            {block:RebloggedFrom}
+            <a href="{ReblogParentURL}" data-root="{ReblogRootURL}">{ReblogParentName}</a>
+            {/block:RebloggedFrom}
+            {block:ContentSource}
+            <a href="{SourceURL}">{lang:Source}: {SourceTitle}</a>
+            {/block:ContentSource}
+            <a href="{Permalink}">Notes</a>
+        </aside>
+    </article>
+    {/block:Posts}
+</section>
 
-<p id="footer">
+<footer>
     {block:PreviousPage}
     <a href="{PreviousPage}">&#171; Previous</a>
     {/block:PreviousPage}{block:NextPage}
@@ -101,5 +110,5 @@
     {/block:NextPage}
 
     <a href="/archive">Archive</a>
-</p>
+</footer>
 {/block:tumblrThemr}

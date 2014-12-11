@@ -50,7 +50,7 @@ body > #tumblrthemr-config {
   letter-spacing: .2em;
   padding: 20px;
   position: fixed;
-  left: 20px;
+  right: 20px;
   text-transform: uppercase;
   z-index: 99999;
   -moz-box-shadow:    rgba(0,0,0,.1) 0 0 5px;
@@ -135,7 +135,7 @@ body > #tumblrthemr-config {
   color: #111;
   font: bold 11px/1.4 Helvetica, arial, verdana, sans-serif;
   letter-spacing: .2em;
-  left: 30px;
+  right: 30px;
   padding: 8px 8px 8px;
   position: fixed;
   text-transform: uppercase;
