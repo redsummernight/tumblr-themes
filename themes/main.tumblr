@@ -9,137 +9,128 @@
 <div id="blog">
     <header>
         <h1>{Title}</h1>
-        {block:Description}<p>{Description}</p>{/block:Description}
+        {block:Description}
+        <div>{Description}</div>
+        {/block:Description}
     </header>
 
-    <section class="posts">
-        {block:Posts}
-        <article class="{PostType}">
-            {block:Text}
-            <!-- Text -->
-            {block:Title}<h2>{Title}</h2>{/block:Title}
-            <div>{Body}</div>
-            {/block:Text}
+    {block:Posts}
+    <article class="{PostType}">
+        {block:Text}
+        <!-- Text -->
+        {block:Title}<h2>{Title}</h2>{/block:Title}
+        <section>{Body}</section>
+        {/block:Text}
 
-            {block:Photo}
-            <!-- Photo -->
-            <figure>
-                {LinkOpenTag}<img src="{PhotoURL-500}" alt="{PhotoAlt}"/>{LinkCloseTag}
-                {block:Caption}
-                <figcaption>{Caption}</figcaption>
-                {/block:Caption}
-            </figure>
-            {/block:Photo}
+        {block:Photo}
+        <!-- Photo -->
+        <figure>
+            {LinkOpenTag}<img src="{PhotoURL-500}" alt="{PhotoAlt}"/>{LinkCloseTag}
+            {block:Caption}
+            <figcaption>{Caption}</figcaption>
+            {/block:Caption}
+        </figure>
+        {/block:Photo}
 
-            {block:Panorama}
-            <!-- Paranoma -->
-            <figure>
-                {LinkOpenTag}<img src="{PhotoURL-Panorama}" alt="{PhotoAlt}"/>{LinkCloseTag}
-                {block:Caption}
-                <figcaption>{Caption}</figcaption>
-                {/block:Caption}
-            </figure>
-            {/block:Panorama}
+        {block:Photoset}
+        <!-- Photoset -->
+        <figure>
+            {Photoset}
+            {block:Caption}
+            <figcaption>{Caption}</figcaption>
+            {/block:Caption}
+        </figure>
+        {/block:Photoset}
 
-            {block:Photoset}
-            <!-- Photoset -->
-            <figure>
-                {Photoset-500}
-                {block:Caption}
-                <figcaption>{Caption}</figcaption>
-                {/block:Caption}
-            </figure>
-            {/block:Photoset}
+        {block:Quote}
+        <!-- Quote -->
+        <blockquote>
+            {Quote}
+            {block:Source}
+            <footer>&mdash; <cite>{Source}</cite></footer>
+            {/block:Source}
+        </blockquote>
+        {/block:Quote}
 
-            {block:Quote}
-            <!-- Quote -->
-            <blockquote>
-                <div>{Quote}</div>
-                {block:Source}
-                <footer>&mdash; <cite>{Source}</cite></footer>
-                {/block:Source}
-            </blockquote>
-            {/block:Quote}
+        {block:Link}
+        <!-- Link -->
+        <h2><a href="{URL}" {Target}>{Name}</a></h2>
+        {block:Description}
+        <section>{Description}</section>
+        {/block:Description}
+        {/block:Link}
 
-            {block:Link}
-            <!-- Link -->
-            <h2><a href="{URL}" {Target}>{Name}</a></h2>
-            {block:Description}
-            <div>{Description}</div>
-            {/block:Description}
-            {/block:Link}
+        {block:Chat}
+        <!-- Chat -->
+        {block:Title}<h2>{Title}</h2>{/block:Title}
+        <ul>
+            {block:Lines}
+            <li class="{Alt}">
+                {block:Label}<strong>{Label}</strong>{/block:Label} {Line}
+            </li>
+            {/block:Lines}
+        </ul>
+        {/block:Chat}
 
-            {block:Chat}
-            <!-- Chat -->
-            {block:Title}<h2>{Title}</h2>{/block:Title}
-            <ul>
-                {block:Lines}
-                <li class="{Alt}">
-                    {block:Label}<strong>{Label}</strong>{/block:Label} {Line}
-                </li>
-                {/block:Lines}
-            </ul>
-            {/block:Chat}
+        {block:Video}
+        <!-- Video -->
+        <figure>
+            {Video-500}
+            {block:Caption}
+            <figcaption>{Caption}</figcaption>
+            {/block:Caption}
+        </figure>
+        {/block:Video}
 
-            {block:Video}
-            <!-- Video -->
-            <figure>
-                {Video-500}
-                {block:Caption}
-                <figcaption>{Caption}</figcaption>
-                {/block:Caption}
-            </figure>
-            {/block:Video}
+        {block:Audio}
+        <!-- Audio -->
+        <figure>
+            {AudioEmbed}
+            {block:Caption}
+            <figcaption>{Caption}</figcaption>
+            {/block:Caption}
+        </figure>
+        {/block:Audio}
 
-            {block:Audio}
-            <!-- Audio -->
-            <figure>
-                {AudioEmbed}
-                {block:Caption}
-                <figcaption>{Caption}</figcaption>
-                {/block:Caption}
-            </figure>
-            {/block:Audio}
+        {block:Answer}
+        <!-- Answer -->
+        <div><strong>{Asker}</strong></div>
+        <div>{Question}</div>
+        {block:Answerer}
+        <div><strong>{Answerer}</strong></div>
+        {/block:Answerer}
+        <div>{Replies}</div>
+        {/block:Answer}
 
-            {block:Answer}
-            <!-- Answer -->
-            <div><strong>{Asker}</strong></div>
-            <div>{Question}</div>
-            {block:Answerer}
-            <div><strong>{Answerer}</strong></div>
-            {/block:Answerer}
-            <div>{Replies}</div>
-            {/block:Answer}
+        <footer class="post-meta">
+            <p>
+                {block:RebloggedFrom}
+                [<a href="{ReblogParentURL}" data-root="{ReblogRootURL}"
+                    title="{lang:Originally from ReblogRootName}">{ReblogParentName}</a>]
+                {/block:RebloggedFrom}
+                {block:ContentSource}
+                (<a href="{SourceURL}">{lang:Source}: {SourceTitle}</a>)
+                {/block:ContentSource}
+                {block:HasTags}{block:Tags}
+                <a href="{TagURL}">#{Tag}</a>
+                {/block:Tags}{/block:HasTags}
+            </p>
 
-            <footer class="post-meta">
-                <p>
-                    {block:RebloggedFrom}
-                    [<a href="{ReblogParentURL}" data-root="{ReblogRootURL}"
-                        title="{lang:Originally from ReblogRootName}">{ReblogParentName}</a>]
-                    {/block:RebloggedFrom}
-                    {block:ContentSource}
-                    (<a href="{SourceURL}">{lang:Source}: {SourceTitle}</a>)
-                    {/block:ContentSource}
-                    {block:HasTags}{block:Tags}
-                    <a href="{TagURL}">#{Tag}</a>
-                    {/block:Tags}{/block:HasTags}
-                </p>
+            <p>
+                {block:NoteCount}<a href="{Permalink}"><strong>{NoteCountWithLabel}</strong></a>{/block:NoteCount}
+                {block:Date}
+                <a href="{Permalink}">
+                    <time datetime="{Timestamp}" title="{TimeAgo}">{Year}/{MonthNumberWithZero}/{DayOfMonthWithZero}
+                        {24HourWithZero}:{Minutes}:{Seconds}
+                    </time>
+                </a>
+                {/block:Date}
+            </p>
+        </footer>
+    </article>
+    {/block:Posts}
 
-                <p>
-                    {block:NoteCount}<a href="{Permalink}"><strong>{NoteCountWithLabel}</strong></a>{/block:NoteCount}
-                    {block:Date}
-                    <a href="{Permalink}">
-                        <time datetime="{Timestamp}" title="{TimeAgo}">{Year}/{MonthNumberWithZero}/{DayOfMonthWithZero}
-                            {24HourWithZero}:{Minutes}:{Seconds}
-                        </time>
-                    </a>
-                    {/block:Date}
-                </p>
-            </footer>
-        </article>
-        {/block:Posts}
-    </section>
-
+    {block:Pagination}
     <footer>
         {block:PreviousPage}
         <a href="{PreviousPage}">&#171; Previous</a>
@@ -147,5 +138,6 @@
         <a href="{NextPage}">Next &#187;</a>
         {/block:NextPage}
     </footer>
+    {/block:Pagination}
 </div>
 {/block:tumblrThemr}
