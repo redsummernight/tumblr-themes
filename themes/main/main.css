@@ -14,12 +14,17 @@ article {
     border: 1px solid rgba(0, 0, 0, 0.4);
     box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.7);
 }
-article img { max-width: 100%; }
 article * { margin-bottom: 10px; }
+article a { color: #000; }
+article img { max-width: 100%; }
 article > h2, article > div, article > figure, article > blockquote, article > ul { margin-bottom: 15px; }
-article > aside { font-size: 80%; margin-bottom: 0; }
-article > aside * { margin-bottom: 0; }
 
+.post-meta { font-size: 80%; margin-bottom: 0; }
+.post-meta * { margin-bottom: 0; }
+.post-meta a { color: #666; text-decoration: none; }
+.post-meta a:hover { color: #000; }
+
+ul { padding-left: 15px; }
 blockquote {
     padding-left: 15px;
     border-left: 3px solid lightgray;

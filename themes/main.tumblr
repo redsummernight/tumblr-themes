@@ -111,28 +111,31 @@
             <div>{Replies}</div>
             {/block:Answer}
 
-            <aside>
-                <p>
-                    {block:Date}
-                    <time datetime="{Timestamp}" title="{TimeAgo}">
-                        <a href="{Permalink}">{ShortMonth} {DayOfMonth}{DayOfMonthSuffix}, {Year}
-                            {24HourWithZero}:{Minutes}:{Seconds}</a>
-                    </time>
-                    {/block:Date}
-                    {block:NoteCount}<span>{NoteCountWithLabel}</span>{/block:NoteCount}
-                </p>
+            <footer class="post-meta">
                 <p>
                     {block:RebloggedFrom}
-                    <a href="{ReblogParentURL}" data-root="{ReblogRootURL}" title="Originally from {ReblogRootName}">{ReblogParentName}</a>
+                    [<a href="{ReblogParentURL}" data-root="{ReblogRootURL}"
+                        title="{lang:Originally from ReblogRootName}">{ReblogParentName}</a>]
                     {/block:RebloggedFrom}
                     {block:ContentSource}
-                    <a href="{SourceURL}">{lang:Source}: {SourceTitle}</a>
+                    (<a href="{SourceURL}">{lang:Source}: {SourceTitle}</a>)
                     {/block:ContentSource}
                     {block:HasTags}{block:Tags}
                     <a href="{TagURL}">#{Tag}</a>
                     {/block:Tags}{/block:HasTags}
                 </p>
-            </aside>
+
+                <p>
+                    {block:NoteCount}<a href="{Permalink}"><strong>{NoteCountWithLabel}</strong></a>{/block:NoteCount}
+                    {block:Date}
+                    <a href="{Permalink}">
+                        <time datetime="{Timestamp}" title="{TimeAgo}">{Year}/{MonthNumberWithZero}/{DayOfMonthWithZero}
+                            {24HourWithZero}:{Minutes}:{Seconds}
+                        </time>
+                    </a>
+                    {/block:Date}
+                </p>
+            </footer>
         </article>
         {/block:Posts}
     </section>
