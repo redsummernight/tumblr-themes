@@ -1,7 +1,5 @@
-<!doctype html>
 <html>
 <head>
-    <meta charset="utf-8">
     <title>{Title}</title>
     <link rel="shortcut icon" href="{Favicon}">
     <link rel="alternate" type="application/rss+xml" href="{RSS}">
@@ -32,7 +30,7 @@
         #blog > * { margin-bottom: 50px; padding: 0 20px; }
         #blog > header { margin-top: 15px; }
         #blog > footer { text-align: center; }
-        h1 { font-size: 120%; }
+        h1 { font-size: 140%; }
         h1 a { text-decoration: none; }
         a { color: #000; }
         a:hover { color: #d40000; }
@@ -42,7 +40,7 @@
         footer a { color: #666; text-decoration: none; }
         p, ul, ol { margin-bottom: 10px; }
         ul { padding-left: 15px; }
-        figcaption, blockquote footer { margin-top: 15px; }
+        figcaption, nav, blockquote footer { margin-top: 15px; }
         blockquote { padding-left: 15px; border-left: 3px solid lightgray; }
         .post-meta { font-size: 85%; }
         .post-meta p { margin-bottom: 0; }
@@ -55,9 +53,12 @@
     <section>{Description}</section>
     {/block:Description}
     <nav>
+        <a href="/archive">Archive</a>
         {block:AskEnabled}<a href="/ask">{AskLabel}</a>{/block:AskEnabled}
         {block:SubmissionsEnabled}<a href="/submit">{SubmitLabel}</a>{/block:SubmissionsEnabled}
-        {block:HasPages}{block:Pages}<a href="{URL}">{Label}</a>{/block:Pages}{/block:HasPages}
+        {block:HasPages}{block:Pages}
+        <a href="{URL}">{Label}</a>
+        {/block:Pages}{/block:HasPages}
     </nav>
 </header>
 
@@ -156,7 +157,6 @@
             {block:ContentSource}(<a href="{SourceURL}">{lang:Source}: {SourceTitle}</a>){/block:ContentSource}
             {block:HasTags}{block:Tags}<a href="{TagURL}">#{Tag}</a> {/block:Tags}{/block:HasTags}
         </p>
-
         <p>
             {block:NoteCount}<a href="{Permalink}"><strong>{NoteCountWithLabel}</strong></a>{/block:NoteCount}
             {block:Date}
