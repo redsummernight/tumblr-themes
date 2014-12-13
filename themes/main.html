@@ -1,146 +1,187 @@
-{block:tumblrThemr}
-<title>{Title}</title>
-<meta name="description" content="{MetaDescription}"/>
-<!--<style type="text/css">{CustomCSS}</style>-->
-<link rel="shortcut icon" href="{Favicon}">
-<link rel="stylesheet" href="themes/main/html5-doctor-reset-stylesheet.min.css"/>
-<link rel="stylesheet" href="themes/main/main.css"/>
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{Title}</title>
+    <link rel="shortcut icon" href="{Favicon}">
+    <link rel="alternate" type="application/rss+xml" href="{RSS}">
+    {block:Description}
+    <meta name="description" content="{MetaDescription}"/>
+    {/block:Description}
+    <style>
+        /* http://www.cssreset.com/scripts/html5-doctor-css-reset-stylesheet/ */
+        html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video { margin: 0; padding: 0; border: 0; outline: 0; font-size: 100%; vertical-align: baseline; background: transparent }
+        article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block }
+        nav ul { list-style: none }
+        blockquote, q { quotes: none }
+        blockquote:before, blockquote:after, q:before, q:after { content: none }
+        a { margin: 0; padding: 0; font-size: 100%; vertical-align: baseline; background: transparent }
+        ins { background-color: #ff9; color: #000; text-decoration: none }
+        mark { background-color: #ff9; color: #000; font-style: italic; font-weight: bold }
+        del { text-decoration: line-through }
+        abbr[title], dfn[title] { border-bottom: 1px dotted; cursor: help }
+        table { border-collapse: collapse; border-spacing: 0 }
+        hr { display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0 }
+        input, select { vertical-align: middle }
+        /* YEAH */
+        body {
+            font-family: verdana, arial, sans-serif; font-size: 16px; line-height: 1.4em;
+            background-color: #f0f0f0;
+        }
+        #blog { max-width: 540px; margin: 0 auto; }
+        #blog > * { margin-bottom: 50px; padding: 0 20px; }
+        #blog > header { margin-top: 15px; }
+        #blog > footer { text-align: center; }
+        h1 { font-size: 120%; }
+        h1 a { text-decoration: none; }
+        a { color: #000; }
+        a:hover { color: #d40000; }
+        article img { max-width: 100%; }
+        article > h2, article > section, article > figure,
+        article > blockquote, article > ul, header h1 { margin-bottom: 15px; }
+        footer a { color: #666; text-decoration: none; }
+        p, ul, ol { margin-bottom: 10px; }
+        ul { padding-left: 15px; }
+        figcaption, blockquote footer { margin-top: 15px; }
+        blockquote { padding-left: 15px; border-left: 3px solid lightgray; }
+        .post-meta { font-size: 85%; }
+        .post-meta p { margin-bottom: 0; }
+    </style>
+</head>
+<body id="blog">
+<header>
+    <h1><a href="{BlogURL}">{Title}</a></h1>
+    {block:Description}
+    <section>{Description}</section>
+    {/block:Description}
+    <nav>
+        {block:AskEnabled}<a href="/ask">{AskLabel}</a>{/block:AskEnabled}
+        {block:SubmissionsEnabled}<a href="/submit">{SubmitLabel}</a>{/block:SubmissionsEnabled}
+        {block:HasPages}{block:Pages}<a href="{URL}">{Label}</a>{/block:Pages}{/block:HasPages}
+    </nav>
+</header>
 
-<div id="blog">
-    <header>
-        <h1><a href="{BlogURL}">{Title}</a></h1>
-        {block:Description}
-        <section>{Description}</section>
-        {/block:Description}
-        <nav>
-            {block:AskEnabled}<a href="/ask">{AskLabel}</a>{/block:AskEnabled}
-            {block:SubmissionsEnabled}<a href="/submit">{SubmitLabel}</a>{/block:SubmissionsEnabled}
-            {block:HasPages}{block:Pages}<a href="{URL}">{Label}</a>{/block:Pages}{/block:HasPages}
-        </nav>
-    </header>
+{block:Posts}
+<article class="post {PostType}">
+    {block:Text}
+    <!-- Text -->
+    {block:Title}<h2>{Title}</h2>{/block:Title}
+    <section>{Body}</section>
+    {/block:Text}
 
-    {block:Posts}
-    <article class="post {PostType}">
-        {block:Text}
-        <!-- Text -->
-        {block:Title}<h2>{Title}</h2>{/block:Title}
-        <section>{Body}</section>
-        {/block:Text}
+    {block:Photo}
+    <!-- Photo -->
+    <figure>
+        {LinkOpenTag}<img src="{PhotoURL-500}" alt="{PhotoAlt}"/>{LinkCloseTag}
+        {block:Caption}
+        <figcaption>{Caption}</figcaption>
+        {/block:Caption}
+    </figure>
+    {/block:Photo}
 
-        {block:Photo}
-        <!-- Photo -->
-        <figure>
-            {LinkOpenTag}<img src="{PhotoURL-500}" alt="{PhotoAlt}"/>{LinkCloseTag}
-            {block:Caption}
-            <figcaption>{Caption}</figcaption>
-            {/block:Caption}
-        </figure>
-        {/block:Photo}
+    {block:Photoset}
+    <!-- Photoset -->
+    <figure>
+        {Photoset}
+        {block:Caption}
+        <figcaption>{Caption}</figcaption>
+        {/block:Caption}
+    </figure>
+    {/block:Photoset}
 
-        {block:Photoset}
-        <!-- Photoset -->
-        <figure>
-            {Photoset}
-            {block:Caption}
-            <figcaption>{Caption}</figcaption>
-            {/block:Caption}
-        </figure>
-        {/block:Photoset}
+    {block:Quote}
+    <!-- Quote -->
+    <blockquote>
+        {Quote}
+        {block:Source}
+        <footer>&mdash; <cite>{Source}</cite></footer>
+        {/block:Source}
+    </blockquote>
+    {/block:Quote}
 
-        {block:Quote}
-        <!-- Quote -->
-        <blockquote>
-            {Quote}
-            {block:Source}
-            <footer>&mdash; <cite>{Source}</cite></footer>
-            {/block:Source}
-        </blockquote>
-        {/block:Quote}
+    {block:Link}
+    <!-- Link -->
+    <h2><a href="{URL}" {Target}>{Name}</a></h2>
+    {block:Description}
+    <section>{Description}</section>
+    {/block:Description}
+    {/block:Link}
 
-        {block:Link}
-        <!-- Link -->
-        <h2><a href="{URL}" {Target}>{Name}</a></h2>
-        {block:Description}
-        <section>{Description}</section>
-        {/block:Description}
-        {/block:Link}
+    {block:Chat}
+    <!-- Chat -->
+    {block:Title}<h2>{Title}</h2>{/block:Title}
+    <ul>
+        {block:Lines}
+        <li class="{Alt}">{block:Label}<strong>{Label}</strong>{/block:Label} {Line}</li>
+        {/block:Lines}
+    </ul>
+    {/block:Chat}
 
-        {block:Chat}
-        <!-- Chat -->
-        {block:Title}<h2>{Title}</h2>{/block:Title}
-        <ul>
-            {block:Lines}
-            <li class="{Alt}">{block:Label}<strong>{Label}</strong>{/block:Label} {Line}</li>
-            {/block:Lines}
-        </ul>
-        {/block:Chat}
+    {block:Video}
+    <!-- Video -->
+    <figure>
+        {Video-500}
+        {block:Caption}
+        <figcaption>{Caption}</figcaption>
+        {/block:Caption}
+    </figure>
+    {/block:Video}
 
-        {block:Video}
-        <!-- Video -->
-        <figure>
-            {Video-500}
-            {block:Caption}
-            <figcaption>{Caption}</figcaption>
-            {/block:Caption}
-        </figure>
-        {/block:Video}
+    {block:Audio}
+    <!-- Audio -->
+    <figure>
+        {AudioEmbed}
+        {block:Caption}
+        <figcaption>{Caption}</figcaption>
+        {/block:Caption}
+    </figure>
+    {/block:Audio}
 
-        {block:Audio}
-        <!-- Audio -->
-        <figure>
-            {AudioEmbed}
-            {block:Caption}
-            <figcaption>{Caption}</figcaption>
-            {/block:Caption}
-        </figure>
-        {/block:Audio}
+    {block:Answer}
+    <!-- Answer -->
+    <div><strong>{Asker}</strong></div>
+    <div>{Question}</div>
+    {block:Answerer}
+    <div><strong>{Answerer}</strong></div>
+    {/block:Answerer}
+    <div>{Replies}</div>
+    {/block:Answer}
 
-        {block:Answer}
-        <!-- Answer -->
-        <div><strong>{Asker}</strong></div>
-        <div>{Question}</div>
-        {block:Answerer}
-        <div><strong>{Answerer}</strong></div>
-        {/block:Answerer}
-        <div>{Replies}</div>
-        {/block:Answer}
+    <footer class="post-meta">
+        <p>
+            {block:RebloggedFrom}
+            [<a href="{ReblogParentURL}" title="{ReblogParentTitle}">{ReblogParentName}</a>]
+            <!--[<a href="{ReblogRootURL}">{ReblogRootName}</a>]-->
+            {/block:RebloggedFrom}
+            {block:ContentSource}(<a href="{SourceURL}">{lang:Source}: {SourceTitle}</a>){/block:ContentSource}
+            {block:HasTags}{block:Tags}<a href="{TagURL}">#{Tag}</a> {/block:Tags}{/block:HasTags}
+        </p>
 
-        <footer class="post-meta">
-            <p>
-                {block:RebloggedFrom}
-                [<a href="{ReblogParentURL}" title="{ReblogParentTitle}">{ReblogParentName}</a>]
-                <!--[<a href="{ReblogRootURL}">{ReblogRootName}</a>]-->
-                {/block:RebloggedFrom}
-                {block:ContentSource}(<a href="{SourceURL}">{lang:Source}: {SourceTitle}</a>){/block:ContentSource}
-                {block:HasTags}{block:Tags}<a href="{TagURL}">#{Tag}</a> {/block:Tags}{/block:HasTags}
-            </p>
-
-            <p>
-                {block:NoteCount}<a href="{Permalink}"><strong>{NoteCountWithLabel}</strong></a>{/block:NoteCount}
-                {block:Date}
-                <a href="{Permalink}">
-                    <time title="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero}T{24HourWithZero}:{Minutes}:{Seconds}Z">
-                        {TimeAgo}
-                    </time>
-                </a>
-                {/block:Date}
-            </p>
-        </footer>
-    </article>
-    {/block:Posts}
-
-    <footer>
-        {block:Pagination}{block:PreviousPage}<a class="prev" href="{PreviousPage}">&#171; {lang:Previous}</a>{/block:PreviousPage}
-        {block:JumpPagination length="10"}
-        {block:CurrentPage}<span>{PageNumber}</span>{/block:CurrentPage}
-        {block:JumpPage}<a href="{URL}">{PageNumber}</a>{/block:JumpPage}
-        {/block:JumpPagination}
-        {block:NextPage}<a class="next" href="{NextPage}">{lang:Next} &#187;</a>{/block:NextPage}{/block:Pagination}
-
-        {block:PermalinkPagination}
-        {block:PreviousPost}<a class="prev" href="{PreviousPost}">&#171; {lang:Previous post}</a>{/block:PreviousPost}
-        {block:NextPost}<a class="next" href="{NextPost}">{lang:Next post} &#187;</a>{/block:NextPost}
-        {/block:PermalinkPagination}
+        <p>
+            {block:NoteCount}<a href="{Permalink}"><strong>{NoteCountWithLabel}</strong></a>{/block:NoteCount}
+            {block:Date}
+            <a href="{Permalink}">
+                <time title="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero}T{24HourWithZero}:{Minutes}:{Seconds}Z">
+                    {TimeAgo}
+                </time>
+            </a>
+            {/block:Date}
+        </p>
     </footer>
-</div>
-{/block:tumblrThemr}
+</article>
+{/block:Posts}
+
+<footer>
+    {block:Pagination}{block:PreviousPage}<a class="prev" href="{PreviousPage}">&#171; {lang:Previous}</a>{/block:PreviousPage}
+    {block:JumpPagination length="10"}
+    {block:CurrentPage}<span>{PageNumber}</span>{/block:CurrentPage}
+    {block:JumpPage}<a href="{URL}">{PageNumber}</a>{/block:JumpPage}
+    {/block:JumpPagination}
+    {block:NextPage}<a class="next" href="{NextPage}">{lang:Next} &#187;</a>{/block:NextPage}{/block:Pagination}
+
+    {block:PermalinkPagination}
+    {block:PreviousPost}<a class="prev" href="{PreviousPost}">&#171; {lang:Previous post}</a>{/block:PreviousPost}
+    {block:NextPost}<a class="next" href="{NextPost}">{lang:Next post} &#187;</a>{/block:NextPost}
+    {/block:PermalinkPagination}
+</footer>
+</body>
