@@ -21,29 +21,40 @@
         table { border-collapse: collapse; border-spacing: 0 }
         hr { display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0 }
         input, select { vertical-align: middle }
+
         /* YEAH */
         body {
             font-family: verdana, arial, sans-serif; font-size: 16px; line-height: 1.4em;
             background-color: #f0f0f0;
         }
+
         #blog { max-width: 540px; margin: 0 auto; }
-        #blog > * { margin-bottom: 50px; padding: 0 20px; }
+        #blog > header, #blog > footer, #blog > article { margin-bottom: 50px; padding: 0 20px; }
         #blog > header { margin-top: 15px; }
         #blog > footer { text-align: center; }
-        h1 { font-size: 140%; }
-        h1 a { text-decoration: none; }
-        a { color: #000; }
-        a:hover { color: #d40000; }
+
         article img { max-width: 100%; }
         article > h2, article > section, article > figure,
         article > blockquote, article > ul, header h1 { margin-bottom: 15px; }
-        footer a { color: #666; text-decoration: none; }
-        p, ul, ol { margin-bottom: 10px; }
-        ul { padding-left: 15px; }
+
+        h1 { font-size: 140%; }
+        h1 a { text-decoration: none; }
+        p, ul, ol, blockquote { margin-bottom: 10px; }
+        ul, ol { padding-left: 1.8em; }
         figcaption, nav, blockquote footer { margin-top: 15px; }
         blockquote { padding-left: 15px; border-left: 3px solid lightgray; }
-        .post-meta { font-size: 85%; }
-        .post-meta p { margin-bottom: 0; }
+        a { color: #000; }
+        a:hover { color: #d40000; }
+
+        .meta a { color: #666; text-decoration: none; text-transform: lowercase; }
+        .meta a:hover { color: #d40000; }
+        .pagination { font-size: 85%; }
+        .pagination a, .pagination span { padding: 10px; }
+        .post .meta { font-size: 85%; }
+        .post .meta p { margin-bottom: 0; }
+        .bracket a:before { content: '['; }
+        .bracket a:after { content: ']'; }
+        {CustomCSS}
     </style>
 </head>
 <body id="blog">
@@ -52,7 +63,7 @@
     {block:Description}
     <section>{Description}</section>
     {/block:Description}
-    <nav>
+    <nav class="meta bracket">
         <a href="/archive">Archive</a>
         {block:AskEnabled}<a href="/ask">{AskLabel}</a>{/block:AskEnabled}
         {block:SubmissionsEnabled}<a href="/submit">{SubmitLabel}</a>{/block:SubmissionsEnabled}
@@ -148,7 +159,7 @@
     <div>{Replies}</div>
     {/block:Answer}
 
-    <footer class="post-meta">
+    <footer class="meta">
         <p>
             {block:RebloggedFrom}
             [<a href="{ReblogParentURL}" title="{ReblogParentTitle}">{ReblogParentName}</a>]
@@ -171,17 +182,14 @@
 </article>
 {/block:Posts}
 
-<footer>
-    {block:Pagination}{block:PreviousPage}<a class="prev" href="{PreviousPage}">&#171; {lang:Previous}</a>{/block:PreviousPage}
-    {block:JumpPagination length="10"}
-    {block:CurrentPage}<span>{PageNumber}</span>{/block:CurrentPage}
-    {block:JumpPage}<a href="{URL}">{PageNumber}</a>{/block:JumpPage}
-    {/block:JumpPagination}
-    {block:NextPage}<a class="next" href="{NextPage}">{lang:Next} &#187;</a>{/block:NextPage}{/block:Pagination}
+<footer class="pagination meta">
+    {block:Pagination}{block:PreviousPage}<a class="prev" href="{PreviousPage}">&#171; {lang:Newer}</a>{/block:PreviousPage}
+    {block:JumpPagination length="7"}{block:CurrentPage}<span><strong>{PageNumber}</strong></span>{/block:CurrentPage}{block:JumpPage}<a href="{URL}">{PageNumber}</a>{/block:JumpPage}{/block:JumpPagination}
+    {block:NextPage}<a class="next" href="{NextPage}">{lang:Older} &#187;</a>{/block:NextPage}{/block:Pagination}
 
     {block:PermalinkPagination}
-    {block:PreviousPost}<a class="prev" href="{PreviousPost}">&#171; {lang:Previous post}</a>{/block:PreviousPost}
-    {block:NextPost}<a class="next" href="{NextPost}">{lang:Next post} &#187;</a>{/block:NextPost}
+    {block:PreviousPost}<a class="prev" href="{PreviousPost}">&#171; {lang:Newer}</a>{/block:PreviousPost}
+    {block:NextPost}<a class="next" href="{NextPost}">{lang:Older} &#187;</a>{/block:NextPost}
     {/block:PermalinkPagination}
 </footer>
 </body>
