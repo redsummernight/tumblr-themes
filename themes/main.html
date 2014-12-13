@@ -155,12 +155,14 @@
 
     {block:Answer}
     <!-- Answer -->
-    <div><strong>{Asker}</strong></div>
-    <div>{Question}</div>
-    {block:Answerer}
-    <div><strong>{Answerer}</strong></div>
-    {/block:Answerer}
-    <div>{Replies}</div>
+    <section><strong>{lang:Asker asked 2}</strong>: <q>{Question}</q></section>
+    <section>
+        {block:Answerer}
+        <p><strong>{Answerer}</strong>:</p>
+        <blockquote>{Answer}</blockquote>
+        {/block:Answerer}
+    </section>
+    <section>{Replies}</section>
     {/block:Answer}
 
     <footer class="meta">
