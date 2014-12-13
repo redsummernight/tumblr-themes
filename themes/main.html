@@ -52,10 +52,10 @@
         .pagination { font-size: 85%; }
         .pagination a, .pagination span { padding: 10px; }
         .post .meta { font-size: 85%; }
-        .post .meta p { margin-bottom: 0; }
+        .post .meta section:last-child { margin-top: 5px; }
         .bracket a:before { content: '['; }
         .bracket a:after { content: ']'; }
-        .like_button, .reblog_button { float: right; margin-left: 5px; }
+        .like_button, .reblog_button { float: right; margin-right: 5px; }
         {CustomCSS}
     </style>
 </head>
@@ -165,6 +165,7 @@
     <section>{Replies}</section>
     {/block:Answer}
 
+    {block:Date}
     <footer class="meta">
         <section>
             {block:RebloggedFrom}
@@ -176,17 +177,16 @@
         </section>
         <section>
             {block:NoteCount}<a href="{Permalink}"><strong>{NoteCountWithLabel}</strong></a>{/block:NoteCount}
-            {block:Date}
             <a href="{Permalink}">
                 <time title="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero}T{24HourWithZero}:{Minutes}:{Seconds}Z">
                     {TimeAgo}
                 </time>
             </a>
-            {/block:Date}
             {LikeButton}
             {ReblogButton}
         </section>
     </footer>
+    {/block:Date}
 </article>
 {/block:Posts}
 
