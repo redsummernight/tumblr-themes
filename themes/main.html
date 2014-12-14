@@ -28,8 +28,7 @@
         }
 
         #blog { max-width: 540px; margin: 0 auto; }
-        #blog > header, #blog > footer, #blog > article, #blog > section { margin-bottom: 50px; padding: 0 20px; }
-        #blog > header { margin-top: 15px; }
+        #blog > header, #blog > footer, #blog > article, #blog > section { margin-bottom: 10px; padding: 20px; }
         #blog > footer { text-align: center; }
 
         article img { max-width: 100%; }
@@ -180,8 +179,8 @@
     {block:PreviousPost}<a id="next" href="{PreviousPost}">{lang:Older} &#187;</a>{/block:PreviousPost}
     {/block:PermalinkPagination}
 </footer>
-
 <script>
+    // Use onkeyup because this is a heavy decision
     window.onkeyup = function (e) {
         switch (e.keyCode) {
             case 37: // left
@@ -192,10 +191,46 @@
                 var n = document.getElementById('next');
                 if (n) window.location.href = n.href;
                 break;
+        }
+    }
+    var items = document.getElementsByTagName('article'), len = items.length;
+    // Use onkeydown so we can hold and keep scrolling
+    window.onkeydown = function (e) {
+        switch (e.keyCode) {
             case 74: // j
+                jump(true);
                 break;
             case 75: // k
+                jump(false);
                 break;
+        }
+    }
+    function jump(down) {
+        for (var i = 0; i < len; i++) { // first to last, order important
+            var el = items[i], last = i == len - 1;
+            // Stupid IE 11 gives a rectangle with fractional top: 0.233...
+            var top = Math.floor(el.getBoundingClientRect().top);
+            if (down) {
+                if (top > 0) {
+                    el.scrollIntoView();
+                    break;
+                }
+                if (last) {
+                    window.scrollTo(0, document.body.scrollHeight); // to page bottom
+                    break;
+                }
+            } else { // up
+                if (top >= 0) {
+                    if (i > 0) {
+                        items[i - 1].scrollIntoView(); // to previous
+                    } else {
+                        window.scrollTo(0, 0); // to page top
+                    }
+                    break;
+                } else if (last) {
+                    items[len - 1].scrollIntoView();
+                }
+            }
         }
     }
 </script>
