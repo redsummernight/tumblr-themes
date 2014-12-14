@@ -4,9 +4,7 @@
     <title>{Title}{block:PostSummary} - {PostSummary}{/block:PostSummary}</title>
     <link rel="shortcut icon" href="{Favicon}">
     <link rel="alternate" type="application/rss+xml" href="{RSS}">
-    {block:Description}
-    <meta name="description" content="{MetaDescription}"/>
-    {/block:Description}
+    {block:Description}<meta name="description" content="{MetaDescription}"/>{/block:Description}
     <style>
         /* http://www.cssreset.com/scripts/html5-doctor-css-reset-stylesheet/ */
         html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video { margin: 0; padding: 0; border: 0; outline: 0; font-size: 100%; vertical-align: baseline; background: transparent }
@@ -62,9 +60,7 @@
 <body id="blog">
 <header>
     {block:ShowTitle}<h1><a href="{BlogURL}">{Title}</a></h1>{/block:ShowTitle}
-    {block:ShowDescription}{block:Description}
-    <section>{Description}</section>
-    {/block:Description}{/block:ShowDescription}
+    {block:ShowDescription}{block:Description}<section>{Description}</section>{/block:Description}{/block:ShowDescription}
     <nav class="meta bracket">
         <a href="/archive">Archive</a>
         {block:AskEnabled}<a href="/ask">{AskLabel}</a>{/block:AskEnabled}
@@ -74,7 +70,6 @@
         {/block:Pages}{/block:HasPages}
     </nav>
 </header>
-
 <section>{block:TagPage}<h2>{lang:Posts tagged Tag 3}</h2>{/block:TagPage}</section>
 
 {block:Posts}
@@ -89,9 +84,7 @@
     <!-- Photo -->
     <figure>
         {LinkOpenTag}<img src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}" />{LinkCloseTag}
-        {block:Caption}
-        <figcaption>{Caption}</figcaption>
-        {/block:Caption}
+        {block:Caption}<figcaption>{Caption}</figcaption>{/block:Caption}
     </figure>
     {/block:Photo}
 
@@ -99,9 +92,7 @@
     <!-- Photoset -->
     <figure>
         {Photoset}
-        {block:Caption}
-        <figcaption>{Caption}</figcaption>
-        {/block:Caption}
+        {block:Caption}<figcaption>{Caption}</figcaption>{/block:Caption}
     </figure>
     {/block:Photoset}
 
@@ -109,27 +100,21 @@
     <!-- Quote -->
     <blockquote>
         {Quote}
-        {block:Source}
-        <footer>&mdash; <cite>{Source}</cite></footer>
-        {/block:Source}
+        {block:Source}<footer>&mdash; <cite>{Source}</cite></footer>{/block:Source}
     </blockquote>
     {/block:Quote}
 
     {block:Link}
     <!-- Link -->
     <h3><a href="{URL}" {Target}>{Name}</a></h3>
-    {block:Description}
-    <section>{Description}</section>
-    {/block:Description}
+    {block:Description}<section>{Description}</section>{/block:Description}
     {/block:Link}
 
     {block:Chat}
     <!-- Chat -->
     {block:Title}<h3>{Title}</h3>{/block:Title}
     <ul>
-        {block:Lines}
-        <li class="{Alt}">{block:Label}<strong>{Label}</strong>{/block:Label} {Line}</li>
-        {/block:Lines}
+        {block:Lines}<li class="{Alt}">{block:Label}<strong>{Label}</strong>{/block:Label} {Line}</li>{/block:Lines}
     </ul>
     {/block:Chat}
 
@@ -137,9 +122,7 @@
     <!-- Video -->
     <figure>
         {Video-500}
-        {block:Caption}
-        <figcaption>{Caption}</figcaption>
-        {/block:Caption}
+        {block:Caption}<figcaption>{Caption}</figcaption>{/block:Caption}
     </figure>
     {/block:Video}
 
@@ -147,9 +130,7 @@
     <!-- Audio -->
     <figure>
         {AudioEmbed}
-        {block:Caption}
-        <figcaption>{Caption}</figcaption>
-        {/block:Caption}
+        {block:Caption}<figcaption>{Caption}</figcaption>{/block:Caption}
     </figure>
     {/block:Audio}
 
@@ -158,8 +139,7 @@
     <section><strong>{lang:Asker asked 2}</strong>: <q>{Question}</q></section>
     <section>
         {block:Answerer}
-        <p><strong>{Answerer}</strong>:</p>
-        <blockquote>{Answer}</blockquote>
+        <p><strong>{Answerer}</strong>:</p><blockquote>{Answer}</blockquote>
         {/block:Answerer}
     </section>
     <section>{Replies}</section>
@@ -191,13 +171,32 @@
 {/block:Posts}
 
 <footer class="pagination meta">
-    {block:Pagination}{block:PreviousPage}<a class="prev" href="{PreviousPage}">&#171; {lang:Newer}</a>{/block:PreviousPage}
+    {block:Pagination}{block:PreviousPage}<a id="prev" href="{PreviousPage}">&#171; {lang:Newer}</a>{/block:PreviousPage}
     {block:JumpPagination length="7"}{block:CurrentPage}<span><strong>{PageNumber}</strong></span>{/block:CurrentPage}{block:JumpPage}<a href="{URL}">{PageNumber}</a>{/block:JumpPage}{/block:JumpPagination}
-    {block:NextPage}<a class="next" href="{NextPage}">{lang:Older} &#187;</a>{/block:NextPage}{/block:Pagination}
+    {block:NextPage}<a id="next" href="{NextPage}">{lang:Older} &#187;</a>{/block:NextPage}{/block:Pagination}
 
     {block:PermalinkPagination}
-    {block:NextPost}<a class="next" href="{NextPost}">&#171; {lang:Newer}</a>{/block:NextPost}
-    {block:PreviousPost}<a class="prev" href="{PreviousPost}">{lang:Older} &#187;</a>{/block:PreviousPost}
+    {block:NextPost}<a id="prev" href="{NextPost}">&#171; {lang:Newer}</a>{/block:NextPost}
+    {block:PreviousPost}<a id="next" href="{PreviousPost}">{lang:Older} &#187;</a>{/block:PreviousPost}
     {/block:PermalinkPagination}
 </footer>
+
+<script>
+    window.onkeyup = function (e) {
+        switch (e.keyCode) {
+            case 37: // left
+                var p = document.getElementById('prev');
+                if (p) window.location.href = p.href;
+                break;
+            case 39: // right
+                var n = document.getElementById('next');
+                if (n) window.location.href = n.href;
+                break;
+            case 74: // j
+                break;
+            case 75: // k
+                break;
+        }
+    }
+</script>
 </body>
