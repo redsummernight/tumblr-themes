@@ -36,6 +36,9 @@
         article img { max-width: 100%; }
         article > h3, article > section, article > figure,
         article > blockquote, article > ul, header h1 { margin-bottom: 15px; }
+        figure.photoset { overflow: hidden; width: 100%; }
+        figure.photoset figure { float: left; }
+        figure.photoset > figcaption { clear: left; padding-top: 15px; }
 
         h1 { font-size: 150%; }
         h1 a { text-decoration: none; }
@@ -93,9 +96,14 @@
 
     {block:Photoset}
     <!-- Photoset -->
-    <figure>
-        {Photoset}
-        {block:Caption}<figcaption>{Caption}</figcaption>{/block:Caption}
+    <figure class="photoset" data-layout="{PhotosetLayout}">{block:Photos}
+        <figure>
+            {block:LinkURL}<a href="{LinkURL}">{/block:LinkURL}
+            <img src="{PhotoURL-500}" alt="{PhotoAlt}" />
+            {block:LinkURL}</a>{/block:LinkURL}
+            {block:Caption}<figcaption>{Caption}</figcaption>{/block:Caption}
+        </figure>
+        {/block:Photos}{block:Caption}<figcaption>{Caption}</figcaption>{/block:Caption}
     </figure>
     {/block:Photoset}
 
@@ -184,6 +192,16 @@
     {/block:PermalinkPagination}
 </footer>
 <script>
+    // Arrange photoset layout
+    var photosets = document.getElementsByClassName('photoset');
+    for (var i = photosets.length; i--;) {
+        var photos = photosets[i].getElementsByTagName('figure'), layout = photosets[i].dataset['layout'];
+        for (var j = 0, p = 0; j < layout.length; j++) {
+            var row = Number(layout[j]), w = Math.floor(100 / row) + '%';
+            photos[p].style.clear = 'left';
+            while (row--) photos[p++].style.maxWidth = w;
+        }
+    }
     // Use onkeyup because this is a heavy decision
     window.onkeyup = function (e) {
         switch (e.keyCode) {
