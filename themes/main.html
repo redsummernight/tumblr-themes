@@ -39,6 +39,7 @@
         figure.photoset { overflow: hidden; width: 100%; }
         figure.photoset figure { float: left; }
         figure.photoset > figcaption { clear: left; padding-top: 15px; }
+        figure .high-res-url { font-size: 80%; }
 
         h1 { font-size: 150%; }
         h1 a { text-decoration: none; }
@@ -90,6 +91,7 @@
         {block:LinkURL}<a href="{LinkURL}">{/block:LinkURL}
         <img src="{PhotoURL-500}" alt="{PhotoAlt}" />
         {block:LinkURL}</a>{/block:LinkURL}
+        {block:HighRes}<a class="high-res-url" href="{PhotoURL-HighRes}">{lang:High-res}</a>{/block:HighRes}
         {block:Caption}<figcaption>{Caption}</figcaption>{/block:Caption}
     </figure>
     {/block:Photo}
