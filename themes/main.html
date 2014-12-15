@@ -1,7 +1,6 @@
 <html>
 <head>
     <!-- {CopyrightYears} -->
-    <!-- TODO: high-res photos -->
     <!-- Ignored: notes, submissions, followings, likes, members -->
     <title>{Title}{block:PostSummary} - {PostSummary}{/block:PostSummary}</title>
     <link rel="shortcut icon" href="{Favicon}">
@@ -36,16 +35,28 @@
         article img { max-width: 100%; }
         article > h3, article > section, article > figure,
         article > blockquote, article > ul, header h1 { margin-bottom: 15px; }
+        figure figcaption { padding-top: 15px; }
         figure.photoset { overflow: hidden; width: 100%; }
         figure.photoset figure { float: left; }
-        figure.photoset > figcaption { clear: left; padding-top: 15px; }
+        figure.photoset figure figcaption { font-size: 80%; padding-top: 0; padding-bottom: 15px; }
+        figure.photoset > figcaption { clear: left; }
+        figure.photoset figure section { position: relative; }
+        figure.photoset figure:hover .high-res-url { display: block; }
+        figure.photoset figure .high-res-url {
+            display: none;
+            position: absolute;
+            top: 0px; left: 0px;
+            background: rgba(255, 255, 255, 0.6);
+            padding: 0 5px;
+            font-size: 60%;
+        }
         figure .high-res-url { font-size: 80%; }
 
         h1 { font-size: 150%; }
         h1 a { text-decoration: none; }
         p, ul, ol, blockquote, li { margin-bottom: 10px; }
         ul, ol { list-style-position: inside; }
-        figcaption, nav, blockquote footer { margin-top: 15px; }
+        nav, blockquote footer { margin-top: 15px; }
         blockquote { padding-left: 15px; border-left: 3px solid #d3d3d3; }
         a { color: #000; }
         a:hover { color: #d40000; }
@@ -91,7 +102,7 @@
         {block:LinkURL}<a href="{LinkURL}">{/block:LinkURL}
         <img src="{PhotoURL-500}" alt="{PhotoAlt}" />
         {block:LinkURL}</a>{/block:LinkURL}
-        {block:HighRes}<a class="high-res-url" href="{PhotoURL-HighRes}">{lang:High-res}</a>{/block:HighRes}
+        {block:HighRes}<a class="high-res-url" href="{PhotoURL-HighRes}" target="_blank">{lang:High-res}</a>{/block:HighRes}
         {block:Caption}<figcaption>{Caption}</figcaption>{/block:Caption}
     </figure>
     {/block:Photo}
@@ -100,9 +111,12 @@
     <!-- Photoset -->
     <figure class="photoset" data-layout="{PhotosetLayout}">{block:Photos}
         <figure>
-            {block:LinkURL}<a href="{LinkURL}">{/block:LinkURL}
-            <img src="{PhotoURL-500}" alt="{PhotoAlt}" />
-            {block:LinkURL}</a>{/block:LinkURL}
+            <section>
+                {block:LinkURL}<a href="{LinkURL}">{/block:LinkURL}
+                <img src="{PhotoURL-500}" alt="{PhotoAlt}" />
+                {block:LinkURL}</a>{/block:LinkURL}
+                {block:HighRes}<a class="high-res-url" href="{PhotoURL-HighRes}" target="_blank">{lang:High-res}</a>{/block:HighRes}
+            </section>
             {block:Caption}<figcaption>{Caption}</figcaption>{/block:Caption}
         </figure>
         {/block:Photos}{block:Caption}<figcaption>{Caption}</figcaption>{/block:Caption}
