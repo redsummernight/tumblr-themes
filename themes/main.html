@@ -25,16 +25,15 @@
         /* YEAH */
         body {
             font-family: verdana, arial, sans-serif; font-size: 16px; line-height: 1.4em;
-            background-color: #fafafa;
-        }
-
+            background-color: #fafafa; }
         #blog { max-width: 540px; margin: 0 auto; }
-        #blog > header, #blog > footer, #blog > article, #blog > section { margin-bottom: 10px; padding: 20px; }
-        #blog > footer { text-align: center; }
+        #blog > header, #blog > nav, #blog > article, #blog > section { margin-bottom: 10px; padding: 20px; }
 
-        article img { max-width: 100%; }
+        h1 { font-size: 150%; }
+        h1 a { text-decoration: none; }
         article > h3, article > section, article > figure,
-        article > blockquote, article > ul, header h1 { margin-bottom: 15px; }
+        article > blockquote, article > ul, header h1, header section { margin-bottom: 15px; }
+        article img { max-width: 100%; }
         figure figcaption { padding-top: 15px; }
         figure.photoset { overflow: hidden; width: 100%; }
         figure.photoset figure { float: left; }
@@ -45,25 +44,20 @@
         figure.photoset figure .high-res-url {
             display: none;
             position: absolute;
-            top: 0px; left: 0px;
+            top: 0px; right: 0px;
             background: rgba(255, 255, 255, 0.6);
-            padding: 0 5px;
-            font-size: 60%;
-        }
-        figure .high-res-url { font-size: 80%; }
-
-        h1 { font-size: 150%; }
-        h1 a { text-decoration: none; }
-        p, ul, ol, blockquote, li { margin-bottom: 10px; }
+            padding: 0 5px; }
+        figure .high-res-url { font-size: 60%; }
+        p, ul, ol, li, blockquote { margin-bottom: 10px; }
         ul, ol { list-style-position: inside; }
-        nav, blockquote footer { margin-top: 15px; }
         blockquote { padding-left: 15px; border-left: 3px solid #d3d3d3; }
+        blockquote footer { margin-top: 15px; }
         a { color: #000; }
         a:hover { color: #d40000; }
 
         .meta a { color: #666; text-decoration: none; text-transform: lowercase; }
         .meta a:hover { color: #d40000; }
-        .pagination { font-size: 85%; }
+        .pagination { font-size: 85%; text-align: center; }
         .pagination a, .pagination span { padding: 10px; }
         .post .meta { font-size: 85%; }
         .post .meta section:last-child { margin-top: 5px; }
@@ -197,7 +191,7 @@
 </article>
 {/block:Posts}
 
-<footer class="pagination meta">
+<nav class="pagination meta">
     {block:Pagination}{block:PreviousPage}<a id="prev" href="{PreviousPage}">&#171;&nbsp;{lang:Newer}</a>{/block:PreviousPage}
     {block:JumpPagination length="7"}{block:CurrentPage}<span><strong>{PageNumber}</strong></span>{/block:CurrentPage}{block:JumpPage}<a href="{URL}">{PageNumber}</a>{/block:JumpPage}{/block:JumpPagination}
     {block:NextPage}<a id="next" href="{NextPage}">{lang:Older}&nbsp;&#187;</a>{/block:NextPage}{/block:Pagination}
@@ -206,7 +200,7 @@
     {block:NextPost}<a id="prev" href="{NextPost}">&#171;&nbsp;{lang:Newer}</a>{/block:NextPost}
     {block:PreviousPost}<a id="next" href="{PreviousPost}">{lang:Older}&nbsp;&#187;</a>{/block:PreviousPost}
     {/block:PermalinkPagination}
-</footer>
+</nav>
 <script>
     // Arrange photoset layout
     var photosets = document.getElementsByClassName('photoset');
