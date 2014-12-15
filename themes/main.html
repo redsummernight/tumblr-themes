@@ -39,15 +39,13 @@
         figure.photoset figure { float: left; }
         figure.photoset figure figcaption { font-size: 80%; padding-top: 0; padding-bottom: 15px; }
         figure.photoset > figcaption { clear: left; }
-        figure.photoset figure section { position: relative; }
-        figure.photoset figure:hover .high-res-url { display: block; }
-        figure.photoset figure .high-res-url {
-            display: none;
-            position: absolute;
-            top: 0px; right: 0px;
-            background: rgba(255, 255, 255, 0.6);
-            padding: 0 5px; }
-        figure .high-res-url { font-size: 60%; }
+        figure.photo section { position: relative; }
+        figure.photo:hover .high-res-url { display: block; }
+        figure.photo .high-res-url {
+            font-size: 60%;
+            display: none; padding: 0 5px;
+            position: absolute; top: 0px; right: 0px;
+            background: rgba(255, 255, 255, 0.6); }
         p, ul, ol, li, blockquote { margin-bottom: 10px; }
         ul, ol { list-style-position: inside; }
         blockquote { padding-left: 15px; border-left: 3px solid #d3d3d3; }
@@ -92,18 +90,20 @@
 
     {block:Photo}
     <!-- Photo -->
-    <figure>
-        {block:LinkURL}<a href="{LinkURL}">{/block:LinkURL}
-        <img src="{PhotoURL-500}" alt="{PhotoAlt}" />
-        {block:LinkURL}</a>{/block:LinkURL}
-        {block:HighRes}<a class="high-res-url" href="{PhotoURL-HighRes}" target="_blank">{lang:High-res}</a>{/block:HighRes}
+    <figure class="photo">
+        <section>
+            {block:LinkURL}<a href="{LinkURL}">{/block:LinkURL}
+            <img src="{PhotoURL-500}" alt="{PhotoAlt}" />
+            {block:LinkURL}</a>{/block:LinkURL}
+            {block:HighRes}<a class="high-res-url" href="{PhotoURL-HighRes}" target="_blank">{lang:High-res}</a>{/block:HighRes}
+        </section>
         {block:Caption}<figcaption>{Caption}</figcaption>{/block:Caption}
     </figure>
     {/block:Photo}
 
     {block:Photoset}
     <!-- Photoset -->
-    <figure class="photoset" data-layout="{PhotosetLayout}">{block:Photos}
+    <figure class="photo photoset" data-layout="{PhotosetLayout}">{block:Photos}
         <figure>
             <section>
                 {block:LinkURL}<a href="{LinkURL}">{/block:LinkURL}
