@@ -193,7 +193,7 @@
 
 <nav class="pagination meta">
     {block:Pagination}{block:PreviousPage}<a id="prev" href="{PreviousPage}">&#171;&nbsp;{lang:Newer}</a>{/block:PreviousPage}
-    {block:JumpPagination length="7"}{block:CurrentPage}<span><strong>{PageNumber}</strong></span>{/block:CurrentPage}{block:JumpPage}<a href="{URL}">{PageNumber}</a>{/block:JumpPage}{/block:JumpPagination}
+    {block:JumpPagination length="7"}{block:CurrentPage}<span title="{lang:Page CurrentPage of TotalPages}"><strong>{PageNumber}</strong></span>{/block:CurrentPage}{block:JumpPage}<a href="{URL}">{PageNumber}</a>{/block:JumpPage}{/block:JumpPagination}
     {block:NextPage}<a id="next" href="{NextPage}">{lang:Older}&nbsp;&#187;</a>{/block:NextPage}{/block:Pagination}
 
     {block:PermalinkPagination}
