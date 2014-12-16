@@ -1,7 +1,7 @@
 <html>
 <head>
     <!-- {CopyrightYears} -->
-    <!-- Ignored: notes, submissions, followings, likes, members -->
+    <!-- Ignored: submissions, followings, likes, members -->
     <title>{Title}{block:PostSummary} - {PostSummary}{/block:PostSummary}</title>
     <link rel="shortcut icon" href="{Favicon}">
     <link rel="alternate" type="application/rss+xml" href="{RSS}">
@@ -59,10 +59,16 @@
         .pagination { font-size: 85%; text-align: center; }
         .pagination a, .pagination span { padding: 10px; }
         .post .meta { font-size: 85%; }
-        .post .meta section:last-child { margin-top: 5px; }
+        .post .meta section { margin-top: 10px; }
         .bracket a:before { content: '['; }
         .bracket a:after { content: ']'; }
-        .like_button, .reblog_button { float: right; margin-right: 5px; }
+        .buttons { width: 50px; margin-left: 10px; float: right; }
+        .buttons > * { margin-right: 5px; float: right; }
+        #notes { padding-top: 10px; }
+        li.note { margin-bottom: 5px; }
+        li.note a.avatar_frame { vertical-align: middle; margin-right: 5px; }
+        li.note.reblog blockquote { padding-left: 10px; }
+        li.more_notes_link_container { list-style-type: none; margin-top: 10px; }
         {CustomCSS}
     </style>
 </head>
@@ -178,15 +184,15 @@
             {block:HasTags}{block:Tags}<a href="{TagURL}">#{Tag}</a> {/block:Tags}{/block:HasTags}
         </section>
         <section>
-            {block:NoteCount}<a href="{Permalink}"><strong>{NoteCountWithLabel}</strong></a>{/block:NoteCount}
+            {block:NoteCount}<a href="{Permalink}#notes"><strong>{NoteCountWithLabel}</strong></a>{/block:NoteCount}
             <a href="{Permalink}">
                 <time title="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero} {24HourWithZero}:{Minutes}:{Seconds}">
                     {TimeAgo}
                 </time>
             </a>
-            {LikeButton}
-            {ReblogButton}
+            <span class="buttons">{LikeButton} {ReblogButton}</span>
         </section>
+        {block:PostNotes}<section id="notes">{PostNotes}</section>{/block:PostNotes}
     </footer>
     {/block:Date}
 </article>
