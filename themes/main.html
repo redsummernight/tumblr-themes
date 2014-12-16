@@ -85,7 +85,8 @@
         {/block:Pages}{/block:HasPages}
     </nav>
 </header>
-{block:TagPage}<section><h2>{lang:Posts tagged Tag 3}</h2></section>{/block:TagPage}
+{block:TagPage}<section>{lang:TagResultCount posts tagged Tag 3}</section>{/block:TagPage}
+{block:NoSearchResults}<section>{lang:No search results for SearchQuery}</section>{/block:NoSearchResults}
 
 {block:Posts}
 <article class="post {PostType}">
