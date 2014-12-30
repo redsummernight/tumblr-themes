@@ -51,6 +51,10 @@
         ul, ol { list-style-position: inside; }
         blockquote { padding-left: 15px; border-left: 3px solid #d3d3d3; }
         blockquote footer { margin-top: 15px; }
+        blockquote footer:before {
+            content: '\2014\a0'; /* &mdash;&nbsp; */
+            float: left;
+        }
         a { color: #000; }
         a:hover { color: #d40000; }
 
@@ -128,8 +132,8 @@
     {block:Quote}
     <!-- Quote -->
     <blockquote>
-        {Quote}
-        {block:Source}<footer>&mdash; <cite>{Source}</cite></footer>{/block:Source}
+        &ldquo;{Quote}&rdquo;
+        {block:Source}<footer>{Source}</footer>{/block:Source}
     </blockquote>
     {/block:Quote}
 
