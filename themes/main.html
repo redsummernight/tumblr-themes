@@ -58,12 +58,12 @@
         a { color: #000; }
         a:hover { color: #d40000; }
 
+        .meta { font-size: 85%; }
         .meta a { color: #666; text-decoration: none; text-transform: lowercase; }
         .meta a:hover { color: #d40000; }
-        .pagination { font-size: 85%; text-align: center; }
-        .pagination a, .pagination span { padding: 10px; }
-        .post .meta { font-size: 85%; }
         .post .meta section { margin-top: 10px; }
+        .pagination { font-size: 85%; margin-left: -10px; }
+        .pagination > * { padding: 10px; line-height: 2.5em; }
         .bracket a:before { content: '['; }
         .bracket a:after { content: ']'; }
         .buttons { width: 50px; margin-left: 10px; float: right; }
@@ -79,7 +79,7 @@
 <body id="blog">
 <header>
     {block:ShowTitle}<h1><a href="{BlogURL}">{Title}</a></h1>{/block:ShowTitle}
-    {block:ShowDescription}{block:Description}<section>{Description}</section>{/block:Description}{/block:ShowDescription}
+    {block:ShowDescription}{block:Description}<section class="meta">{Description}</section>{/block:Description}{/block:ShowDescription}
     <nav class="meta bracket">
         <a href="/archive">Archive</a>
         {block:AskEnabled}<a href="/ask">{AskLabel}</a>{/block:AskEnabled}
@@ -182,10 +182,10 @@
     <footer class="meta">
         <section>
             {block:RebloggedFrom}
-            [<a href="{ReblogParentURL}" title="{ReblogParentTitle}">{ReblogParentName}</a>]
+            <a href="{ReblogParentURL}" title="{ReblogParentTitle}">[{ReblogParentName}]</a>
             <!--[<a href="{ReblogRootURL}">{ReblogRootName}</a>]-->
             {/block:RebloggedFrom}
-            {block:ContentSource}(<a href="{SourceURL}">{lang:Source}: {SourceTitle}</a>){/block:ContentSource}
+            {block:ContentSource}<a href="{SourceURL}">({lang:Source}: {SourceTitle})</a>{/block:ContentSource}
             {block:HasTags}{block:Tags}<a href="{TagURL}">#{Tag}</a> {/block:Tags}{/block:HasTags}
         </section>
         <section>
@@ -204,12 +204,18 @@
 {/block:Posts}
 
 <nav class="pagination meta">
-    {block:Pagination}{block:PreviousPage}<a id="prev" href="{PreviousPage}">&#171;&nbsp;{lang:Newer}</a>{/block:PreviousPage}
-    {block:JumpPagination length="7"}{block:CurrentPage}<span title="{lang:Page CurrentPage of TotalPages}"><strong>{PageNumber}</strong></span>{/block:CurrentPage}{block:JumpPage}<a href="{URL}">{PageNumber}</a>{/block:JumpPage}{/block:JumpPagination}
-    {block:NextPage}<a id="next" href="{NextPage}">{lang:Older}&nbsp;&#187;</a>{/block:NextPage}{/block:Pagination}
+    {block:JumpPagination length="11"}
+    {block:CurrentPage}<span title="{lang:Page CurrentPage of TotalPages}"><strong>{PageNumber}</strong></span>{/block:CurrentPage}
+    {block:JumpPage}<a href="{URL}">{PageNumber}</a>{/block:JumpPage}
+    {/block:JumpPagination}
+
+    {block:Pagination}<br />
+    {block:PreviousPage}<a id="prev" href="{PreviousPage}">{lang:Newer}&nbsp;&#171;</a>{/block:PreviousPage}
+    {block:NextPage}<a id="next" href="{NextPage}">{lang:Older}&nbsp;&#187;</a>{/block:NextPage}
+    {/block:Pagination}
 
     {block:PermalinkPagination}
-    {block:NextPost}<a id="prev" href="{NextPost}">&#171;&nbsp;{lang:Newer}</a>{/block:NextPost}
+    {block:NextPost}<a id="prev" href="{NextPost}">{lang:Newer}&nbsp;&#171;</a>{/block:NextPost}
     {block:PreviousPost}<a id="next" href="{PreviousPost}">{lang:Older}&nbsp;&#187;</a>{/block:PreviousPost}
     {/block:PermalinkPagination}
 </nav>
