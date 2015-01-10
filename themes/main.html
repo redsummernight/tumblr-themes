@@ -15,7 +15,7 @@
     <meta name="color:Meta link" content="#666666">
     <meta name="color:Meta link hovered" content="#d40000">
     <meta name="if:Show people I follow" content="1">
-    <meta name="if:Show high-res photo links" content="1">
+    <meta name="if:Show high resolution photo links" content="1">
     <style>
         /* http://www.cssreset.com/scripts/html5-doctor-css-reset-stylesheet/ */
         html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video { margin: 0; padding: 0; border: 0; outline: 0; font-size: 100%; vertical-align: baseline; background: transparent }
@@ -128,7 +128,9 @@
             {block:LinkURL}<a href="{LinkURL}">{/block:LinkURL}
             <img src="{PhotoURL-500}" alt="{PhotoAlt}" />
             {block:LinkURL}</a>{/block:LinkURL}
+            {block:IfShowHighResolutionPhotoLinks}
             {block:HighRes}<a class="high-res-url" href="{PhotoURL-HighRes}" target="_blank">{lang:High-res}</a>{/block:HighRes}
+            {/block:IfShowHighResolutionPhotoLinks}
         </section>
         {block:Caption}<figcaption>{Caption}</figcaption>{/block:Caption}
     </figure>
@@ -142,9 +144,9 @@
                 {block:LinkURL}<a href="{LinkURL}">{/block:LinkURL}
                 <img src="{PhotoURL-500}" alt="{PhotoAlt}" />
                 {block:LinkURL}</a>{/block:LinkURL}
-                {block:IfShowHighResPhotoLinks}
+                {block:IfShowHighResolutionPhotoLinks}
                 {block:HighRes}<a class="high-res-url" href="{PhotoURL-HighRes}" target="_blank">{lang:High-res}</a>{/block:HighRes}
-                {/block:IfShowHighResPhotoLinks}
+                {/block:IfShowHighResolutionPhotoLinks}
             </section>
             {block:Caption}<figcaption>{Caption}</figcaption>{/block:Caption}
         </figure>
