@@ -6,6 +6,9 @@
     <link rel="alternate" type="application/rss+xml" href="{RSS}">
     {block:Description}<meta name="description" content="{MetaDescription}"/>{/block:Description}
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Theme options -->
+    <meta name="if:Show people I follow" content="1">
+    <meta name="if:Show high-res photo links" content="1">
     <style>
         /* http://www.cssreset.com/scripts/html5-doctor-css-reset-stylesheet/ */
         html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video { margin: 0; padding: 0; border: 0; outline: 0; font-size: 100%; vertical-align: baseline; background: transparent }
@@ -27,8 +30,9 @@
             font-family: verdana, arial, sans-serif; font-size: 15px; line-height: 1.4em;
             background-color: #fafafa; }
         #blog { max-width: 540px; margin: 0 auto; }
-        #blog > header, #blog > nav, #blog > article, #blog > section, #blog > footer { margin-bottom: 10px; padding: 20px; }
-        #blog > footer { font-size: 80%; margin-bottom: 0; }
+        #blog > header, #blog > nav, #blog > article,
+        #blog > section, #blog > footer { margin-bottom: 10px; padding: 20px; }
+        #blog > footer { font-size: 85%; margin-bottom: 0; }
 
         h1 { font-size: 150%; }
         h1 a { text-decoration: none; }
@@ -36,6 +40,7 @@
         article > h3, article > section, article > figure,
         article > blockquote, article > ul { margin-bottom: 15px; }
         article img { max-width: 100%; }
+
         figure figcaption { padding-top: 15px; clear: left; }
         figure.photoset { overflow: hidden; width: 100%; }
         figure.photoset figure { float: left; }
@@ -47,6 +52,7 @@
             display: none; padding: 0 5px;
             position: absolute; top: 0px; left: 0px;
             background: rgba(255, 255, 255, 0.6); }
+
         p, ul, ol, li, blockquote { margin-bottom: 10px; }
         ul, ol { list-style-position: inside; }
         pre { white-space: normal; }
@@ -54,14 +60,15 @@
         blockquote footer { margin-top: 15px; }
         blockquote footer:before {
             content: '\2014\a0'; /* &mdash;&nbsp; */
-            float: left;
-        }
+            float: left; }
         a { color: #000; }
         a:hover { color: #d40000; }
 
         .meta { font-size: 85%; }
         .meta a { color: #666; text-decoration: none; text-transform: lowercase; }
         .meta a:hover { color: #d40000; }
+        ul.meta { list-style-type: none; }
+        ul.meta li { margin-bottom: 0; }
         .post .meta section { margin-top: 10px; }
         .pagination { padding-left: 10px !important; }
         .pagination > * { padding: 10px; line-height: 2.5em; }
@@ -69,6 +76,7 @@
         .bracket a:after { content: ']'; }
         .buttons { width: 50px; margin-left: 10px; float: right; }
         .buttons > * { margin-right: 5px; float: right; }
+
         #notes { padding-top: 10px; }
         li.note { margin-bottom: 5px; }
         li.note a.avatar_frame { vertical-align: middle; margin-right: 5px; }
@@ -80,8 +88,6 @@
             margin-right: 10px; margin-bottom: 10px;
         }
         .tumblr_audio_player { border: 1px solid #d3d3d3; }
-        ul.meta { list-style-type: none; }
-        ul.meta li { margin-bottom: 0; }
         {CustomCSS}
     </style>
 </head>
@@ -130,7 +136,9 @@
                 {block:LinkURL}<a href="{LinkURL}">{/block:LinkURL}
                 <img src="{PhotoURL-500}" alt="{PhotoAlt}" />
                 {block:LinkURL}</a>{/block:LinkURL}
+                {block:IfShowHighResPhotoLinks}
                 {block:HighRes}<a class="high-res-url" href="{PhotoURL-HighRes}" target="_blank">{lang:High-res}</a>{/block:HighRes}
+                {/block:IfShowHighResPhotoLinks}
             </section>
             {block:Caption}<figcaption>{Caption}</figcaption>{/block:Caption}
         </figure>
@@ -200,7 +208,7 @@
             <a href="{ReblogParentURL}" title="{ReblogParentTitle}">[{ReblogParentName}]</a>
             <!--[<a href="{ReblogRootURL}">{ReblogRootName}</a>]-->
             {/block:RebloggedFrom}
-            {block:ContentSource}<a href="{SourceURL}">({lang:Source}: {SourceTitle})</a>{/block:ContentSource}
+            {block:ContentSource}<a href="{SourceURL}">({lang:Source}:{SourceTitle})</a>{/block:ContentSource}
             {block:HasTags}{block:Tags}<a href="{TagURL}">#{Tag}</a> {/block:Tags}{/block:HasTags}
         </section>
         <section>
@@ -210,8 +218,6 @@
                     {TimeAgo}
                 </time>
             </a>
-            {block:Audio}<span>{PlayCountWithLabel}</span>{block:Audio}
-            {block:Video}<span>{PlayCountWithLabel}</span>{/block:Video}
             <span class="buttons">{LikeButton} {ReblogButton}</span>
         </section>
         {block:PostNotes}<section id="notes">{PostNotes}</section>{/block:PostNotes}
@@ -237,15 +243,15 @@
     {/block:PermalinkPagination}
 </nav>
 
-{block:IndexPage}{block:Following}
+{block:IfShowPeopleIFollow}{block:IndexPage}{block:Following}
 <nav class="meta">
     {block:Followed}
         <a href="{FollowedURL}"><img src="{FollowedPortraitURL-30}" alt="{FollowedName}" title="{FollowedName}"></a>
     {/block:Followed}
 </nav>
-{/block:Following}{/block:IndexPage}
+{/block:Following}{/block:IndexPage}{/block:IfShowPeopleIFollow}
 
-<footer>{CopyrightYears}. {lang:Powered by Tumblr 2}.</footer>
+<footer>{lang:Powered by Tumblr 2}.</footer>
 
 <script>
     // Arrange photoset layout
