@@ -1,7 +1,6 @@
 <html>
 <head>
-    <!-- {CopyrightYears} -->
-    <!-- Ignored: submissions, followings, likes, members -->
+    <!-- Ignored: submissions, likes, members -->
     <title>{Title}{block:PostSummary} - {PostSummary}{/block:PostSummary}</title>
     <link rel="shortcut icon" href="{Favicon}">
     <link rel="alternate" type="application/rss+xml" href="{RSS}">
@@ -28,12 +27,14 @@
             font-family: verdana, arial, sans-serif; font-size: 15px; line-height: 1.4em;
             background-color: #fafafa; }
         #blog { max-width: 540px; margin: 0 auto; }
-        #blog > header, #blog > nav, #blog > article, #blog > section { margin-bottom: 10px; padding: 20px; }
+        #blog > header, #blog > nav, #blog > article, #blog > section, #blog > footer { margin-bottom: 10px; padding: 20px; }
+        #blog > footer { font-size: 80%; margin-bottom: 0; }
 
         h1 { font-size: 150%; }
         h1 a { text-decoration: none; }
+        header h1, header section { margin-bottom: 10px; }
         article > h3, article > section, article > figure,
-        article > blockquote, article > ul, header h1, header section { margin-bottom: 15px; }
+        article > blockquote, article > ul { margin-bottom: 15px; }
         article img { max-width: 100%; }
         figure figcaption { padding-top: 15px; clear: left; }
         figure.photoset { overflow: hidden; width: 100%; }
@@ -62,7 +63,7 @@
         .meta a { color: #666; text-decoration: none; text-transform: lowercase; }
         .meta a:hover { color: #d40000; }
         .post .meta section { margin-top: 10px; }
-        .pagination { font-size: 85%; margin-left: -10px; }
+        .pagination { padding-left: 10px !important; }
         .pagination > * { padding: 10px; line-height: 2.5em; }
         .bracket a:before { content: '['; }
         .bracket a:after { content: ']'; }
@@ -75,8 +76,8 @@
         li.more_notes_link_container { list-style-type: none; margin-top: 10px; }
 
         img.album_art {
-            margin-right: 10px; float: left;
-            border: 1px solid #d3d3d3;
+            float: left; border: 1px solid #d3d3d3;
+            margin-right: 10px; margin-bottom: 10px;
         }
         .tumblr_audio_player { border: 1px solid #d3d3d3; }
         ul.meta { list-style-type: none; }
@@ -89,7 +90,7 @@
     {block:ShowTitle}<h1><a href="{BlogURL}">{Title}</a></h1>{/block:ShowTitle}
     {block:ShowDescription}{block:Description}<section class="meta">{Description}</section>{/block:Description}{/block:ShowDescription}
     <nav class="meta bracket">
-        <a href="/archive">Archive</a>
+        <a href="/archive">{lang:Archive}</a>
         {block:AskEnabled}<a href="/ask">{AskLabel}</a>{/block:AskEnabled}
         {block:SubmissionsEnabled}<a href="/submit">{SubmitLabel}</a>{/block:SubmissionsEnabled}
         {block:HasPages}{block:Pages}
@@ -220,7 +221,7 @@
 {/block:Posts}
 
 <nav class="pagination meta">
-    {block:JumpPagination length="11"}
+    {block:JumpPagination length="9"}
     {block:CurrentPage}<span><strong>{PageNumber}/{TotalPages}</strong></span>{/block:CurrentPage}
     {block:JumpPage}<a href="{URL}">{PageNumber}</a>{/block:JumpPage}
     {/block:JumpPagination}
@@ -235,6 +236,17 @@
     {block:PreviousPost}<a id="next" href="{PreviousPost}">{lang:Older}&nbsp;&#187;</a>{/block:PreviousPost}
     {/block:PermalinkPagination}
 </nav>
+
+{block:IndexPage}{block:Following}
+<nav class="meta">
+    {block:Followed}
+        <a href="{FollowedURL}"><img src="{FollowedPortraitURL-30}" alt="{FollowedName}" title="{FollowedName}"></a>
+    {/block:Followed}
+</nav>
+{/block:Following}{/block:IndexPage}
+
+<footer>{CopyrightYears}. {lang:Powered by Tumblr 2}.</footer>
+
 <script>
     // Arrange photoset layout
     var photosets = document.getElementsByClassName('photoset');
