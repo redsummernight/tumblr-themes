@@ -16,6 +16,9 @@
     <meta name="color:Meta link hovered" content="#d40000">
     <meta name="if:Show people I follow" content="1">
     <meta name="if:Show high resolution photo links" content="1">
+    <meta name="if:Show like and reblog buttons" content="1">
+    <meta name="if:Show audio ID3 tags" content="1">
+    <meta name="if:Enable keyboard shortcuts" content="1">
     <style>
         /* http://www.cssreset.com/scripts/html5-doctor-css-reset-stylesheet/ */
         html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video { margin: 0; padding: 0; border: 0; outline: 0; font-size: 100%; vertical-align: baseline; background: transparent }
@@ -34,7 +37,7 @@
 
         /* YEAH */
         body {
-            font-family: {font:Body}, sans-serif; font-size: 15px; line-height: 1.4em;
+            font-family: {font:Body}; font-size: 15px; line-height: 1.4em;
             color: {color:Text};
             background-color: {color:Background}; }
         #blog { max-width: 540px; margin: 0 auto; }
@@ -52,6 +55,7 @@
         figure figcaption { padding-top: 15px; clear: left; }
         figure.photoset { overflow: hidden; width: 100%; }
         figure.photoset figure { float: left; }
+        figure.photoset figure img { width: 100%; }
         figure.photoset figure figcaption { font-size: 80%; padding-top: 0; padding-bottom: 15px; }
         figure.photo section { position: relative; }
         figure.photo:hover .high-res-url { display: block; }
@@ -91,9 +95,8 @@
         li.note.reblog blockquote { padding-left: 10px; }
         li.more_notes_link_container { list-style-type: none; margin-top: 10px; }
 
-        img.album_art, .tumblr_audio_player {
-            border: 1px solid #d3d3d3; margin-bottom: 10px; }
-        img.album_art { float: left; margin-right: 10px; }
+        img.album_art { float: left; margin-right: 10px; margin-bottom: 10px; }
+        .tumblr_audio_player { background: #d3d3d3; }
         {CustomCSS}
     </style>
 </head>
@@ -187,13 +190,17 @@
     {block:Audio}
     <!-- Audio -->
     <figure>
-        {block:AlbumArt}<img width="100" height="100" class="album_art" src="{AlbumArtURL}">{/block:AlbumArt}
+        {block:IfShowAudioID3Tags}{block:AlbumArt}
+            <img width="100" height="100" class="album_art" src="{AlbumArtURL}">
+        {/block:AlbumArt}{/block:IfShowAudioID3Tags}
         {AudioPlayerGrey}
+        {block:IfShowAudioID3Tags}
         <ul class="meta">
             {block:TrackName}<li><strong>{TrackName}</strong></li>{/block:TrackName}
             {block:Artist}<li>{Artist}</li>{/block:Artist}
             {block:Album}<li>{Album}</li>{/block:Album}
         </ul>
+        {/block:IfShowAudioID3Tags}
         {block:Caption}<figcaption>{Caption}</figcaption>{/block:Caption}
     </figure>
     {/block:Audio}
@@ -226,7 +233,7 @@
                     {TimeAgo}
                 </time>
             </a>
-            <span class="buttons">{LikeButton} {ReblogButton}</span>
+            {block:IfShowLikeAndReblogButtons}<span class="buttons">{LikeButton} {ReblogButton}</span>{/block:IfShowLikeAndReblogButtons}
         </section>
         {block:PostNotes}<section id="notes">{PostNotes}</section>{/block:PostNotes}
     </footer>
@@ -272,6 +279,7 @@
             while (row--) photos[p++].style.maxWidth = w;
         }
     }
+    {block:IfEnableKeyboardShortcuts}
     // Use onkeyup because this is a heavy decision
     window.onkeyup = function (e) {
         switch (e.keyCode) {
@@ -325,5 +333,6 @@
             }
         }
     }
+    {/block:IfEnableKeyboardShortcuts}
 </script>
 </body>
