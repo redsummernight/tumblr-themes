@@ -239,7 +239,7 @@
     // Arrange photoset layout
     var photosets = document.getElementsByClassName('photoset');
     for (var i = photosets.length; i--;) {
-        var photos = photosets[i].getElementsByTagName('figure'), layout = photosets[i].dataset['layout'];
+        var photos = photosets[i].getElementsByTagName('figure'), layout = photosets[i].getAttribute('data-layout');
         for (var j = 0, p = 0; j < layout.length; j++) {
             var row = Number(layout[j]), w = Math.floor(100 / row) + '%';
             photos[p].style.clear = 'left';
