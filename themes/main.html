@@ -35,20 +35,20 @@
         article > h3, article > section, article > figure,
         article > blockquote, article > ul, header h1, header section { margin-bottom: 15px; }
         article img { max-width: 100%; }
-        figure figcaption { padding-top: 15px; }
+        figure figcaption { padding-top: 15px; clear: left; }
         figure.photoset { overflow: hidden; width: 100%; }
         figure.photoset figure { float: left; }
         figure.photoset figure figcaption { font-size: 80%; padding-top: 0; padding-bottom: 15px; }
-        figure.photoset > figcaption { clear: left; }
         figure.photo section { position: relative; }
         figure.photo:hover .high-res-url { display: block; }
         figure.photo .high-res-url {
             font-size: 60%;
             display: none; padding: 0 5px;
-            position: absolute; top: 0px; right: 0px;
+            position: absolute; top: 0px; left: 0px;
             background: rgba(255, 255, 255, 0.6); }
         p, ul, ol, li, blockquote { margin-bottom: 10px; }
         ul, ol { list-style-position: inside; }
+        pre { white-space: normal; }
         blockquote { padding-left: 15px; border-left: 3px solid #d3d3d3; }
         blockquote footer { margin-top: 15px; }
         blockquote footer:before {
@@ -73,6 +73,14 @@
         li.note a.avatar_frame { vertical-align: middle; margin-right: 5px; }
         li.note.reblog blockquote { padding-left: 10px; }
         li.more_notes_link_container { list-style-type: none; margin-top: 10px; }
+
+        img.album_art {
+            margin-right: 10px; float: left;
+            border: 1px solid #d3d3d3;
+        }
+        .tumblr_audio_player { border: 1px solid #d3d3d3; }
+        ul.meta { list-style-type: none; }
+        ul.meta li { margin-bottom: 0; }
         {CustomCSS}
     </style>
 </head>
@@ -162,7 +170,13 @@
     {block:Audio}
     <!-- Audio -->
     <figure>
-        {AudioEmbed}
+        {block:AlbumArt}<img width="100" height="100" class="album_art" src="{AlbumArtURL}">{/block:AlbumArt}
+        {AudioPlayerGrey}
+        <ul class="meta">
+            {block:TrackName}<li><strong>{TrackName}</strong></li>{/block:TrackName}
+            {block:Artist}<li>{Artist}</li>{/block:Artist}
+            {block:Album}<li>{Album}</li>{/block:Album}
+        </ul>
         {block:Caption}<figcaption>{Caption}</figcaption>{/block:Caption}
     </figure>
     {/block:Audio}
@@ -195,6 +209,8 @@
                     {TimeAgo}
                 </time>
             </a>
+            {block:Audio}<span>{PlayCountWithLabel}</span>{block:Audio}
+            {block:Video}<span>{PlayCountWithLabel}</span>{/block:Video}
             <span class="buttons">{LikeButton} {ReblogButton}</span>
         </section>
         {block:PostNotes}<section id="notes">{PostNotes}</section>{/block:PostNotes}
@@ -205,7 +221,7 @@
 
 <nav class="pagination meta">
     {block:JumpPagination length="11"}
-    {block:CurrentPage}<span title="{lang:Page CurrentPage of TotalPages}"><strong>{PageNumber}</strong></span>{/block:CurrentPage}
+    {block:CurrentPage}<span><strong>{PageNumber}/{TotalPages}</strong></span>{/block:CurrentPage}
     {block:JumpPage}<a href="{URL}">{PageNumber}</a>{/block:JumpPage}
     {/block:JumpPagination}
 
