@@ -16,9 +16,10 @@
     <meta name="color:Meta link" content="#666666">
     <meta name="color:Meta link hovered" content="#d40000">
     <meta name="if:Show people I follow" content="1">
-    <meta name="if:Show high resolution photo links" content="1">
+    <meta name="if:Use custom photosets" content="0">
+    <meta name="if:Show high res links on custom photosets" content="1">
     <meta name="if:Show like and reblog buttons" content="1">
-    <meta name="if:Show audio ID3 tags" content="1">
+    <meta name="if:Show audio track info" content="1">
     <meta name="if:Enable keyboard shortcuts" content="1">
     <style>
         /* http://www.cssreset.com/scripts/html5-doctor-css-reset-stylesheet/ */
@@ -142,9 +143,9 @@
             {block:LinkURL}<a href="{LinkURL}">{/block:LinkURL}
             <img src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}" />
             {block:LinkURL}</a>{/block:LinkURL}
-            {block:IfShowHighResolutionPhotoLinks}
+            {block:IfShowHighResLinksOnCustomPhotosets}
             {block:HighRes}<a class="high-res-url" href="{PhotoURL-HighRes}" target="_blank">{lang:High-res}</a>{/block:HighRes}
-            {/block:IfShowHighResolutionPhotoLinks}
+            {/block:IfShowHighResLinksOnCustomPhotosets}
         </section>
         {block:Caption}<figcaption>{Caption}</figcaption>{/block:Caption}
     </figure>
@@ -152,19 +153,22 @@
 
     {block:Photoset}
     <!-- Photoset -->
-    <figure class="photoset" data-layout="{PhotosetLayout}">{block:Photos}
+    <figure class="photoset" data-layout="{PhotosetLayout}">
+        {block:IfNotUseCustomPhotosets}{Photoset-500}{/block:IfNotUseCustomPhotosets}
+        {block:IfUseCustomPhotosets}{block:Photos}
         <figure class="photo">
             <section>
                 {block:LinkURL}<a href="{LinkURL}">{/block:LinkURL}
                 <img src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}" />
                 {block:LinkURL}</a>{/block:LinkURL}
-                {block:IfShowHighResolutionPhotoLinks}
+                {block:IfShowHighResLinksOnCustomPhotosets}
                 {block:HighRes}<a class="high-res-url" href="{PhotoURL-HighRes}" target="_blank">{lang:High-res}</a>{/block:HighRes}
-                {/block:IfShowHighResolutionPhotoLinks}
+                {/block:IfShowHighResLinksOnCustomPhotosets}
             </section>
             {block:Caption}<figcaption>{Caption}</figcaption>{/block:Caption}
         </figure>
-        {/block:Photos}{block:Caption}<figcaption>{Caption}</figcaption>{/block:Caption}
+        {block:Photos}{/block:IfUseCustomPhotosets}
+        {block:Caption}<figcaption>{Caption}</figcaption>{/block:Caption}
     </figure>
     {/block:Photoset}
 
@@ -201,17 +205,17 @@
     {block:Audio}
     <!-- Audio -->
     <figure>
-        {block:IfShowAudioID3Tags}{block:AlbumArt}
+        {block:IfShowAudioTrackInfo}{block:AlbumArt}
         <img width="100" height="100" class="album-art" src="{AlbumArtURL}">
-        {/block:AlbumArt}{/block:IfShowAudioID3Tags}
+        {/block:AlbumArt}{/block:IfShowAudioTrackInfo}
         {AudioPlayerGrey}
-        {block:IfShowAudioID3Tags}
+        {block:IfShowAudioTrackInfo}
         <ul class="meta">
             {block:TrackName}<li><strong>{TrackName}</strong></li>{/block:TrackName}
             {block:Artist}<li>{Artist}</li>{/block:Artist}
             {block:Album}<li>{Album}</li>{/block:Album}
         </ul>
-        {/block:IfShowAudioID3Tags}
+        {/block:IfShowAudioTrackInfo}
         {block:Caption}<figcaption>{Caption}</figcaption>{/block:Caption}
     </figure>
     {/block:Audio}
@@ -285,6 +289,7 @@
 <footer>{lang:Powered by Tumblr 2}.</footer>
 
 <script>
+    {block:IfUseCustomPhotosets}
     // Arrange photoset layout
     var photosets = document.getElementsByClassName('photoset');
     for (var i = photosets.length; i--;) {
@@ -295,6 +300,7 @@
             while (row--) photos[p++].style.maxWidth = w;
         }
     }
+    {/block:IfUseCustomPhotosets}
     {block:IfEnableKeyboardShortcuts}
     // Use onkeyup because this is a heavy decision
     window.onkeyup = function (e) {
