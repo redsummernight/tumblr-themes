@@ -51,12 +51,12 @@
         header h1, header section { margin-bottom: 10px; }
         article > h3, article > section, article > figure,
         article > blockquote, article > ul { margin-bottom: 15px; }
-        article img { max-width: 100%; }
+        article img { max-width: 100%; height: auto; }
 
         figure figcaption { padding-top: 15px; clear: left; }
         figure.photoset { overflow: hidden; width: 100%; }
         figure.photoset figure { float: left; }
-        figure.photoset figure img { width: 100%; }
+        figure.photoset figure img { width: 100%; height: auto; }
         figure.photoset figure figcaption { font-size: 80%; padding-top: 0; padding-bottom: 15px; }
         figure.photo section { position: relative; }
         figure.photo:hover .high-res-url { display: block; }
@@ -98,7 +98,7 @@
         li.note.reblog blockquote { padding-left: 10px; }
         li.more_notes_link_container { list-style-type: none; margin-top: 10px; }
 
-        img.album_art { float: left; margin-right: 10px; margin-bottom: 10px; }
+        img.album-art { float: left; margin-right: 10px; margin-bottom: 10px; }
         .tumblr_audio_player { background: #d3d3d3; }
         {CustomCSS}
     </style>
@@ -140,7 +140,7 @@
     <figure class="photo">
         <section>
             {block:LinkURL}<a href="{LinkURL}">{/block:LinkURL}
-            <img src="{PhotoURL-500}" alt="{PhotoAlt}" />
+            <img src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}" />
             {block:LinkURL}</a>{/block:LinkURL}
             {block:IfShowHighResolutionPhotoLinks}
             {block:HighRes}<a class="high-res-url" href="{PhotoURL-HighRes}" target="_blank">{lang:High-res}</a>{/block:HighRes}
@@ -156,7 +156,7 @@
         <figure class="photo">
             <section>
                 {block:LinkURL}<a href="{LinkURL}">{/block:LinkURL}
-                <img src="{PhotoURL-500}" alt="{PhotoAlt}" />
+                <img src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}" />
                 {block:LinkURL}</a>{/block:LinkURL}
                 {block:IfShowHighResolutionPhotoLinks}
                 {block:HighRes}<a class="high-res-url" href="{PhotoURL-HighRes}" target="_blank">{lang:High-res}</a>{/block:HighRes}
@@ -186,7 +186,7 @@
     <!-- Chat -->
     {block:Title}<h3>{Title}</h3>{/block:Title}
     <ul>
-        {block:Lines}<li class="{Alt}">{block:Label}<strong>{Label}</strong>{/block:Label} {Line}</li>{/block:Lines}
+        {block:Lines}<li>{block:Label}<strong>{Label}</strong>{/block:Label} {Line}</li>{/block:Lines}
     </ul>
     {/block:Chat}
 
@@ -202,7 +202,7 @@
     <!-- Audio -->
     <figure>
         {block:IfShowAudioID3Tags}{block:AlbumArt}
-        <img width="100" height="100" class="album_art" src="{AlbumArtURL}">
+        <img width="100" height="100" class="album-art" src="{AlbumArtURL}">
         {/block:AlbumArt}{/block:IfShowAudioID3Tags}
         {AudioPlayerGrey}
         {block:IfShowAudioID3Tags}
