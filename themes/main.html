@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
     <!-- Ignored: submissions, likes, members -->
@@ -41,7 +42,7 @@
             color: {color:Text};
             background-color: {color:Background}; }
         #blog { max-width: 540px; margin: 0 auto; }
-        #blog > header, #blog > nav, #blog > article, #blog > section, #blog > footer { padding: 20px; }
+        #blog > * { padding: 20px; }
         #blog > article { margin: 20px 0; }
         #blog > footer { font-size: 85%; }
 
@@ -86,6 +87,8 @@
         .pagination > * { padding: 10px; line-height: 2.5em; }
         .bracket a:before { content: '['; }
         .bracket a:after { content: ']'; }
+        #prev:after { content: '\a0\ab'; } /* &nbsp;&laquo; */
+        #next:after { content: '\a0\bb'; } /* &nbsp;&raquo; */
         .buttons { width: 50px; margin-left: 10px; float: right; }
         .buttons > * { margin-right: 5px; float: right; }
 
@@ -100,7 +103,8 @@
         {CustomCSS}
     </style>
 </head>
-<body id="blog">
+<body>
+<div id="blog">
 <header>
     {block:ShowTitle}<h1><a href="{BlogURL}">{Title}</a></h1>{/block:ShowTitle}
     {block:ShowDescription}{block:Description}<section class="meta">{Description}</section>{/block:Description}{/block:ShowDescription}
@@ -113,13 +117,15 @@
         {/block:Pages}{/block:HasPages}
     </nav>
 </header>
+
 {block:TagPage}<section>{lang:TagResultCount posts tagged Tag 3}</section>{/block:TagPage}
 {block:SearchPage}
-    <section>
-        {lang:SearchResultCount results}{block:NoSearchResults}{lang:No results found}{/block:NoSearchResults}:
-        <a href="/search/{URLSafeSearchQuery}">{SearchQuery}</a>
-    </section>
+<section>
+    {lang:SearchResultCount results}{block:NoSearchResults}{lang:No results found}{/block:NoSearchResults}:
+    <a href="/search/{URLSafeSearchQuery}">{SearchQuery}</a>
+</section>
 {/block:SearchPage}
+{block:DayPage}<section>{lang:Posted on DayOfWeek Month DayOfMonth Year 3}</section>{/block:DayPage}
 
 {block:Posts}
 <article class="post {PostType}">
@@ -196,7 +202,7 @@
     <!-- Audio -->
     <figure>
         {block:IfShowAudioID3Tags}{block:AlbumArt}
-            <img width="100" height="100" class="album_art" src="{AlbumArtURL}">
+        <img width="100" height="100" class="album_art" src="{AlbumArtURL}">
         {/block:AlbumArt}{/block:IfShowAudioID3Tags}
         {AudioPlayerGrey}
         {block:IfShowAudioID3Tags}
@@ -253,20 +259,25 @@
     {/block:JumpPagination}
 
     {block:Pagination}<br />
-    {block:PreviousPage}<a id="prev" href="{PreviousPage}">{lang:Newer}&nbsp;&#171;</a>{/block:PreviousPage}
-    {block:NextPage}<a id="next" href="{NextPage}">{lang:Older}&nbsp;&#187;</a>{/block:NextPage}
+    {block:PreviousPage}<a id="prev" href="{PreviousPage}">{lang:Newer}</a>{/block:PreviousPage}
+    {block:NextPage}<a id="next" href="{NextPage}">{lang:Older}</a>{/block:NextPage}
     {/block:Pagination}
 
     {block:PermalinkPagination}
-    {block:NextPost}<a id="prev" href="{NextPost}">{lang:Newer}&nbsp;&#171;</a>{/block:NextPost}
-    {block:PreviousPost}<a id="next" href="{PreviousPost}">{lang:Older}&nbsp;&#187;</a>{/block:PreviousPost}
+    {block:PreviousPost}<a id="prev" href="{PreviousPost}">{lang:Older}</a>{/block:PreviousPost}
+    {block:NextPost}<a id="next" href="{NextPost}">{lang:Newer}</a>{/block:NextPost}
     {/block:PermalinkPagination}
+
+    {block:DayPagination}
+    {block:PreviousDayPage}<a id="prev" href="{PreviousDayPage}">{lang:Previous day}</a>{/block:PreviousDayPage}
+    {block:NextDayPage}<a id="next" href="{NextDayPage}">{lang:Next day}</a>{/block:NextDayPage}
+    {/block:DayPagination}
 </nav>
 
 {block:IfShowPeopleIFollow}{block:IndexPage}{block:Following}
 <nav class="meta">
     {block:Followed}
-        <a href="{FollowedURL}"><img src="{FollowedPortraitURL-30}" alt="{FollowedName}" title="{FollowedName}"></a>
+    <a href="{FollowedURL}"><img src="{FollowedPortraitURL-30}" alt="{FollowedName}" title="{FollowedName}"></a>
     {/block:Followed}
 </nav>
 {/block:Following}{/block:IndexPage}{/block:IfShowPeopleIFollow}
@@ -340,4 +351,6 @@
     }
     {/block:IfEnableKeyboardShortcuts}
 </script>
+</div>
 </body>
+</html>
