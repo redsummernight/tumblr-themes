@@ -114,7 +114,12 @@
     </nav>
 </header>
 {block:TagPage}<section>{lang:TagResultCount posts tagged Tag 3}</section>{/block:TagPage}
-{block:NoSearchResults}<section>{lang:No search results for SearchQuery}</section>{/block:NoSearchResults}
+{block:SearchPage}
+    <section>
+        {lang:SearchResultCount results}{block:NoSearchResults}{lang:No results found}{/block:NoSearchResults}:
+        <a href="/search/{URLSafeSearchQuery}">{SearchQuery}</a>
+    </section>
+{/block:SearchPage}
 
 {block:Posts}
 <article class="post {PostType}">
