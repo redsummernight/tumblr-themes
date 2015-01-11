@@ -25,7 +25,6 @@
         /* http://www.cssreset.com/scripts/html5-doctor-css-reset-stylesheet/ */
         html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video { margin: 0; padding: 0; border: 0; outline: 0; font-size: 100%; vertical-align: baseline; background: transparent }
         article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block }
-        nav ul { list-style: none }
         blockquote, q { quotes: none }
         blockquote:before, blockquote:after, q:before, q:after { content: none }
         a { margin: 0; padding: 0; font-size: 100%; vertical-align: baseline; background: transparent }
@@ -36,23 +35,31 @@
         table { border-collapse: collapse; border-spacing: 0 }
         hr { display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0 }
         input, select { vertical-align: middle }
-
-        /* YEAH */
+    </style>
+    <style>
         body {
             font-family: {font:Body}; font-size: 15px; line-height: 1.4em;
             color: {color:Text};
             background-color: {color:Background}; }
         #blog { max-width: 540px; margin: 0 auto; }
         #blog > * { padding: 20px; }
-        #blog > article { margin: 20px 0; }
+        #blog > article { margin-bottom: 20px; }
         #blog > footer { font-size: 85%; }
 
         h1 { font-size: 150%; }
         h1 a { text-decoration: none; }
         header h1, header section { margin-bottom: 10px; }
-        article > h3, article > section, article > figure,
-        article > blockquote, article > ul { margin-bottom: 15px; }
+        article > * { margin-bottom: 15px; }
+        article footer { margin-bottom: 0; }
         article img { max-width: 100%; height: auto; }
+
+        a { color: {color:Link}; }
+        a:hover { color: {color:Link hovered}; }
+        nav, .meta { font-size: 85%; }
+        nav a, .meta a { color: {color:Meta link}; text-decoration: none; text-transform: lowercase; }
+        nav a:hover, .meta a:hover { color: {color:Meta link hovered}; }
+        nav ul { list-style: none; margin: 0; }
+        nav ul li { display: inline; margin: 0; }
 
         figure figcaption { padding-top: 15px; clear: left; }
         figure.photoset { overflow: hidden; width: 100%; }
@@ -75,47 +82,51 @@
         blockquote footer:before {
             content: '\2014\a0'; /* &mdash;&nbsp; */
             float: left; }
-        a { color: {color:Link}; }
-        a:hover { color: {color:Link hovered}; }
 
-        .meta { font-size: 85%; }
-        .meta a { color: {color:Meta link}; text-decoration: none; text-transform: lowercase; }
-        .meta a:hover { color: {color:Meta link hovered}; }
-        ul.meta { list-style-type: none; }
-        ul.meta li { margin-bottom: 0; }
-        .post .meta section { margin-top: 10px; }
-        .pagination { padding-left: 10px !important; }
-        .pagination > * { padding: 10px; line-height: 2.5em; }
         .bracket a:before { content: '['; }
         .bracket a:after { content: ']'; }
-        #prev:after { content: '\a0\ab'; } /* &nbsp;&laquo; */
-        #next:after { content: '\a0\bb'; } /* &nbsp;&raquo; */
         .buttons { width: 50px; margin-left: 10px; float: right; }
         .buttons > * { margin-right: 5px; float: right; }
 
-        #notes { padding-top: 10px; }
+        #notes { padding-top: 15px; }
         li.note { margin-bottom: 5px; }
         li.note a.avatar_frame { vertical-align: middle; margin-right: 5px; }
         li.note.reblog blockquote { padding-left: 10px; }
         li.more_notes_link_container { list-style-type: none; margin-top: 10px; }
 
+        #pagination { padding-left: 10px !important; }
+        #pagination a, #pagination span { padding: 10px; line-height: 2.5em; }
+        #prev:after { content: '\a0\ab'; } /* &nbsp;&laquo; */
+        #next:after { content: '\a0\bb'; } /* &nbsp;&raquo; */
+
+        #following { padding-left: 18px !important; }
+        #following li { float: left; margin: 2px; }
+        #following img { vertical-align: bottom; }
+        #following:after { content: ''; display: block; clear: both; }
+
         img.album-art { float: left; margin-right: 10px; margin-bottom: 10px; }
+        .audio figure ul.meta { list-style: none; }
+        .audio figure ul.meta li { margin-bottom: 0; }
         .tumblr_audio_player { background: #d3d3d3; }
-        {CustomCSS}
     </style>
+    <style>{CustomCSS}</style>
 </head>
 <body>
 <div id="blog">
 <header>
     {block:ShowTitle}<h1><a href="{BlogURL}">{Title}</a></h1>{/block:ShowTitle}
-    {block:ShowDescription}{block:Description}<section class="meta">{Description}</section>{/block:Description}{/block:ShowDescription}
-    <nav class="meta bracket">
-        <a href="/archive">{lang:Archive}</a>
-        {block:AskEnabled}<a href="/ask">{AskLabel}</a>{/block:AskEnabled}
-        {block:SubmissionsEnabled}<a href="/submit">{SubmitLabel}</a>{/block:SubmissionsEnabled}
-        {block:HasPages}{block:Pages}
-        <a href="{URL}">{Label}</a>
-        {/block:Pages}{/block:HasPages}
+    {block:ShowDescription}{block:Description}
+    <section class="meta">{Description}</section>
+    {/block:Description}{/block:ShowDescription}
+    <nav class="bracket">
+        <ul>
+            <li><a href="/archive">{lang:Archive}</a></li>
+            {block:AskEnabled}<li><a href="/ask">{AskLabel}</a></li>{/block:AskEnabled}
+            {block:SubmissionsEnabled}<li><a href="/submit">{SubmitLabel}</a></li>{/block:SubmissionsEnabled}
+            {block:HasPages}{block:Pages}
+            <li><a href="{URL}">{Label}</a></li>
+            {/block:Pages}{/block:HasPages}
+        </ul>
     </nav>
 </header>
 
@@ -129,7 +140,7 @@
 {block:DayPage}<section>{lang:Posted on DayOfWeek Month DayOfMonth Year 3}</section>{/block:DayPage}
 
 {block:Posts}
-<article class="post {PostType}">
+<article class="{PostType}">
     {block:Text}
     <!-- Text -->
     {block:Title}<h3>{Title}</h3>{/block:Title}
@@ -232,57 +243,93 @@
     {/block:Answer}
 
     {block:Date}
-    <footer class="meta">
-        <section>
-            {block:RebloggedFrom}
-            <a href="{ReblogParentURL}" title="{ReblogParentTitle}">[{ReblogParentName}]</a>
-            <!--[<a href="{ReblogRootURL}">{ReblogRootName}</a>]-->
-            {/block:RebloggedFrom}
-            {block:ContentSource}<a href="{SourceURL}">({lang:Source}: {SourceTitle})</a>{/block:ContentSource}
-            {block:HasTags}{block:Tags}<a href="{TagURL}">#{Tag}</a> {/block:Tags}{/block:HasTags}
-        </section>
-        <section>
-            {block:NoteCount}<a href="{Permalink}#notes"><strong>{NoteCountWithLabel}</strong></a>{/block:NoteCount}
-            <a href="{Permalink}">
-                <time title="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero} {24HourWithZero}:{Minutes}:{Seconds}">
-                    {TimeAgo}
-                </time>
-            </a>
-            {block:IfShowLikeAndReblogButtons}<span class="buttons">{LikeButton} {ReblogButton}</span>{/block:IfShowLikeAndReblogButtons}
-        </section>
-        {block:PostNotes}<section id="notes">{PostNotes}</section>{/block:PostNotes}
+    <footer>
+        <nav>
+            <ul>
+                {block:RebloggedFrom}
+                <li><a href="{ReblogParentURL}" title="{ReblogParentTitle}">[{ReblogParentName}]</a></li>
+                <!--<li><a href="{ReblogRootURL}">[{ReblogRootName}]</a></li>-->
+                {/block:RebloggedFrom}
+                {block:ContentSource}
+                <li><a href="{SourceURL}">({lang:Source}: {SourceTitle})</a></li>
+                {/block:ContentSource}
+                {block:HasTags}{block:Tags}
+                <li><a href="{TagURL}">#{Tag}</a></li>
+                {/block:Tags}{/block:HasTags}
+            </ul>
+            <ul>
+                {block:NoteCount}
+                <li><a href="{Permalink}#notes"><strong>{NoteCountWithLabel}</strong></a></li>
+                {/block:NoteCount}
+                <li><a href="{Permalink}">
+                    <time title="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero} {24HourWithZero}:{Minutes}:{Seconds}">{TimeAgo}</time>
+                </a></li>
+                {block:IfShowLikeAndReblogButtons}
+                <li class="buttons">{LikeButton} {ReblogButton}</li>
+                {/block:IfShowLikeAndReblogButtons}
+            </ul>
+        </nav>
+        {block:PostNotes}<section id="notes" class="meta">{PostNotes}</section>{/block:PostNotes}
     </footer>
     {/block:Date}
 </article>
 {/block:Posts}
 
-<nav class="pagination meta">
-    {block:JumpPagination length="9"}
-    {block:CurrentPage}<span><strong>{PageNumber}/{TotalPages}</strong></span>{/block:CurrentPage}
-    {block:JumpPage}<a href="{URL}">{PageNumber}</a>{/block:JumpPage}
-    {/block:JumpPagination}
+<nav id="pagination">
+    <ul>
+        {block:JumpPagination length="9"}
+        {block:CurrentPage}
+        <li><span><strong>{PageNumber}/{TotalPages}</strong></span></li>
+        {/block:CurrentPage}
+        {block:JumpPage}
+        <li><a href="{URL}">{PageNumber}</a></li>
+        {/block:JumpPage}
+        {/block:JumpPagination}
+    </ul>
 
-    {block:Pagination}<br />
-    {block:PreviousPage}<a id="prev" href="{PreviousPage}">{lang:Newer}</a>{/block:PreviousPage}
-    {block:NextPage}<a id="next" href="{NextPage}">{lang:Older}</a>{/block:NextPage}
+    {block:Pagination}
+    <ul>
+        {block:PreviousPage}
+        <li><a id="prev" href="{PreviousPage}">{lang:Newer}</a></li>
+        {/block:PreviousPage}
+        {block:NextPage}
+        <li><a id="next" href="{NextPage}">{lang:Older}</a></li>
+        {/block:NextPage}
+    </ul>
     {/block:Pagination}
 
     {block:PermalinkPagination}
-    {block:PreviousPost}<a id="prev" href="{PreviousPost}">{lang:Older}</a>{/block:PreviousPost}
-    {block:NextPost}<a id="next" href="{NextPost}">{lang:Newer}</a>{/block:NextPost}
+    <ul>
+        {block:PreviousPost}
+        <li><a id="prev" href="{PreviousPost}">{lang:Older}</a></li>
+        {/block:PreviousPost}
+        {block:NextPost}
+        <li><a id="next" href="{NextPost}">{lang:Newer}</a></li>
+        {/block:NextPost}
+    </ul>
     {/block:PermalinkPagination}
 
     {block:DayPagination}
-    {block:PreviousDayPage}<a id="prev" href="{PreviousDayPage}">{lang:Previous day}</a>{/block:PreviousDayPage}
-    {block:NextDayPage}<a id="next" href="{NextDayPage}">{lang:Next day}</a>{/block:NextDayPage}
+    <ul>
+        {block:PreviousDayPage}
+        <li><a id="prev" href="{PreviousDayPage}">{lang:Previous day}</a></li>
+        {/block:PreviousDayPage}
+        {block:NextDayPage}
+        <li><a id="next" href="{NextDayPage}">{lang:Next day}</a></li>
+        {/block:NextDayPage}
+    </ul>
     {/block:DayPagination}
 </nav>
 
 {block:IfShowPeopleIFollow}{block:IndexPage}{block:Following}
-<nav class="meta">
-    {block:Followed}
-    <a href="{FollowedURL}"><img src="{FollowedPortraitURL-30}" alt="{FollowedName}" title="{FollowedName}"></a>
-    {/block:Followed}
+<nav id="following">
+    <ul>
+        {block:Followed}
+        <li><a href="{FollowedURL}">
+            <img src="{FollowedPortraitURL-30}" alt="{FollowedName}" title="{FollowedName}">
+        </a></li>
+        {/block:Followed}
+    </ul>
 </nav>
 {/block:Following}{/block:IndexPage}{/block:IfShowPeopleIFollow}
 
