@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
 <head>
     <!-- Ignored: submissions, likes, members -->
@@ -17,7 +16,6 @@
     <meta name="color:Meta link hovered" content="#d40000">
     <meta name="if:Show people I follow" content="1">
     <meta name="if:Use custom photosets" content="0">
-    <meta name="if:Show high res links on custom photosets" content="1">
     <meta name="if:Show like and reblog buttons" content="1">
     <meta name="if:Show audio track info" content="1">
     <meta name="if:Enable keyboard shortcuts" content="1">
@@ -48,10 +46,17 @@
 
         h1 { font-size: 150%; }
         h1 a { text-decoration: none; }
-        header h1, header section { margin-bottom: 10px; }
         article > * { margin-bottom: 15px; }
         article footer { margin-bottom: 0; }
         article img { max-width: 100%; height: auto; }
+        h1, h3, p, ul, ol, li, blockquote { margin-bottom: 10px; }
+        ul, ol { list-style-position: inside; }
+        pre { white-space: normal; }
+        blockquote { padding-left: 15px; border-left: 3px solid #d3d3d3; }
+        blockquote footer { margin-top: 15px; }
+        blockquote footer:before {
+            content: '\2014\a0'; /* &mdash;&nbsp; */
+            float: left; }
 
         a { color: {color:Link}; }
         a:hover { color: {color:Link hovered}; }
@@ -65,23 +70,16 @@
         figure.photoset { overflow: hidden; width: 100%; }
         figure.photoset figure { float: left; }
         figure.photoset figure img { width: 100%; vertical-align: bottom; }
-        figure.photoset figure figcaption { font-size: 80%; padding-top: 0; padding-bottom: 15px; }
-        figure.photo section { position: relative; }
+        figure.photoset figure figcaption {
+            font-size: 80%;
+            padding: 10px 5px; padding-top: 0; }
+        figure.photo { position: relative; }
         figure.photo:hover .high-res-url { display: block; }
         figure.photo .high-res-url {
             font-size: 60%;
             display: none; padding: 0 5px;
             position: absolute; top: 0px; left: 0px;
             background: rgba(255, 255, 255, 0.6); }
-
-        p, ul, ol, li, blockquote { margin-bottom: 10px; }
-        ul, ol { list-style-position: inside; }
-        pre { white-space: normal; }
-        blockquote { padding-left: 15px; border-left: 3px solid #d3d3d3; }
-        blockquote footer { margin-top: 15px; }
-        blockquote footer:before {
-            content: '\2014\a0'; /* &mdash;&nbsp; */
-            float: left; }
 
         .bracket a:before { content: '['; }
         .bracket a:after { content: ']'; }
@@ -99,7 +97,7 @@
         #prev:after { content: '\a0\ab'; } /* &nbsp;&laquo; */
         #next:after { content: '\a0\bb'; } /* &nbsp;&raquo; */
 
-        #following { padding-left: 18px !important; }
+        #following { padding-left: 18px; padding-right: 12px; }
         #following li { float: left; margin: 2px; }
         #following img { vertical-align: bottom; }
         #following:after { content: ''; display: block; clear: both; }
@@ -116,7 +114,7 @@
 <header>
     {block:ShowTitle}<h1><a href="{BlogURL}">{Title}</a></h1>{/block:ShowTitle}
     {block:ShowDescription}{block:Description}
-    <section class="meta">{Description}</section>
+    <p class="meta">{Description}</p>
     {/block:Description}{/block:ShowDescription}
     <nav class="bracket">
         <ul>
@@ -143,21 +141,19 @@
 <article class="{PostType}">
     {block:Text}
     <!-- Text -->
-    {block:Title}<h3>{Title}</h3>{/block:Title}
-    <section>{Body}</section>
+    <section>
+        {block:Title}<h3>{Title}</h3>{/block:Title}
+        {Body}
+    </section>
     {/block:Text}
 
     {block:Photo}
     <!-- Photo -->
     <figure class="photo">
-        <section>
-            {block:LinkURL}<a href="{LinkURL}">{/block:LinkURL}
-            <img src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}" />
-            {block:LinkURL}</a>{/block:LinkURL}
-            {block:IfShowHighResLinksOnCustomPhotosets}
-            {block:HighRes}<a class="high-res-url" href="{PhotoURL-HighRes}" target="_blank">{lang:High-res}</a>{/block:HighRes}
-            {/block:IfShowHighResLinksOnCustomPhotosets}
-        </section>
+        {block:LinkURL}<a href="{LinkURL}">{/block:LinkURL}
+        <img src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}" />
+        {block:LinkURL}</a>{/block:LinkURL}
+        {block:HighRes}<a class="high-res-url" href="{PhotoURL-HighRes}" target="_blank">{lang:High-res}</a>{/block:HighRes}
         {block:Caption}<figcaption>{Caption}</figcaption>{/block:Caption}
     </figure>
     {/block:Photo}
@@ -168,14 +164,10 @@
         {block:IfNotUseCustomPhotosets}{Photoset-500}{/block:IfNotUseCustomPhotosets}
         {block:IfUseCustomPhotosets}{block:Photos}
         <figure class="photo">
-            <section>
-                {block:LinkURL}<a href="{LinkURL}">{/block:LinkURL}
-                <img src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}" />
-                {block:LinkURL}</a>{/block:LinkURL}
-                {block:IfShowHighResLinksOnCustomPhotosets}
-                {block:HighRes}<a class="high-res-url" href="{PhotoURL-HighRes}" target="_blank">{lang:High-res}</a>{/block:HighRes}
-                {/block:IfShowHighResLinksOnCustomPhotosets}
-            </section>
+            {block:LinkURL}<a href="{LinkURL}">{/block:LinkURL}
+            <img src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}" />
+            {block:LinkURL}</a>{/block:LinkURL}
+            {block:HighRes}<a class="high-res-url" href="{PhotoURL-HighRes}" target="_blank">{lang:High-res}</a>{/block:HighRes}
             {block:Caption}<figcaption>{Caption}</figcaption>{/block:Caption}
         </figure>
         {block:Photos}{/block:IfUseCustomPhotosets}
@@ -233,13 +225,13 @@
 
     {block:Answer}
     <!-- Answer -->
-    <section><strong>{lang:Asker asked 2}</strong>: <q>{Question}</q></section>
     <section>
+        <p><strong>{lang:Asker asked 2}</strong>: <q>{Question}</q></p>
         {block:Answerer}
         <p><strong>{Answerer}</strong>:</p><blockquote>{Answer}</blockquote>
         {/block:Answerer}
+        {Replies}
     </section>
-    <section>{Replies}</section>
     {/block:Answer}
 
     {block:Date}
@@ -261,9 +253,7 @@
                 {block:NoteCount}
                 <li><a href="{Permalink}#notes"><strong>{NoteCountWithLabel}</strong></a></li>
                 {/block:NoteCount}
-                <li><a href="{Permalink}">
-                    <time title="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero} {24HourWithZero}:{Minutes}:{Seconds}">{TimeAgo}</time>
-                </a></li>
+                <li><a href="{Permalink}" title="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero} {24HourWithZero}:{Minutes}:{Seconds}">{TimeAgo}</a></li>
                 {block:IfShowLikeAndReblogButtons}
                 <li class="buttons">{ReblogButton} {LikeButton}</li>
                 {/block:IfShowLikeAndReblogButtons}
