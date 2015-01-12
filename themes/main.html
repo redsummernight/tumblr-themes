@@ -381,26 +381,39 @@
             var top = Math.floor(el.getBoundingClientRect().top);
             if (down) {
                 if (top > 0) {
-                    el.scrollIntoView();
+                    focus(el); // to next
                     break;
                 }
                 if (last) {
-                    window.scrollTo(0, document.body.scrollHeight); // to page bottom
+                    if (el.nextElementSibling) {
+                        focus(el.nextElementSibling); // to after last
+                    } else {
+                        window.scrollTo(0, document.body.scrollHeight); // to page bottom
+                    }
                     break;
                 }
             } else { // up
                 if (top >= 0) {
-                    if (i > 0) {
-                        items[i - 1].scrollIntoView(); // to previous
+                    if (el.previousElementSibling) {
+                        focus(el.previousElementSibling); // to previous post or header
                     } else {
                         window.scrollTo(0, 0); // to page top
                     }
                     break;
                 } else if (last) {
-                    items[len - 1].scrollIntoView();
+                    focus(el); // if at page bottom, to last
                 }
             }
         }
+    }
+    function focus(el) {
+        if (!el) return;
+        el.scrollIntoView();
+        // If the element is non-interactive (not a link/form item),
+        // setting tabindex to -1 makes it focusable by scripts
+        // (but not users/screenreaders).
+        if (el.tabIndex < 0) el.tabIndex = -1;
+        el.focus();
     }
     {/block:IfEnableKeyboardShortcuts}
 </script>
