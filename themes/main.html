@@ -86,7 +86,7 @@
         .bracket a:before { content: '['; }
         .bracket a:after { content: ']'; }
         .buttons { width: 50px; margin-left: 10px; float: right; }
-        .buttons > * { margin-right: 5px; float: right; }
+        .buttons > * { margin-right: 5px; float: left; }
 
         #notes { padding-top: 15px; }
         li.note { margin-bottom: 5px; }
@@ -265,7 +265,7 @@
                     <time title="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero} {24HourWithZero}:{Minutes}:{Seconds}">{TimeAgo}</time>
                 </a></li>
                 {block:IfShowLikeAndReblogButtons}
-                <li class="buttons">{LikeButton} {ReblogButton}</li>
+                <li class="buttons">{ReblogButton} {LikeButton}</li>
                 {/block:IfShowLikeAndReblogButtons}
             </ul>
         </nav>
