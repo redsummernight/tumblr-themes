@@ -9,6 +9,7 @@
     <!-- Theme options -->
     <meta name="font:Body" content="Verdana">
     <meta name="color:Background" content="#fafafa">
+    <meta name="color:Border" content="#d3d3d3">
     <meta name="color:Text" content="#000000">
     <meta name="color:Link" content="#000000">
     <meta name="color:Link hovered" content="#d40000">
@@ -37,47 +38,43 @@
     <style>
         body {
             font-family: {font:Body}; font-size: 15px; line-height: 1.4em;
-            color: {color:Text};
-            background-color: {color:Background}; }
+            color: {color:Text}; background-color: {color:Background}; }
         #blog { max-width: 540px; margin: 0 auto; }
         #blog > * { padding: 20px; }
         #blog > article { margin-bottom: 20px; }
-        #blog > footer { font-size: 85%; }
+        #blog > footer, nav, .meta { font-size: 85%; }
+
+        a { color: {color:Link}; }
+        a:hover { color: {color:Link hovered}; }
+        nav a, .meta a {
+            color: {color:Meta link};
+            text-decoration: none; text-transform: lowercase; }
+        nav a:hover, .meta a:hover { color: {color:Meta link hovered}; }
+        nav ul { list-style: none; margin: 0; }
+        nav ul li { display: inline; margin: 0; }
 
         h1 { font-size: 150%; }
         h1 a { text-decoration: none; }
+        header nav { clear: both; }
         article > * { margin-bottom: 15px; }
         article footer { margin-bottom: 0; }
         article img { max-width: 100%; height: auto; }
         h1, h3, p, ul, ol, li, blockquote { margin-bottom: 10px; }
         ul, ol { list-style-position: inside; }
         pre { white-space: normal; }
-        blockquote { padding-left: 15px; border-left: 3px solid #d3d3d3; }
+        blockquote { padding-left: 15px; border-left: 3px solid {color:Border}; }
         blockquote footer { margin-top: 15px; }
-        blockquote footer:before {
-            content: '\2014\a0'; /* &mdash;&nbsp; */
-            float: left; }
-
-        a { color: {color:Link}; }
-        a:hover { color: {color:Link hovered}; }
-        nav, .meta { font-size: 85%; }
-        nav a, .meta a { color: {color:Meta link}; text-decoration: none; text-transform: lowercase; }
-        nav a:hover, .meta a:hover { color: {color:Meta link hovered}; }
-        nav ul { list-style: none; margin: 0; }
-        nav ul li { display: inline; margin: 0; }
+        blockquote footer:before { float: left; content: '\2014\a0'; /* &mdash;&nbsp; */ }
 
         figure figcaption { padding-top: 15px; clear: left; }
         figure.photoset { overflow: hidden; width: 100%; }
         figure.photoset figure { float: left; }
         figure.photoset figure img { width: 100%; vertical-align: bottom; }
-        figure.photoset figure figcaption {
-            font-size: 80%;
-            padding: 10px 5px; padding-top: 0; }
+        figure.photoset figure figcaption { font-size: 80%; padding: 10px 5px; padding-top: 0; }
         figure.photo { position: relative; }
         figure.photo:hover .high-res-url { display: block; }
         figure.photo .high-res-url {
-            font-size: 60%;
-            display: none; padding: 0 5px;
+            font-size: 60%; display: none; padding: 0 5px;
             position: absolute; top: 0px; left: 0px;
             background: rgba(255, 255, 255, 0.6); }
 
@@ -92,7 +89,7 @@
         li.note.reblog blockquote { padding-left: 10px; }
         li.more_notes_link_container { list-style-type: none; margin-top: 10px; }
 
-        #pagination { padding-left: 10px !important; }
+        #pagination { padding-left: 10px; }
         #pagination a, #pagination span { padding: 10px; line-height: 2.5em; }
         #prev:after { content: '\a0\ab'; } /* &nbsp;&laquo; */
         #next:after { content: '\a0\bb'; } /* &nbsp;&raquo; */
@@ -102,16 +99,22 @@
         #following img { vertical-align: bottom; }
         #following:after { content: ''; display: block; clear: both; }
 
-        img.album-art { float: left; margin-right: 10px; margin-bottom: 10px; }
+        img.circle { border-radius: 50%; }
+        img.avatar, img.album-art {
+            border: 1px solid {color:Border};
+            float: left; margin-right: 10px; margin-bottom: 10px; }
         .audio figure ul.meta { list-style: none; }
         .audio figure ul.meta li { margin-bottom: 0; }
-        .tumblr_audio_player { background: #d3d3d3; }
+        .tumblr_audio_player { background: {color:Border}; }
     </style>
     <style>{CustomCSS}</style>
 </head>
 <body>
 <div id="blog">
 <header>
+    {block:ShowAvatar}
+    <a href="{BlogURL}"><img class="avatar {AvatarShape}" src="{PortraitURL-40}" alt="{Name}" /></a>
+    {/block:ShowAvatar}
     {block:ShowTitle}<h1><a href="{BlogURL}">{Title}</a></h1>{/block:ShowTitle}
     {block:ShowDescription}{block:Description}
     <p class="meta">{Description}</p>
