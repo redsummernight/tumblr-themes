@@ -15,9 +15,10 @@
     <meta name="color:Link hovered" content="#d40000">
     <meta name="color:Meta link" content="#666666">
     <meta name="color:Meta link hovered" content="#d40000">
-    <meta name="if:Show people I follow" content="0">
-    <meta name="if:Use custom photosets" content="1">
-    <meta name="if:Show like and reblog buttons" content="1">
+    <meta name="if:Narrow layout" content="0">
+    <meta name="if:Custom photosets" content="1">
+    <meta name="if:Show blogs I follow" content="0">
+    <meta name="if:Show like and reblog buttons" content="0">
     <meta name="if:Show audio track info" content="1">
     <meta name="if:Enable keyboard shortcuts" content="1">
     <style>
@@ -37,12 +38,19 @@
     </style>
     <style>
         body {
-            font-family: {font:Body}; font-size: 14px; line-height: 1.4em;
+            font-family: {font:Body}; line-height: 1.4em;
             color: {color:Text}; background-color: {color:Background}; }
-        #blog { max-width: 540px; margin: 0 auto; }
+        {block:IfNarrowLayout}
+        #blog { max-width: 440px; font-size: 13px; }
+        #blog > footer, nav, .meta { font-size: 90%; }
+        {/block:IfNarrowLayout}
+        {block:IfNotNarrowLayout}
+        #blog { max-width: 540px; font-size: 14px; }
+        #blog > footer, nav, .meta { font-size: 85%; }
+        {/block:IfNotNarrowLayout}
+        #blog { margin: 0 auto; }
         #blog > * { padding: 20px; }
         #blog > article { margin-bottom: 20px; }
-        #blog > footer, nav, .meta { font-size: 85%; }
 
         a { color: {color:Link}; }
         a:hover { color: {color:Link hovered}; }
@@ -62,7 +70,10 @@
         h1, h3, p, ul, ol, li, blockquote { margin-bottom: 10px; }
         ul, ol { list-style-position: inside; }
         pre { white-space: normal; }
-        blockquote { padding-left: 10px; border-left: 3px solid {color:Border}; }
+        blockquote {
+            {block:IfNarrowLayout}padding-left: 7px;{/block:IfNarrowLayout}
+            {block:IfNotNarrowLayout}padding-left: 10px;{/block:IfNotNarrowLayout}
+            border-left: 3px solid {color:Border}; }
         blockquote footer { margin-top: 15px; }
         blockquote footer:before { float: left; content: '\2014\a0'; /* &mdash;&nbsp; */ }
 
@@ -70,7 +81,10 @@
         figure.photoset { overflow: hidden; width: 100%; }
         figure.photoset figure { float: left; }
         figure.photoset figure img { width: 100%; vertical-align: bottom; }
-        figure.photoset figure figcaption { font-size: 80%; padding: 10px 5px; padding-top: 0; }
+        figure.photoset figure figcaption {
+            {block:IfNarrowLayout}font-size: 95%;{/block:IfNarrowLayout}
+            {block:IfNotNarrowLayout}font-size: 80%;{/block:IfNotNarrowLayout}
+            padding: 10px 5px; padding-top: 0; }
         figure.photo { position: relative; }
         figure.photo:hover .high-res-url { display: block; }
         figure.photo .high-res-url {
@@ -80,7 +94,7 @@
 
         .bracket a:before { content: '['; }
         .bracket a:after { content: ']'; }
-        .buttons { width: 50px; margin-left: 10px; margin-top: 2px; float: right; }
+        .buttons { margin-left: 10px; margin-top: 2px; float: right; }
         .buttons > * { margin-left: 5px; float: left; }
 
         #notes { padding-top: 15px; }
@@ -154,7 +168,12 @@
     <!-- Photo -->
     <figure class="photo">
         {block:LinkURL}<a href="{LinkURL}">{/block:LinkURL}
+        {block:IfNarrowLayout}
+        <img src="{PhotoURL-400}" alt="{PhotoAlt}" width="{PhotoWidth-400}" height="{PhotoHeight-400}" />
+        {/block:IfNarrowLayout}
+        {block:IfNotNarrowLayout}
         <img src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}" />
+        {/block:IfNotNarrowLayout}
         {block:LinkURL}</a>{/block:LinkURL}
         {block:HighRes}<a class="high-res-url" href="{PhotoURL-HighRes}" target="_blank">{lang:High-res}</a>{/block:HighRes}
         {block:Caption}<figcaption>{Caption}</figcaption>{/block:Caption}
@@ -164,16 +183,24 @@
     {block:Photoset}
     <!-- Photoset -->
     <figure class="photoset" data-layout="{PhotosetLayout}">
-        {block:IfNotUseCustomPhotosets}{Photoset-500}{/block:IfNotUseCustomPhotosets}
-        {block:IfUseCustomPhotosets}{block:Photos}
+        {block:IfNotCustomPhotosets}
+        {block:IfNarrowLayout}{Photoset-400}{/block:IfNarrowLayout}
+        {block:IfNotNarrowLayout}{Photoset-500}{/block:IfNotNarrowLayout}
+        {/block:IfNotCustomPhotosets}
+        {block:IfCustomPhotosets}{block:Photos}
         <figure class="photo">
             {block:LinkURL}<a href="{LinkURL}">{/block:LinkURL}
+            {block:IfNarrowLayout}
+            <img src="{PhotoURL-400}" alt="{PhotoAlt}" width="{PhotoWidth-400}" height="{PhotoHeight-400}" />
+            {/block:IfNarrowLayout}
+            {block:IfNotNarrowLayout}
             <img src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}" />
+            {/block:IfNotNarrowLayout}
             {block:LinkURL}</a>{/block:LinkURL}
             {block:HighRes}<a class="high-res-url" href="{PhotoURL-HighRes}" target="_blank">{lang:High-res}</a>{/block:HighRes}
             {block:Caption}<figcaption>{Caption}</figcaption>{/block:Caption}
         </figure>
-        {block:Photos}{/block:IfUseCustomPhotosets}
+        {block:Photos}{/block:IfCustomPhotosets}
         {block:Caption}<figcaption>{Caption}</figcaption>{/block:Caption}
     </figure>
     {/block:Photoset}
@@ -203,7 +230,8 @@
     {block:Video}
     <!-- Video -->
     <figure>
-        {Video-500}
+        {block:IfNarrowLayout}{Video-400}{/block:IfNarrowLayout}
+        {block:IfNotNarrowLayout}{Video-500}{/block:IfNotNarrowLayout}
         {block:Caption}<figcaption>{Caption}</figcaption>{/block:Caption}
     </figure>
     {/block:Video}
@@ -258,7 +286,14 @@
                 {/block:NoteCount}
                 <li><a href="{Permalink}" title="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero} {24HourWithZero}:{Minutes}:{Seconds}">{TimeAgo}</a></li>
                 {block:IfShowLikeAndReblogButtons}
-                <li class="buttons">{ReblogButton} {LikeButton}</li>
+                <li class="buttons">
+                    {block:IfNarrowLayout}
+                    {ReblogButton size="15"} {LikeButton size="15"}
+                    {/block:IfNarrowLayout}
+                    {block:IfNotNarrowLayout}
+                    {ReblogButton} {LikeButton}
+                    {/block:IfNotNarrowLayout}
+                </li>
                 {/block:IfShowLikeAndReblogButtons}
             </ul>
         </nav>
@@ -314,7 +349,7 @@
     {/block:DayPagination}
 </nav>
 
-{block:IfShowPeopleIFollow}{block:IndexPage}{block:Following}
+{block:IfShowBlogsIFollow}{block:IndexPage}{block:Following}
 <nav id="following">
     <ul>
         {block:Followed}
@@ -324,12 +359,12 @@
         {/block:Followed}
     </ul>
 </nav>
-{/block:Following}{/block:IndexPage}{/block:IfShowPeopleIFollow}
+{/block:Following}{/block:IndexPage}{/block:IfShowBlogsIFollow}
 
 <footer>{lang:Powered by Tumblr 2}.</footer>
 
 <script>
-    {block:IfUseCustomPhotosets}
+    {block:IfCustomPhotosets}
     // Arrange photoset layout
     var photosets = document.getElementsByClassName('photoset');
     for (var i = photosets.length; i--;) {
@@ -340,7 +375,7 @@
             while (row--) photos[p++].style.maxWidth = w;
         }
     }
-    {/block:IfUseCustomPhotosets}
+    {/block:IfCustomPhotosets}
     {block:IfEnableKeyboardShortcuts}
     // Use onkeyup because this is a heavy decision
     window.onkeyup = function (e) {
