@@ -3,6 +3,7 @@
     <!-- Ignored: submissions, likes, members -->
     <title>{Title}{block:PostSummary} - {PostSummary}{/block:PostSummary}</title>
     <link rel="shortcut icon" href="{Favicon}">
+    <link rel="apple-touch-icon" href="{Favicon}">
     <link rel="alternate" type="application/rss+xml" href="{RSS}">
     {block:Description}<meta name="description" content="{MetaDescription}"/>{/block:Description}
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -80,7 +81,7 @@
         figure figcaption { padding-top: 15px; clear: left; }
         figure.photoset { overflow: hidden; width: 100%; }
         figure.photoset figure { float: left; }
-        figure.photoset figure img { width: 100%; vertical-align: bottom; }
+        figure.photoset figure img { vertical-align: bottom; }
         figure.photoset figure figcaption {
             {block:IfNarrowLayout}font-size: 95%;{/block:IfNarrowLayout}
             {block:IfNotNarrowLayout}font-size: 80%;{/block:IfNotNarrowLayout}
@@ -155,7 +156,7 @@
 {block:DayPage}<section>{lang:Posted on DayOfWeek Month DayOfMonth Year 3}</section>{/block:DayPage}
 
 {block:Posts}
-<article class="{PostType}">
+<article id="{PostID}" class="{PostType}">
     {block:Text}
     <!-- Text -->
     <section>
