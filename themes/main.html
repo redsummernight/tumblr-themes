@@ -391,7 +391,7 @@
                 break;
         }
     };
-    var items = document.getElementsByTagName('article'), len = items.length;
+    var items = document.getElementById('blog').children, len = items.length, curr = null;
     // Use onkeydown so we can hold and keep scrolling
     window.onkeydown = function (e) {
         switch (e.keyCode) {
@@ -401,6 +401,8 @@
             case 75: // k
                 jump(false);
                 break;
+            default:
+                focus(null);
         }
     };
     function jump(down) {
@@ -417,15 +419,16 @@
                     if (el.nextElementSibling) {
                         focus(el.nextElementSibling); // to after last
                     } else {
+                        focus(null);
                         window.scrollTo(0, document.body.scrollHeight); // to page bottom
                     }
-                    break;
                 }
             } else { // up
                 if (top >= 0) {
                     if (el.previousElementSibling) {
                         focus(el.previousElementSibling); // to previous post or header
                     } else {
+                        focus(null);
                         window.scrollTo(0, 0); // to page top
                     }
                     break;
@@ -436,6 +439,8 @@
         }
     }
     function focus(el) {
+        if (curr) curr.blur();
+        curr = el;
         if (!el) return;
         el.scrollIntoView();
         // If the element is non-interactive (not a link/form item),
