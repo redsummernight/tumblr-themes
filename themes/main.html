@@ -85,16 +85,17 @@
         figure figcaption { padding-top: 15px; clear: left; }
         figure.photoset { overflow: hidden; width: 100%; }
         figure.photoset figure { float: left; }
-        figure.photoset figure img { vertical-align: bottom; }
         figure.photoset figure figcaption {
             {block:IfNarrowLayout}font-size: 95%;{/block:IfNarrowLayout}
             {block:IfNotNarrowLayout}font-size: 80%;{/block:IfNotNarrowLayout}
             padding: 10px 5px; padding-top: 0; }
-        figure.photo { position: relative; }
-        figure.photo:hover .high-res-url { display: block; }
+        figure.photo .img-wrapper { position: relative; }
+        figure.photo .img-wrapper img { vertical-align: bottom; }
+        figure.photo:hover .high-res-url,
+        figure.photo .high-res-url:focus { opacity: 1; }
         figure.photo .high-res-url {
-            font-size: 75%; display: none; padding: 3px;
-            position: absolute; top: 0px; left: 0px;
+            font-size: 75%; opacity: 0; padding: 3px;
+            position: absolute; bottom: 0px; right: 0px;
             background: rgba(255, 255, 255, 0.5); }
 
         .bracket a:before { content: '['; }
@@ -172,15 +173,17 @@
     {block:Photo}
     <!-- Photo -->
     <figure class="photo">
-        {block:LinkURL}<a href="{LinkURL}">{/block:LinkURL}
-        {block:IfNarrowLayout}
-        <img src="{PhotoURL-400}" alt="{PhotoAlt}" width="{PhotoWidth-400}" height="{PhotoHeight-400}" />
-        {/block:IfNarrowLayout}
-        {block:IfNotNarrowLayout}
-        <img src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}" />
-        {/block:IfNotNarrowLayout}
-        {block:LinkURL}</a>{/block:LinkURL}
-        {block:HighRes}<a class="high-res-url" href="{PhotoURL-HighRes}" target="_blank">{lang:High-res}</a>{/block:HighRes}
+        <div class="img-wrapper">
+            {block:LinkURL}<a href="{LinkURL}">{/block:LinkURL}
+            {block:IfNarrowLayout}
+            <img src="{PhotoURL-400}" alt="{PhotoAlt}" width="{PhotoWidth-400}" height="{PhotoHeight-400}" />
+            {/block:IfNarrowLayout}
+            {block:IfNotNarrowLayout}
+            <img src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}" />
+            {/block:IfNotNarrowLayout}
+            {block:LinkURL}</a>{/block:LinkURL}
+            {block:HighRes}<a class="high-res-url" href="{PhotoURL-HighRes}" target="_blank">{lang:High-res}</a>{/block:HighRes}
+        </div>
         {block:Caption}<figcaption>{Caption}</figcaption>{/block:Caption}
     </figure>
     {/block:Photo}
@@ -194,15 +197,17 @@
         {/block:IfNotCustomPhotosets}
         {block:IfCustomPhotosets}{block:Photos}
         <figure class="photo">
-            {block:LinkURL}<a href="{LinkURL}">{/block:LinkURL}
-            {block:IfNarrowLayout}
-            <img src="{PhotoURL-400}" alt="{PhotoAlt}" width="{PhotoWidth-400}" height="{PhotoHeight-400}" />
-            {/block:IfNarrowLayout}
-            {block:IfNotNarrowLayout}
-            <img src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}" />
-            {/block:IfNotNarrowLayout}
-            {block:LinkURL}</a>{/block:LinkURL}
-            {block:HighRes}<a class="high-res-url" href="{PhotoURL-HighRes}" target="_blank">{lang:High-res}</a>{/block:HighRes}
+            <div class="img-wrapper">
+                {block:LinkURL}<a href="{LinkURL}">{/block:LinkURL}
+                {block:IfNarrowLayout}
+                <img src="{PhotoURL-400}" alt="{PhotoAlt}" width="{PhotoWidth-400}" height="{PhotoHeight-400}" />
+                {/block:IfNarrowLayout}
+                {block:IfNotNarrowLayout}
+                <img src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}" />
+                {/block:IfNotNarrowLayout}
+                {block:LinkURL}</a>{/block:LinkURL}
+                {block:HighRes}<a class="high-res-url" href="{PhotoURL-HighRes}" target="_blank">{lang:High-res}</a>{/block:HighRes}
+            </div>
             {block:Caption}<figcaption>{Caption}</figcaption>{/block:Caption}
         </figure>
         {block:Photos}{/block:IfCustomPhotosets}
