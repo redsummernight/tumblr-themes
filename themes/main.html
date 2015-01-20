@@ -339,22 +339,8 @@
 
 <script>
     {block:IfEnableKeyboardShortcuts}
-    // Use onkeyup because this is a heavy decision
-    window.onkeyup = function (e) {
-        switch (e.keyCode) {
-            case 37: // left
-                var p = document.getElementById('prev');
-                if (p) window.location.href = p.href;
-                break;
-            case 39: // right
-                var n = document.getElementById('next');
-                if (n) window.location.href = n.href;
-                break;
-        }
-    };
-    var items = document.getElementById('blog').children, len = items.length, curr = null;
     // Use onkeydown so we can hold and keep scrolling
-    window.onkeydown = function (e) {
+    window.addEventListener("keydown", function(e) {
         switch (e.keyCode) {
             case 74: // j
                 jump(true);
@@ -365,7 +351,9 @@
             default:
                 focus(null);
         }
-    };
+    }, false);
+    var items = document.getElementById('blog').children,
+        len = items.length, curr = null;
     function jump(down) {
         for (var i = 0; i < len; i++) { // first to last, order important
             var el = items[i], last = i == len - 1;
