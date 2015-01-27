@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Theme options -->
     <meta name="font:Body" content="Verdana">
-    <meta name="color:Theme background" content="#000022">
+    <meta name="color:Theme background" content="#fafafa">
     <meta name="color:Content background" content="#fafafa">
     <meta name="color:Border" content="#d3d3d3">
     <meta name="color:Text" content="#000000">
@@ -51,9 +51,9 @@
         #blog { max-width: 540px; font-size: 14px; }
         #blog > footer, nav, .meta { font-size: 85%; }
         {/block:IfNotNarrowLayout}
-        #blog { margin: 0 auto; background-color: {color:Content background}; }
+        #blog { margin: 0 auto; }
         #blog > * { padding: 20px; }
-        #blog > article { margin: 20px 0; }
+        #blog > article { margin: 40px 0; background-color: {color:Content background}; }
 
         a { color: {color:Link}; }
         a:hover { color: {color:Link hovered}; }
@@ -81,10 +81,10 @@
         blockquote footer { margin-top: 15px; }
         blockquote footer:before { float: left; content: '\2014\a0'; /* &mdash;&nbsp; */ }
 
-        .high-res-url { font-size: 75%; }
+        .high-res-url { font-size: 75%; display: block; }
         .bracket a:before { content: '['; }
         .bracket a:after { content: ']'; }
-        .buttons { margin-left: 10px; margin-top: 2px; float: right; }
+        .buttons { margin-left: 10px; margin-top: 10px; float: right; }
         .buttons > * { margin-left: 5px; float: left; }
 
         #notes { padding-top: 15px; }
@@ -104,7 +104,7 @@
         #following:after { content: ''; display: block; clear: both; }
 
         img.circle { border-radius: 50%; }
-        header img.avatar, img.album-art {
+        img.album-art {
             border: 1px solid {color:Border};
             float: left; margin-right: 10px; margin-bottom: 10px; }
         .audio figure ul.meta { list-style: none; }
@@ -116,9 +116,6 @@
 <body>
 <div id="blog">
 <header>
-    {block:ShowAvatar}
-    <a href="{BlogURL}"><img class="avatar {AvatarShape}" src="{PortraitURL-40}" alt="{Name}" width="40" height="40" /></a>
-    {/block:ShowAvatar}
     {block:ShowTitle}<h1><a href="{BlogURL}">{Title}</a></h1>{/block:ShowTitle}
     {block:ShowDescription}{block:Description}
     <p class="meta">{Description}</p>
@@ -277,6 +274,7 @@
 </article>
 {/block:Posts}
 
+{block:Pagination}
 <nav id="pagination">
     <ul>
         {block:JumpPagination length="9"}
@@ -288,8 +286,6 @@
         {/block:JumpPage}
         {/block:JumpPagination}
     </ul>
-
-    {block:Pagination}
     <ul>
         {block:PreviousPage}
         <li><a id="prev" href="{PreviousPage}">{lang:Newer}</a></li>
@@ -298,9 +294,11 @@
         <li><a id="next" href="{NextPage}">{lang:Older}</a></li>
         {/block:NextPage}
     </ul>
-    {/block:Pagination}
+</nav>
+{/block:Pagination}
 
-    {block:PermalinkPagination}
+{block:PermalinkPagination}
+<nav id="pagination">
     <ul>
         {block:PreviousPost}
         <li><a id="prev" href="{PreviousPost}">{lang:Older}</a></li>
@@ -309,9 +307,11 @@
         <li><a id="next" href="{NextPost}">{lang:Newer}</a></li>
         {/block:NextPost}
     </ul>
-    {/block:PermalinkPagination}
+</nav>
+{/block:PermalinkPagination}
 
-    {block:DayPagination}
+{block:DayPagination}
+<nav id="pagination">
     <ul>
         {block:PreviousDayPage}
         <li><a id="prev" href="{PreviousDayPage}">{lang:Previous day}</a></li>
@@ -320,8 +320,8 @@
         <li><a id="next" href="{NextDayPage}">{lang:Next day}</a></li>
         {/block:NextDayPage}
     </ul>
-    {/block:DayPagination}
 </nav>
+{/block:DayPagination}
 
 {block:IfShowBlogsIFollow}{block:IndexPage}{block:Following}
 <nav id="following">
