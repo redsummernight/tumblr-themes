@@ -48,8 +48,8 @@
         #blog > footer, nav, .meta { font-size: 90%; }
         {/block:IfNarrowLayout}
         {block:IfNotNarrowLayout}
-        #blog { max-width: 540px; font-size: 14px; }
-        #blog > footer, nav, .meta { font-size: 85%; }
+        #blog { max-width: 540px; font-size: 13px; }
+        #blog > footer, nav, .meta { font-size: 95%; }
         {/block:IfNotNarrowLayout}
         #blog { margin: 0 auto; }
         #blog > * { padding: 20px; }
@@ -73,6 +73,7 @@
         figure figcaption { padding-top: 15px; clear: left; }
         h1, h3, p, ul, ol, li, blockquote { margin-bottom: 10px; }
         ul, ol { list-style-position: inside; }
+        li > * { display: inline; }
         pre { white-space: normal; }
         blockquote {
             {block:IfNarrowLayout}padding-left: 7px;{/block:IfNarrowLayout}
@@ -81,7 +82,7 @@
         blockquote footer { margin-top: 15px; }
         blockquote footer:before { float: left; content: '\2014\a0'; /* &mdash;&nbsp; */ }
 
-        .high-res-url { font-size: 75%; display: block; }
+        .high-res-url { font-size: 80%; }
         .bracket a:before { content: '['; }
         .bracket a:after { content: ']'; }
         .buttons { margin-left: 10px; margin-top: 10px; float: right; }
