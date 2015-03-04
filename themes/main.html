@@ -44,16 +44,15 @@
             background-attachment: fixed;
             background-color: {color:Theme background}; }
         {block:IfNarrowLayout}
-        #blog { max-width: 440px; font-size: 12px; }
-        #blog > footer, nav, .meta { font-size: 90%; }
+        #blog { max-width: 420px; }
         {/block:IfNarrowLayout}
         {block:IfNotNarrowLayout}
-        #blog { max-width: 540px; font-size: 13px; }
-        #blog > footer, nav, .meta { font-size: 95%; }
+        #blog { max-width: 520px; }
         {/block:IfNotNarrowLayout}
-        #blog { margin: 0 auto; }
-        #blog > * { padding: 20px; }
-        #blog > article { margin: 40px 0; background-color: {color:Content background}; }
+        #blog > footer, nav, .meta { font-size: 90%; }
+        #blog { margin: 0 auto; font-size: 12px; }
+        #blog > * { padding: 10px; background-color: {color:Content background}; }
+        #blog > article { margin: 10px 0; }
 
         a { color: {color:Link}; }
         a:hover { color: {color:Link hovered}; }
@@ -66,14 +65,12 @@
 
         h1 { font-size: 150%; }
         h1 a { text-decoration: none; }
-        header nav { clear: both; }
-        article > * { margin-bottom: 15px; }
-        article footer { margin-bottom: 0; }
+        article footer { margin-top: 15px; }
         article img { max-width: 100%; height: auto; }
         figure figcaption { padding-top: 15px; clear: left; }
         h1, h3, p, ul, ol, li, blockquote { margin-bottom: 10px; }
         ul, ol { list-style-position: inside; }
-        li > * { display: inline; }
+        li > p { display: inline; }
         pre { white-space: normal; }
         blockquote {
             {block:IfNarrowLayout}padding-left: 7px;{/block:IfNarrowLayout}
@@ -85,7 +82,7 @@
         .high-res-url { font-size: 80%; }
         .bracket a:before { content: '['; }
         .bracket a:after { content: ']'; }
-        .buttons { margin-left: 10px; margin-top: 10px; float: right; }
+        .buttons { margin-left: 10px; margin-top: 5px; float: right; }
         .buttons > * { margin-left: 5px; float: left; }
 
         #notes { padding-top: 15px; }
@@ -94,12 +91,12 @@
         li.note.reblog blockquote { padding-left: 10px; }
         li.more_notes_link_container { list-style-type: none; margin-top: 10px; }
 
-        #pagination { padding-left: 10px; }
+        #pagination { padding-left: 0; }
         #pagination a, #pagination span { padding: 10px; line-height: 2.5em; }
         #prev:after { content: '\a0\ab'; } /* &nbsp;&laquo; */
         #next:after { content: '\a0\bb'; } /* &nbsp;&raquo; */
 
-        #following { padding-left: 18px; padding-right: 12px; }
+        #following { padding-left: 8px; padding-right: 0; }
         #following li { float: left; margin: 2px; }
         #following img { vertical-align: bottom; }
         #following:after { content: ''; display: block; clear: both; }
@@ -146,10 +143,8 @@
 <article id="{PostID}" class="{PostType}">
     {block:Text}
     <!-- Text -->
-    <section>
-        {block:Title}<h3>{Title}</h3>{/block:Title}
-        {Body}
-    </section>
+    {block:Title}<h3>{Title}</h3>{/block:Title}
+    <section>{Body}</section>
     {/block:Text}
 
     {block:Photo}
@@ -195,7 +190,11 @@
     <!-- Chat -->
     {block:Title}<h3>{Title}</h3>{/block:Title}
     <ul>
-        {block:Lines}<li>{block:Label}<strong>{Label}</strong>{/block:Label} {Line}</li>{/block:Lines}
+        {block:Lines}
+        <li>
+            {block:Label}<strong>{Label}</strong>{/block:Label} {Line}
+        </li>
+        {/block:Lines}
     </ul>
     {/block:Chat}
 
@@ -228,13 +227,11 @@
 
     {block:Answer}
     <!-- Answer -->
-    <section>
-        <p><strong>{lang:Asker asked 2}</strong>: <q>{Question}</q></p>
-        {block:Answerer}
-        <p><strong>{Answerer}</strong>:</p><blockquote>{Answer}</blockquote>
-        {/block:Answerer}
-        {Replies}
-    </section>
+    <p><strong>{lang:Asker asked 2}</strong>: <q>{Question}</q></p>
+    {block:Answerer}
+    <p><strong>{Answerer}</strong>:</p><blockquote>{Answer}</blockquote>
+    {/block:Answerer}
+    <section>{Replies}</section>
     {/block:Answer}
 
     {block:Date}
@@ -280,12 +277,13 @@
     <ul>
         {block:JumpPagination length="9"}
         {block:CurrentPage}
-        <li><span><strong>{PageNumber}/{TotalPages}</strong></span></li>
+        <li><span><strong>{PageNumber}</strong></span></li>
         {/block:CurrentPage}
         {block:JumpPage}
         <li><a href="{URL}">{PageNumber}</a></li>
         {/block:JumpPage}
         {/block:JumpPagination}
+        <li><span>({TotalPages})</span></li>
     </ul>
     <ul>
         {block:PreviousPage}
