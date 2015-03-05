@@ -1,8 +1,6 @@
 <html>
 <head>
     <!--
-    Bigger nav links
-    Grey tags and permalinks (meta links)
     High-res links on hover
     Box shadows on images
     -->
@@ -17,6 +15,7 @@
     <meta name="color:Background" content="#fafafa">
     <meta name="color:Border" content="#d3d3d3">
     <meta name="color:Text" content="#000000">
+    <meta name="color:Meta link" content="#555">
     <style>
         body {
             font-family: {font:Body};
@@ -30,11 +29,12 @@
             margin: 0 auto; padding: 20px;
         }
         #blog > * { margin-bottom: 5em; }
-        #blog > *:last-child { margin-bottom: 2em; }
+        #blog > footer { margin-bottom: 2em; text-align: right; }
 
-        nav a, h1 a { text-decoration: none; }
-        nav ul { list-style: none; margin: 0; padding: 0; }
-        nav ul li { display: inline; margin: 0; }
+        h1 a { text-decoration: none; }
+        nav a { text-decoration: none; padding: 10px 0; }
+        nav ul { margin: 0; padding: 0; }
+        nav ul li { display: inline; }
 
         article header {
             margin-bottom: 10px;
@@ -42,7 +42,7 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
-        article header a { text-decoration: none; }
+        article header a { text-decoration: none; color: {color:Meta link}; }
         article footer { margin-top: 10px; }
         article img { max-width: 100%; height: auto; }
 
@@ -57,12 +57,14 @@
         }
 
         .source { text-transform: lowercase; }
-        .tags a { text-transform: lowercase; text-decoration: none; }
+        .tags a {
+            text-transform: lowercase;
+            text-decoration: none;
+            color: {color:Meta link};
+        }
         .tags a:before { content: '#'; }
-
-        .notes { margin-top: 50px; font-size: 85%; }
-        li.note a.avatar_frame { vertical-align: middle; margin-right: 5px; }
-        li.more_notes_link_container { list-style-type: none; }
+        .pagination { text-align: right; }
+        .pagination a { padding: 10px; line-height: 2.5em; }
 
         #prev:after { content: '\a0\ab'; } /* &nbsp;&laquo; */
         #next:after { content: '\a0\bb'; } /* &nbsp;&raquo; */
@@ -73,6 +75,10 @@
         }
         .audio figure > ul { list-style: none; }
         .audio figcaption { clear: both; }
+
+        .notes { margin-top: 50px; font-size: 85%; }
+        li.note a.avatar_frame { vertical-align: middle; margin-right: 5px; }
+        li.more_notes_link_container { list-style-type: none; }
     </style>
     <style>{CustomCSS}</style>
 </head>
@@ -213,15 +219,13 @@
 {/block:Posts}
 
 {block:Pagination}
-<nav>
+<nav class="pagination">
     <ul>
         {block:JumpPagination length="9"}
         {block:CurrentPage}
-        <li><span><strong>{PageNumber}/{TotalPages}</strong></span></li>
+        <li><a href=""><strong>{PageNumber}/{TotalPages}</strong></a></li>
         {/block:CurrentPage}
-        {block:JumpPage}
-        <li><a href="{URL}">{PageNumber}</a></li>
-        {/block:JumpPage}
+        {block:JumpPage}<li><a href="{URL}">{PageNumber}</a></li>{/block:JumpPage}
         {/block:JumpPagination}
     </ul>
     <ul>
@@ -236,7 +240,7 @@
 {/block:Pagination}
 
 {block:DayPagination}
-<nav>
+<nav class="pagination">
     <ul>
         {block:PreviousDayPage}
         <li><a id="prev" href="{PreviousDayPage}">{lang:Previous day}</a></li>
@@ -247,6 +251,8 @@
     </ul>
 </nav>
 {/block:DayPagination}
+
+<footer>{lang:Powered by Tumblr 2}</footer>
 </div>
 </body>
 </html>
