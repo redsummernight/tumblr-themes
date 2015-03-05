@@ -1,0 +1,246 @@
+<html>
+<head>
+    <!--
+    Bigger nav links
+    Grey tags and permalinks (meta links)
+    High-res links on hover
+    Box shadows on images
+    -->
+    <title>{Title}{block:PostSummary} - {PostSummary}{/block:PostSummary}</title>
+    <link rel="shortcut icon" href="{Favicon}">
+    <link rel="apple-touch-icon" href="{Favicon}">
+    <link rel="alternate" type="application/rss+xml" href="{RSS}">
+    {block:Description}<meta name="description" content="{MetaDescription}"/>{/block:Description}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Theme options -->
+    <meta name="font:Body" content="Arial">
+    <meta name="color:Background" content="#fafafa">
+    <meta name="color:Border" content="#d3d3d3">
+    <meta name="color:Text" content="#000000">
+    <style>
+        body {
+            font-family: {font:Body};
+            color: {color:Text};
+            background-color: {color:Background};
+            margin: 0; padding: 0;
+        }
+        #blog {
+            font-size: 13px; line-height: 1.4em;
+            max-width: 440px;
+            margin: 0 auto; padding: 20px;
+        }
+        #blog > * { margin-bottom: 5em; }
+        #blog > *:last-child { margin-bottom: 2em; }
+
+        nav a, header a { text-decoration: none; }
+        nav ul { list-style: none; margin: 0; padding: 0; }
+        nav ul li { display: inline; margin: 0; }
+        article header {
+            margin-bottom: 10px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        article footer { margin-top: 10px; }
+        article img { max-width: 100%; height: auto; }
+        figure.photoset figure figcaption { margin-bottom: 20px; }
+        blockquote {
+            margin: 5px 0; padding-left: 10px;
+            border-left: 3px solid {color:Border};
+        }
+        blockquote footer:before {
+            float: left;
+            content: '\2014\a0'; /* &mdash;&nbsp; */
+        }
+
+        .tags { text-transform: lowercase; }
+        .tags li:before { content: '#'; }
+        .notes { margin-top: 50px; font-size: 85%; }
+        li.note a.avatar_frame { vertical-align: middle; margin-right: 5px; }
+        li.more_notes_link_container { list-style-type: none; }
+
+        #prev:after { content: '\a0\ab'; } /* &nbsp;&laquo; */
+        #next:after { content: '\a0\bb'; } /* &nbsp;&raquo; */
+
+        img.album-art {
+            border: 1px solid {color:Border};
+            float: left; margin-right: 10px; margin-bottom: 10px;
+        }
+        .audio figure > ul { list-style: none; }
+        .audio figcaption { clear: both; }
+    </style>
+    <style>{CustomCSS}</style>
+</head>
+<body>
+<div id="blog">
+<header>
+    <h1><a href="{BlogURL}">{Title}</a></h1>
+    <p>{Description}</p>
+    <nav>
+        <ul>
+            <li><a href="/archive">{lang:Archive}</a></li>
+            {block:AskEnabled}<li><a href="/ask">{AskLabel}</a></li>{/block:AskEnabled}
+            {block:HasPages}{block:Pages}
+            <li><a href="{URL}">{Label}</a></li>
+            {/block:Pages}{/block:HasPages}
+        </ul>
+    </nav>
+</header>
+
+{block:TagPage}<section>{lang:TagResultCount posts tagged Tag 3}</section>{/block:TagPage}
+{block:DayPage}<section>{lang:Posted on DayOfWeek Month DayOfMonth Year 3}</section>{/block:DayPage}
+{block:SearchPage}
+<section>
+    {lang:SearchResultCount results}{block:NoSearchResults}{lang:No results found}{/block:NoSearchResults}:
+    <a href="/search/{URLSafeSearchQuery}">{SearchQuery}</a>
+</section>
+{/block:SearchPage}
+
+{block:Posts}
+<article class="{PostType}">
+    {block:Date}
+    <header>
+        <a href="{Permalink}" title="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero} {24HourWithZero}:{Minutes}:{Seconds}">{ShortMonth} {DayOfMonth}, {ShortYear}</a>
+        | {block:NoteCount}{NoteCountWithLabel}{/block:NoteCount} |
+        {block:RebloggedFrom}
+        <a href="{ReblogParentURL}" title="{ReblogParentTitle}">{ReblogParentName}</a>
+        <!--<a href="{ReblogRootURL}">{ReblogRootName}</a>-->
+        {/block:RebloggedFrom}
+        {block:ContentSource}(<a href="{SourceURL}">{SourceTitle}</a>){/block:ContentSource}
+    </header>
+    {/block:Date}
+
+    {block:Text}
+    <section>
+        {block:Title}<h3>{Title}</h3>{/block:Title}
+        {Body}
+    </section>
+    {/block:Text}
+
+    {block:Photo}
+    <figure class="photo">
+        {block:LinkURL}<a href="{LinkURL}">{/block:LinkURL}
+        <img src="{PhotoURL-400}" alt="{PhotoAlt}" width="{PhotoWidth-400}" height="{PhotoHeight-400}" />
+        {block:LinkURL}</a>{/block:LinkURL}
+        <!--{block:HighRes}{PhotoURL-HighRes}{/block:HighRes}-->
+        {block:Caption}<figcaption>{Caption}</figcaption>{/block:Caption}
+    </figure>
+    {/block:Photo}
+
+    {block:Photoset}
+    <figure class="photoset" data-layout="{PhotosetLayout}">
+        {block:Photos}
+        <figure class="photo">
+            {block:LinkURL}<a href="{LinkURL}">{/block:LinkURL}
+            <img src="{PhotoURL-400}" alt="{PhotoAlt}" width="{PhotoWidth-400}" height="{PhotoHeight-400}" />
+            {block:LinkURL}</a>{/block:LinkURL}
+            <!--{block:HighRes}{PhotoURL-HighRes}{/block:HighRes}-->
+            {block:Caption}<figcaption>{Caption}</figcaption>{/block:Caption}
+        </figure>
+        {block:Photos}
+        {block:Caption}<figcaption>{Caption}</figcaption>{/block:Caption}
+    </figure>
+    {/block:Photoset}
+
+    {block:Quote}
+    <blockquote>
+        &ldquo;{Quote}&rdquo;
+        {block:Source}<footer>{Source}</footer>{/block:Source}
+    </blockquote>
+    {/block:Quote}
+
+    {block:Link}
+    <h3><a href="{URL}" {Target}>{Name}</a></h3>
+    {block:Description}<section>{Description}</section>{/block:Description}
+    {/block:Link}
+
+    {block:Chat}
+    {block:Title}<h3>{Title}</h3>{/block:Title}
+    <ul>
+        {block:Lines}<li>{block:Label}<strong>{Label}</strong>{/block:Label} {Line}</li>{/block:Lines}
+    </ul>
+    {/block:Chat}
+
+    {block:Video}
+    <figure>
+        {Video-400}
+        {block:Caption}<figcaption>{Caption}</figcaption>{/block:Caption}
+    </figure>
+    {/block:Video}
+
+    {block:Audio}
+    <figure>
+        {block:AlbumArt}<img class="album-art" width="100" height="100" src="{AlbumArtURL}">{/block:AlbumArt}
+        {AudioPlayerGrey}
+        <ul>
+            {block:TrackName}<li><strong>{TrackName}</strong></li>{/block:TrackName}
+            {block:Artist}<li>{Artist}</li>{/block:Artist}
+            {block:Album}<li>{Album}</li>{/block:Album}
+        </ul>
+        {block:Caption}<figcaption>{Caption}</figcaption>{/block:Caption}
+    </figure>
+    {/block:Audio}
+
+    {block:Answer}
+    <section>
+        <p><strong>{lang:Asker asked 2}</strong>: <q>{Question}</q></p>
+        {block:Answerer}
+        <p><strong>{Answerer}</strong>:</p><blockquote>{Answer}</blockquote>
+        {/block:Answerer}
+        {Replies}
+    </section>
+    {/block:Answer}
+
+    {block:Date}
+    <footer>
+        {block:HasTags}
+        <nav>
+            <ul class="tags">
+                {block:Tags}<li><a href="{TagURL}">{Tag}</a></li> {/block:Tags}
+            </ul>
+        </nav>
+        {/block:HasTags}
+        {block:PostNotes}{PostNotes}{/block:PostNotes}
+    </footer>
+    {/block:Date}
+</article>
+{/block:Posts}
+
+{block:Pagination}
+<nav>
+    <ul>
+        {block:JumpPagination length="9"}
+        {block:CurrentPage}
+        <li><span><strong>{PageNumber}/{TotalPages}</strong></span></li>
+        {/block:CurrentPage}
+        {block:JumpPage}
+        <li><a href="{URL}">{PageNumber}</a></li>
+        {/block:JumpPage}
+        {/block:JumpPagination}
+    </ul>
+    <ul>
+        {block:PreviousPage}
+        <li><a id="prev" href="{PreviousPage}">{lang:Newer}</a></li>
+        {/block:PreviousPage}
+        {block:NextPage}
+        <li><a id="next" href="{NextPage}">{lang:Older}</a></li>
+        {/block:NextPage}
+    </ul>
+</nav>
+{/block:Pagination}
+
+{block:DayPagination}
+<nav>
+    <ul>
+        {block:PreviousDayPage}
+        <li><a id="prev" href="{PreviousDayPage}">{lang:Previous day}</a></li>
+        {/block:PreviousDayPage}
+        {block:NextDayPage}
+        <li><a id="next" href="{NextDayPage}">{lang:Next day}</a></li>
+        {/block:NextDayPage}
+    </ul>
+</nav>
+{/block:DayPagination}
+</div>
+</body>
+</html>
