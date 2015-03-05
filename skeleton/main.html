@@ -32,17 +32,20 @@
         #blog > * { margin-bottom: 5em; }
         #blog > *:last-child { margin-bottom: 2em; }
 
-        nav a, header a { text-decoration: none; }
+        nav a, h1 a { text-decoration: none; }
         nav ul { list-style: none; margin: 0; padding: 0; }
         nav ul li { display: inline; margin: 0; }
+
         article header {
             margin-bottom: 10px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
+        article header a { text-decoration: none; }
         article footer { margin-top: 10px; }
         article img { max-width: 100%; height: auto; }
+
         figure.photoset figure figcaption { margin-bottom: 20px; }
         blockquote {
             margin: 5px 0; padding-left: 10px;
@@ -53,8 +56,10 @@
             content: '\2014\a0'; /* &mdash;&nbsp; */
         }
 
-        .tags { text-transform: lowercase; }
-        .tags li:before { content: '#'; }
+        .source { text-transform: lowercase; }
+        .tags a { text-transform: lowercase; text-decoration: none; }
+        .tags a:before { content: '#'; }
+
         .notes { margin-top: 50px; font-size: 85%; }
         li.note a.avatar_frame { vertical-align: middle; margin-right: 5px; }
         li.more_notes_link_container { list-style-type: none; }
@@ -100,13 +105,16 @@
 <article class="{PostType}">
     {block:Date}
     <header>
-        <a href="{Permalink}" title="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero} {24HourWithZero}:{Minutes}:{Seconds}">{ShortMonth} {DayOfMonth}, {ShortYear}</a>
-        | {block:NoteCount}{NoteCountWithLabel}{/block:NoteCount} |
-        {block:RebloggedFrom}
-        <a href="{ReblogParentURL}" title="{ReblogParentTitle}">{ReblogParentName}</a>
-        <!--<a href="{ReblogRootURL}">{ReblogRootName}</a>-->
-        {/block:RebloggedFrom}
-        {block:ContentSource}(<a href="{SourceURL}">{SourceTitle}</a>){/block:ContentSource}
+        <a href="{Permalink}" title="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero} {24HourWithZero}:{Minutes}:{Seconds}">{ShortMonth} {DayOfMonth}, {ShortYear}</a> &ndash;
+        {block:NoteCount}{NoteCountWithLabel}{/block:NoteCount} &ndash;
+        <span class="source">
+            {block:ContentSource}<a href="{SourceURL}">{SourceTitle}</a>{/block:ContentSource}
+            {block:RebloggedFrom}
+            {lang:Via}
+            <a href="{ReblogParentURL}" title="{ReblogParentTitle}">{ReblogParentName}</a>
+            <!--<a href="{ReblogRootURL}">{ReblogRootName}</a>-->
+            {/block:RebloggedFrom}
+        </span>
     </header>
     {/block:Date}
 
@@ -194,11 +202,9 @@
     {block:Date}
     <footer>
         {block:HasTags}
-        <nav>
-            <ul class="tags">
-                {block:Tags}<li><a href="{TagURL}">{Tag}</a></li> {/block:Tags}
-            </ul>
-        </nav>
+        <p class="tags">
+            {block:Tags}<a href="{TagURL}">{Tag}</a> {/block:Tags}
+        </p>
         {/block:HasTags}
         {block:PostNotes}{PostNotes}{/block:PostNotes}
     </footer>
