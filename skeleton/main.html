@@ -2,7 +2,6 @@
 <head>
     <!--
     High-res links on hover
-    Box shadows on images
     -->
     <title>{Title}{block:PostSummary} - {PostSummary}{/block:PostSummary}</title>
     <link rel="shortcut icon" href="{Favicon}">
@@ -29,7 +28,7 @@
             margin: 0 auto; padding: 20px;
         }
         #blog > * { margin-bottom: 5em; }
-        #blog > footer { margin-bottom: 2em; text-align: right; }
+        #blog > footer { margin-bottom: 2em; }
 
         h1 a { text-decoration: none; }
         nav a { text-decoration: none; padding: 10px 0; }
@@ -44,9 +43,15 @@
         }
         article header a { text-decoration: none; color: {color:Meta link}; }
         article footer { margin-top: 10px; }
-        article img { max-width: 100%; height: auto; }
+        article img {
+            max-width: 100%; height: auto;
+            vertical-align: bottom;
+            -webkit-box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.75);
+            -moz-box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.75);
+            box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.75);
+        }
 
-        figure.photoset figure figcaption { margin-bottom: 20px; }
+        figure.photoset figure figcaption { margin: 5px 0 15px 0; }
         blockquote {
             margin: 5px 0; padding-left: 10px;
             border-left: 3px solid {color:Border};
@@ -63,20 +68,22 @@
             color: {color:Meta link};
         }
         .tags a:before { content: '#'; }
-        .pagination { text-align: right; }
+        .pagination { margin-left: -10px; }
         .pagination a { padding: 10px; line-height: 2.5em; }
 
         #prev:after { content: '\a0\ab'; } /* &nbsp;&laquo; */
         #next:after { content: '\a0\bb'; } /* &nbsp;&raquo; */
 
-        img.album-art {
-            border: 1px solid {color:Border};
-            float: left; margin-right: 10px; margin-bottom: 10px;
-        }
+        img.album-art { float: left; margin: 0 10px 10px 0; }
         .audio figure > ul { list-style: none; }
         .audio figcaption { clear: both; }
 
         .notes { margin-top: 50px; font-size: 85%; }
+        img.avatar {
+            -webkit-box-shadow: none;
+            -moz-box-shadow: none;
+            box-shadow: none;
+        }
         li.note a.avatar_frame { vertical-align: middle; margin-right: 5px; }
         li.more_notes_link_container { list-style-type: none; }
     </style>
@@ -185,7 +192,7 @@
     {block:Audio}
     <figure>
         {block:AlbumArt}<img class="album-art" width="100" height="100" src="{AlbumArtURL}">{/block:AlbumArt}
-        {AudioPlayerGrey}
+        {AudioPlayerBlack}
         <ul>
             {block:TrackName}<li><strong>{TrackName}</strong></li>{/block:TrackName}
             {block:Artist}<li>{Artist}</li>{/block:Artist}
