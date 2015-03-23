@@ -83,8 +83,8 @@
         #next:after { content: '\a0\bb'; } /* &nbsp;&raquo; */
 
         img.album-art { float: left; margin: 0 10px 10px 0; }
-        .audio figure > ul { list-style: none; padding: 0; }
-        .audio figcaption { clear: both; }
+        .audio ul.info { list-style: none; padding: 0; }
+        .clearfix { overflow: auto; }
 
         .notes { margin-top: 50px; font-size: 85%; }
         img.avatar {
@@ -201,13 +201,17 @@
 
     {block:Audio}
     <figure>
-        {block:AlbumArt}<img class="album-art" width="100" height="100" src="{AlbumArtURL}">{/block:AlbumArt}
-        {AudioPlayerBlack}
-        <ul>
-            {block:TrackName}<li><strong>{TrackName}</strong></li>{/block:TrackName}
-            {block:Artist}<li>{Artist}</li>{/block:Artist}
-            {block:Album}<li>{Album}</li>{/block:Album}
-        </ul>
+        <div class="clearfix">
+            {block:AlbumArt}
+            <img class="album-art" width="100" height="100" src="{AlbumArtURL}">
+            {/block:AlbumArt}
+            {AudioPlayerBlack}
+            <ul class="info">
+                {block:TrackName}<li><strong>{TrackName}</strong></li>{/block:TrackName}
+                {block:Artist}<li>{Artist}</li>{/block:Artist}
+                {block:Album}<li>{Album}</li>{/block:Album}
+            </ul>
+        </div>
         {block:Caption}<figcaption>{Caption}</figcaption>{/block:Caption}
     </figure>
     {/block:Audio}
