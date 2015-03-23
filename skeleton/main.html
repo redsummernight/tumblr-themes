@@ -24,6 +24,7 @@
         }
         #blog {
             font-size: 13px; line-height: 1.4em;
+            word-wrap: break-word;
             max-width: 440px;
             margin: 0 auto; padding: 20px;
         }
@@ -31,7 +32,11 @@
         #blog > footer { margin-bottom: 2em; }
 
         h1 a { text-decoration: none; }
-        nav a { text-decoration: none; padding: 10px 0; }
+        nav a {
+            text-decoration: none;
+            text-transform: lowercase;
+            padding: 10px 0;
+        }
         nav ul { margin: 0; padding: 0; }
         nav ul li { display: inline; }
 
@@ -46,6 +51,8 @@
         article img {
             max-width: 100%; height: auto;
             vertical-align: bottom;
+        }
+        article img.photo {
             -webkit-box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.75);
             -moz-box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.75);
             box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.75);
@@ -61,7 +68,8 @@
             content: '\2014\a0'; /* &mdash;&nbsp; */
         }
 
-        .source { text-transform: lowercase; }
+        .meta { text-transform: lowercase; }
+        .meta:before { content: '\2013'; } /* &ndash; */
         .tags a {
             text-transform: lowercase;
             text-decoration: none;
@@ -75,7 +83,7 @@
         #next:after { content: '\a0\bb'; } /* &nbsp;&raquo; */
 
         img.album-art { float: left; margin: 0 10px 10px 0; }
-        .audio figure > ul { list-style: none; }
+        .audio figure > ul { list-style: none; padding: 0; }
         .audio figcaption { clear: both; }
 
         .notes { margin-top: 50px; font-size: 85%; }
@@ -118,14 +126,16 @@
 <article class="{PostType}">
     {block:Date}
     <header>
-        <a href="{Permalink}" title="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero} {24HourWithZero}:{Minutes}:{Seconds}">{ShortMonth} {DayOfMonth}, {ShortYear}</a> &ndash;
-        {block:NoteCount}{NoteCountWithLabel}{/block:NoteCount} &ndash;
-        <span class="source">
+        <a href="{Permalink}" title="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero} {24HourWithZero}:{Minutes}:{Seconds}.{Beats}">
+            {ShortMonth} {DayOfMonth}, {ShortYear}
+        </a>
+        {block:NoteCount}<span class="meta"> {NoteCountWithLabel}</span>{/block:NoteCount}
+        <span class="{block:ContentSource}meta{/block:ContentSource} {block:RebloggedFrom}meta{/block:RebloggedFrom}">
             {block:ContentSource}<a href="{SourceURL}">{SourceTitle}</a>{/block:ContentSource}
             {block:RebloggedFrom}
             {lang:Via}
             <a href="{ReblogParentURL}" title="{ReblogParentTitle}">{ReblogParentName}</a>
-            <!--<a href="{ReblogRootURL}">{ReblogRootName}</a>-->
+            <!--<a href="{ReblogRootURL}" title="{ReblogRootTitle}">{ReblogRootName}</a>-->
             {/block:RebloggedFrom}
         </span>
     </header>
@@ -139,9 +149,9 @@
     {/block:Text}
 
     {block:Photo}
-    <figure class="photo">
+    <figure>
         {block:LinkURL}<a href="{LinkURL}">{/block:LinkURL}
-        <img src="{PhotoURL-400}" alt="{PhotoAlt}" width="{PhotoWidth-400}" height="{PhotoHeight-400}" />
+        <img class="photo" src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}" />
         {block:LinkURL}</a>{/block:LinkURL}
         <!--{block:HighRes}{PhotoURL-HighRes}{/block:HighRes}-->
         {block:Caption}<figcaption>{Caption}</figcaption>{/block:Caption}
@@ -151,9 +161,9 @@
     {block:Photoset}
     <figure class="photoset" data-layout="{PhotosetLayout}">
         {block:Photos}
-        <figure class="photo">
+        <figure>
             {block:LinkURL}<a href="{LinkURL}">{/block:LinkURL}
-            <img src="{PhotoURL-400}" alt="{PhotoAlt}" width="{PhotoWidth-400}" height="{PhotoHeight-400}" />
+            <img class="photo" src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}" />
             {block:LinkURL}</a>{/block:LinkURL}
             <!--{block:HighRes}{PhotoURL-HighRes}{/block:HighRes}-->
             {block:Caption}<figcaption>{Caption}</figcaption>{/block:Caption}
