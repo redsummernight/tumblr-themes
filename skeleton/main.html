@@ -14,6 +14,7 @@
     <meta name="color:Background" content="#fafafa">
     <meta name="color:Border" content="#d3d3d3">
     <meta name="color:Text" content="#000000">
+    <meta name="color:Link" content="#0F00F0">
     <meta name="color:Meta link" content="#555">
     <style>
         body {
@@ -25,12 +26,13 @@
         #blog {
             font-size: 13px; line-height: 1.4em;
             word-wrap: break-word;
-            max-width: 440px;
+            max-width: 500px;
             margin: 0 auto; padding: 20px;
         }
         #blog > * { margin-bottom: 5em; }
         #blog > footer { margin-bottom: 2em; }
 
+        a { color: {color:Link}; }
         h1 a { text-decoration: none; }
         nav a {
             text-decoration: none;
@@ -56,6 +58,7 @@
             -webkit-box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.75);
             -moz-box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.75);
             box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.75);
+            background-color: #ccc;
         }
 
         figure.photoset figure figcaption { margin: 5px 0 15px 0; }
@@ -194,7 +197,7 @@
 
     {block:Video}
     <figure>
-        {Video-400}
+        {Video-500}
         {block:Caption}<figcaption>{Caption}</figcaption>{/block:Caption}
     </figure>
     {/block:Video}
