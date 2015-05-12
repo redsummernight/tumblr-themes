@@ -33,6 +33,7 @@
         #blog > footer { margin-bottom: 2em; }
 
         a { color: {color:Link}; }
+        a:hover { text-decoration: underline; }
         h1 a { text-decoration: none; }
         nav a {
             text-decoration: none;
@@ -129,9 +130,9 @@
 <article class="{PostType}">
     {block:Date}
     <header>
-        <a href="{Permalink}" title="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero} {24HourWithZero}:{Minutes}:{Seconds}.{Beats}">
-            {ShortMonth} {DayOfMonth}, {ShortYear}
-        </a>
+        <a href="{Permalink}"
+                title="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero} {24HourWithZero}:{Minutes}:{Seconds}.{Beats}">
+            {ShortMonth} {DayOfMonth}, {ShortYear}</a>
         {block:NoteCount}<span class="meta"> {NoteCountWithLabel}</span>{/block:NoteCount}
         <span class="{block:ContentSource}meta{/block:ContentSource} {block:RebloggedFrom}meta{/block:RebloggedFrom}">
             {block:ContentSource}<a href="{SourceURL}">{SourceTitle}</a>{/block:ContentSource}
