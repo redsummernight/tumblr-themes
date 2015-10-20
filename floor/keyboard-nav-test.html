@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+<!--
+https://developer.mozilla.org/en-US/docs/Web/Accessibility/Keyboard-navigable_JavaScript_widgets
+http://www.w3.org/TR/2009/WD-html5-20090423/editing.html
+http://www.wufoo.com/html5/attributes/27-tabindex.html
+http://www.w3.org/TR/2009/WD-wai-aria-practices-20090224/#keyboard
+-->
+    <style>
+        body {
+            font-size: 25px;
+            width: 400px;
+        }
+        figure.photoset figure {
+            display: block;
+            float: left;
+            margin: 0;
+        }
+        figure.photoset figure div {
+            width: 200px;
+            height: 30px;
+        }
+        /*
+        figure.photoset figcaption {
+            clear: left;
+        }
+        */
+        figure.photoset {
+            overflow: hidden;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<article>
+    <figure class="photoset" data-layout="1111" data-count="4">
+    <figure style="background-color: red;">
+        <div></div>
+    </figure>
+    <figure style="background-color: blue;">
+        <div></div>
+    </figure>
+    <figure style="background-color: green;">
+        <div></div>
+    </figure>
+    <figure style="background-color: yellow;">
+        <div></div>
+    </figure>
+    <figcaption>Alive</figcaption>
+    </figure>
+</article>
+<article>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ultricies dapibus tempor. Donec pharetra leo ac ligula
+    pretium facilisis. Ut nec pharetra purus. Vivamus turpis risus, varius vel enim ac, malesuada consequat odio.
+    Maecenas eu aliquam quam. Phasellus dapibus nisl est, non volutpat elit lacinia vitae. Cum sociis natoque penatibus
+    et magnis dis parturient montes, nascetur ridiculus mus. Curabitur molestie, dui ac semper mattis, diam mi sodales
+    sapien, in interdum massa neque sit amet tellus. Duis quis nulla non neque ullamcorper facilisis. Nam sem dolor,
+    blandit at erat quis, imperdiet auctor justo. Nullam ipsum massa, tincidunt ut venenatis quis, volutpat ut purus.
+</article>
+
+<article>
+    Vivamus tellus ipsum, gravida ac ultricies non, convallis quis enim. Donec at orci euismod, interdum massa et,
+    maximus sapien. Phasellus mattis libero vitae sem pulvinar congue. Fusce elementum neque sed ipsum commodo
+    dignissim. Vestibulum mauris turpis, bibendum et laoreet lacinia, congue dignissim nibh. Pellentesque eu scelerisque
+    leo, dictum laoreet ipsum. Duis id gravida dolor, tincidunt tempus justo. Sed a scelerisque justo. Curabitur ut leo
+    a tellus facilisis ultrices vel sed dolor. Morbi vel pellentesque felis. Integer vehicula finibus bibendum. Duis ut
+    justo orci. Ut at velit elit. Pellentesque et libero diam. Aliquam erat volutpat.
+</article>
+
+<article>
+    Sed euismod quis augue sit amet fringilla. Phasellus lacinia blandit elit a porta. Suspendisse et tortor purus.
+    Nulla a orci rutrum, venenatis quam id, consectetur felis. Nulla rutrum ultricies turpis, id tempus metus lacinia
+    quis. Donec non arcu eget quam luctus convallis nec id ligula. Curabitur porttitor, lectus non ultrices faucibus,
+    sem mi pretium tellus, ac congue elit turpis sit amet mi. Interdum et malesuada fames ac ante ipsum primis in
+    faucibus. Phasellus at ultricies urna. Maecenas elementum placerat tristique. Etiam rhoncus, justo at elementum
+    eleifend, nibh lorem aliquet enim, ut porta purus est quis purus.
+</article>
+
+<article>
+    Nulla facilisi. Nullam at rhoncus libero. Etiam convallis cursus odio quis posuere. Mauris a ornare quam. Sed eu
+    elit eros. Quisque vestibulum nibh neque, imperdiet suscipit leo viverra at. Sed dictum ligula non leo blandit
+    lobortis eu ac ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
+    Phasellus pulvinar erat vel sodales tristique. Cras sit amet elit a diam bibendum aliquet. Fusce non ante at nunc
+    mattis interdum quis quis sapien. Phasellus at nunc at felis tincidunt scelerisque at commodo lacus. Vivamus gravida
+    eros lobortis, suscipit dui non, eleifend dui. Donec semper, ipsum vitae volutpat euismod, risus mi sodales nulla,
+    ultrices accumsan purus tellus in nisl.
+</article>
+
+<article>
+    Maecenas non ipsum iaculis, posuere arcu sit amet, eleifend eros. Nam ut orci ac felis maximus lacinia. Nam vel
+    justo a nulla condimentum posuere. Proin vitae mi eu lacus pretium feugiat. Vestibulum non ligula in turpis euismod
+    mollis vel vestibulum dolor. Vivamus viverra convallis quam, eu accumsan massa tempor vel. Nulla malesuada sit amet
+    est quis lacinia. Suspendisse in risus nisi. Maecenas at ligula eros. Aenean tempus molestie imperdiet.
+    Maecenas non ipsum iaculis, posuere arcu sit amet, eleifend eros. Nam ut orci ac felis maximus lacinia. Nam vel
+    justo a nulla condimentum posuere. Proin vitae mi eu lacus pretium feugiat. Vestibulum non ligula in turpis euismod
+    mollis vel vestibulum dolor. Vivamus viverra convallis quam, eu accumsan massa tempor vel. Nulla malesuada sit amet
+    est quis lacinia. Suspendisse in risus nisi. Maecenas at ligula eros. Aenean tempus molestie imperdiet.
+    Maecenas non ipsum iaculis, posuere arcu sit amet, eleifend eros. Nam ut orci ac felis maximus lacinia. Nam vel
+    justo a nulla condimentum posuere. Proin vitae mi eu lacus pretium feugiat. Vestibulum non ligula in turpis euismod
+    mollis vel vestibulum dolor. Vivamus viverra convallis quam, eu accumsan massa tempor vel. Nulla malesuada sit amet
+    est quis lacinia. Suspendisse in risus nisi. Maecenas at ligula eros. Aenean tempus molestie imperdiet.
+    Maecenas non ipsum iaculis, posuere arcu sit amet, eleifend eros. Nam ut orci ac felis maximus lacinia. Nam vel
+    justo a nulla condimentum posuere. Proin vitae mi eu lacus pretium feugiat. Vestibulum non ligula in turpis euismod
+    mollis vel vestibulum dolor. Vivamus viverra convallis quam, eu accumsan massa tempor vel. Nulla malesuada sit amet
+    est quis lacinia. Suspendisse in risus nisi. Maecenas at ligula eros. Aenean tempus molestie imperdiet.
+</article>
+<blockquote>Sorry.</blockquote>
+<script>
+    var posts = document.getElementsByTagName('article'), len = posts.length, activePost = null;
+    // Use onkeydown so we can hold and keep scrolling
+    window.onkeydown = function (e) {
+        switch (e.keyCode) {
+            case 74: // j
+                jump(true);
+                break;
+            case 75: // k
+                jump(false);
+                break;
+            default:
+                if (activePost) activePost.blur();
+        }
+    };
+    function jump(down) {
+        for (var i = 0; i < len; i++) { // first to last, order important
+            var el = posts[i], last = i == len - 1;
+            // Stupid IE 11 gives a rectangle with fractional top: 0.233...
+            var top = Math.floor(el.getBoundingClientRect().top);
+            if (down) {
+                if (top > 0) {
+                    focus(el); // to next
+                    break;
+                }
+                if (last) {
+                    if (el.nextElementSibling) {
+                        focus(el.nextElementSibling); // to after last
+                    } else {
+                        window.scrollTo(0, document.body.scrollHeight); // to page bottom
+                    }
+                    break;
+                }
+            } else { // up
+                if (top >= 0) {
+                    if (el.previousElementSibling) {
+                        focus(el.previousElementSibling); // to previous post or header
+                    } else {
+                        window.scrollTo(0, 0); // to page top
+                    }
+                    break;
+                } else if (last) {
+                    focus(el); // if at page bottom, to last
+                }
+            }
+        }
+    }
+    function focus(el) {
+        if (!el) return;
+        activePost = el;
+        el.scrollIntoView();
+        // If the element is non-interactive (not a link/form item),
+        // setting tabindex to -1 makes it focusable by scripts
+        // (but not users/screenreaders).
+        if (el.tabIndex < 0) el.tabIndex = -1;
+        el.focus();
+    }
+    for (var i = len; i--;) {
+        posts[i].onclick = function (e) {
+            console.log(Math.floor(e.target.getBoundingClientRect().top));
+        }
+    }
+</script>
+</body>
+</html>
