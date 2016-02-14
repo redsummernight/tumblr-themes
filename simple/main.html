@@ -16,6 +16,10 @@
     <meta name="color:Text" content="#000000">
     <meta name="color:Link" content="#0F00F0">
     <meta name="color:Meta link" content="#555">
+    <meta name="text:Link01" content="">
+    <meta name="text:Link01 title" content="">
+    <meta name="text:Link02" content="">
+    <meta name="text:Link02 title" content="">
     <style>
         body {
             font-family: {font:Body};
@@ -39,6 +43,7 @@
             text-decoration: none;
             text-transform: lowercase;
             padding: 10px 0;
+            margin-right: 5px;
         }
         nav ul { margin: 0; padding: 0; }
         nav ul li { display: inline; }
@@ -113,6 +118,12 @@
             {block:HasPages}{block:Pages}
             <li><a href="{URL}">{Label}</a></li>
             {/block:Pages}{/block:HasPages}
+            {block:IfLink01}
+            <li><a href="{text:Link01}">{text:Link01 title}</a></li>
+            {/block:IfLink01}
+            {block:IfLink02}
+            <li><a href="{text:Link02}">{text:Link02 title}</a></li>
+            {/block:IfLink02}
         </ul>
     </nav>
 </header>
