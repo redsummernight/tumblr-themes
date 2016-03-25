@@ -151,10 +151,10 @@
             {ShortMonth} {DayOfMonth}, {ShortYear}</a>
         {block:NoteCount}<span class="meta"> {NoteCountWithLabel}</span>{/block:NoteCount}
         <span class="{block:ContentSource}meta{/block:ContentSource} {block:RebloggedFrom}meta{/block:RebloggedFrom}">
-            {block:ContentSource}<a href="{SourceURL}">{SourceTitle}</a>{/block:ContentSource}
+            {block:ContentSource}<a href="{SourceURL}" title="{lang:Source}">{SourceTitle}</a>{/block:ContentSource}
             {block:RebloggedFrom}
             {lang:Via}
-            <a href="{ReblogParentURL}" title="{ReblogParentTitle}">{ReblogParentName}</a>
+            <a href="{ReblogParentURL}" title="{lang:Reblogged from ReblogParentTitle}">{ReblogParentName}</a>
             /
             <a href="{ReblogRootURL}" title="{lang:Originally from ReblogRootTitle}">{ReblogRootName}</a>
             {/block:RebloggedFrom}
