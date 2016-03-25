@@ -28,7 +28,7 @@
             margin: 0; padding: 0;
         }
         #blog {
-            font-size: 13px; line-height: 1.4em;
+            font-size: 13px; line-height: 1.5em;
             word-wrap: break-word;
             max-width: 500px;
             margin: 0 auto; padding: 20px;
@@ -42,8 +42,8 @@
         nav a {
             text-decoration: none;
             text-transform: lowercase;
-            padding: 10px 0;
-            margin-right: 5px;
+            padding: 0.5em 0;
+            margin-right: 0.5em;
         }
         nav ul { margin: 0; padding: 0; }
         nav ul li { display: inline; }
@@ -83,8 +83,13 @@
             text-transform: lowercase;
             text-decoration: none;
             color: {color:Meta link};
+            margin-right: 0.5em;
         }
-        .tags a:before { content: '#'; }
+        .tags a:before {
+            display: inline-block;
+            content: '#';
+        }
+        .tags a:hover { text-decoration: underline; }
         .pagination { margin-left: -10px; }
         .pagination a { padding: 10px; line-height: 2.5em; }
 
