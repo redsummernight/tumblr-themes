@@ -158,7 +158,11 @@
         <a href="{Permalink}"
                 title="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero} {24HourWithZero}:{Minutes}:{Seconds}.{Beats}">
             {ShortMonth} {DayOfMonth}, {ShortYear}</a>
-        {block:NoteCount}<span class="meta"> {NoteCountWithLabel}</span>{/block:NoteCount}
+        {block:NoteCount}
+        <span class="meta">
+            {NoteCountWithLabel}
+        </span>
+        {/block:NoteCount}
         <span class="{block:ContentSource}meta{/block:ContentSource} {block:RebloggedFrom}meta{/block:RebloggedFrom}">
             {block:ContentSource}<a href="{SourceURL}" title="{lang:Source}">{SourceTitle}</a>{/block:ContentSource}
             {block:RebloggedFrom}
