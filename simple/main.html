@@ -194,15 +194,7 @@
 
     {block:Photoset}
     <figure class="photoset" data-layout="{PhotosetLayout}">
-        {block:Photos}
-        <figure>
-            {block:LinkURL}<a href="{LinkURL}">{/block:LinkURL}
-            <img class="photo" src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}" />
-            {block:LinkURL}</a>{/block:LinkURL}
-            {block:Caption}<figcaption>{Caption}</figcaption>{/block:Caption}
-        </figure>
-        {block:Photos}
-        <br>
+        {Photoset}
         {block:Photos}
         <span class="high-res-url"><a target="_blank" href="{PhotoURL-HighRes}">{PhotoWidth-HighRes}x{PhotoHeight-HighRes}</a></span>
         {/block:Photos}
