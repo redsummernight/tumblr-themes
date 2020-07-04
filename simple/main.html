@@ -36,13 +36,14 @@
         #blog > footer { margin-bottom: 2em; }
 
         a { color: {color:Link}; }
-        a:hover { text-decoration: underline; }
-        h1 a { text-decoration: none; }
         nav a {
             text-decoration: none;
             text-transform: lowercase;
-            padding: 0.5em 0;
-            margin-right: 0.5em;
+            display: inline-block;
+            padding: 10px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            border: solid 1px {color:Border};
         }
         nav ul { margin: 0; padding: 0; }
         nav ul li { display: inline; }
@@ -50,7 +51,11 @@
         article header {
             margin-bottom: 10px;
         }
-        article header a { text-decoration: none; color: {color:Meta link}; }
+        article header a {
+            text-decoration: none;
+            color: {color:Meta link};
+            border-bottom: dotted 1px;
+        }
         article footer { margin-top: 10px; }
         article iframe {
             max-width: 100%;
@@ -67,6 +72,7 @@
         }
 
         .high-res-url { font-size: 85%; margin-right: 0.5em; }
+        figure { margin: 0; }
         figure.photoset figure figcaption { margin: 5px 0 15px 0; }
         figure.photoset { counter-reset: high-res-url; }
         figure.photoset .high-res-url::before {
@@ -75,7 +81,7 @@
         }
         blockquote {
             margin: 5px 0; padding-left: 10px;
-            border-left: 3px solid {color:Border};
+            border-left: 4px solid {color:Border};
         }
         blockquote footer:before {
             float: left;
@@ -90,14 +96,12 @@
             text-decoration: none;
             color: {color:Meta link};
             margin-right: 0.5em;
+            border-bottom: dotted 1px;
         }
         .tags a:before {
             display: inline-block;
             content: '#';
         }
-        .tags a:hover { text-decoration: underline; }
-        .pagination { margin-left: -10px; }
-        .pagination a { padding: 10px; line-height: 2.5em; }
 
         #prev:after { content: '\a0\ab'; } /* &nbsp;&laquo; */
         #next:after { content: '\a0\bb'; } /* &nbsp;&raquo; */
@@ -302,7 +306,6 @@
 </nav>
 {/block:DayPagination}
 
-<footer>{lang:Powered by Tumblr 2}</footer>
 </div>
 </body>
 <script>
