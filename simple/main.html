@@ -91,14 +91,14 @@
 
         .meta { text-transform: lowercase; }
         .meta:before { content: '\2013'; } /* &ndash; */
-        .tags a {
+        a.tag {
             text-transform: lowercase;
             text-decoration: none;
             color: {color:Meta link};
             margin-right: 0.5em;
             border-bottom: dotted 1px;
         }
-        .tags a:before {
+        a.tag:before {
             display: inline-block;
             content: '#';
         }
@@ -262,9 +262,7 @@
     {block:Date}
     <footer>
         {block:HasTags}
-        <p class="tags">
-            {block:Tags}<a href="{TagURL}">{Tag}</a> {/block:Tags}
-        </p>
+        {block:Tags}<a class="tag" href="{TagURL}">{Tag}</a> {/block:Tags}
         {/block:HasTags}
         {block:PostNotes}{PostNotes}{/block:PostNotes}
     </footer>
