@@ -51,7 +51,9 @@
         article header {
             margin-bottom: 10px;
         }
-        article header a, a.high-res-url {
+        article header a,
+        a.high-res-url /* photo */,
+        .high-res-url a /* photoset */ {
             text-decoration: none;
             color: {color:Meta link};
             border-bottom: dotted 1px;
@@ -75,6 +77,7 @@
         figure { margin: 0; }
         figure.photoset figure figcaption { margin: 5px 0 15px 0; }
         figure.photoset { counter-reset: high-res-url; }
+        figure.photoset .high-res-url { display: inline-block; }
         figure.photoset .high-res-url::before {
             counter-increment: high-res-url;
             content: counter(high-res-url) ".";
