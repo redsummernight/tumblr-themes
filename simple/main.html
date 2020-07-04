@@ -51,7 +51,7 @@
         article header {
             margin-bottom: 10px;
         }
-        article header a {
+        article header a, a.high-res-url {
             text-decoration: none;
             color: {color:Meta link};
             border-bottom: dotted 1px;
@@ -71,7 +71,7 @@
             background-color: #ccc;
         }
 
-        .high-res-url { font-size: 85%; margin-right: 0.5em; }
+        .high-res-url { font-size: 80%; margin-right: 0.5em; }
         figure { margin: 0; }
         figure.photoset figure figcaption { margin: 5px 0 15px 0; }
         figure.photoset { counter-reset: high-res-url; }
@@ -115,6 +115,7 @@
             -webkit-box-shadow: none;
             -moz-box-shadow: none;
             box-shadow: none;
+            vertical-align: text-bottom;
         }
         li.note a.avatar_frame { vertical-align: middle; margin-right: 5px; }
         li.more_notes_link_container { list-style-type: none; }
