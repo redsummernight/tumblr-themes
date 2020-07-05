@@ -52,8 +52,8 @@
             margin-bottom: 10px;
         }
         article header a,
-        a.high-res-url /* photo */,
-        .high-res-url a /* photoset */ {
+        a.tag,
+        .high-res-url a {
             text-decoration: none;
             color: {color:Meta link};
             border-bottom: dotted 1px;
@@ -92,14 +92,11 @@
         }
         pre { white-space: pre-wrap; }
 
-        .meta { text-transform: lowercase; }
-        .meta:before { content: '\2013'; } /* &ndash; */
+        .source { text-transform: lowercase; }
+        .source:before { content: '\2013'; } /* &ndash; */
         a.tag {
             text-transform: lowercase;
-            text-decoration: none;
-            color: {color:Meta link};
             margin-right: 0.5em;
-            border-bottom: dotted 1px;
         }
         a.tag:before {
             display: inline-block;
@@ -167,7 +164,7 @@
                 title="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero} {24HourWithZero}:{Minutes}:{Seconds}.{Beats}">
             {ShortMonth} {DayOfMonth}, {ShortYear}</a>
         {block:NoteCount}&ndash; {NoteCountWithLabel}{/block:NoteCount}
-        <span class="{block:ContentSource}meta{/block:ContentSource} {block:RebloggedFrom}meta{/block:RebloggedFrom}">
+        <span class="{block:ContentSource}source{/block:ContentSource} {block:RebloggedFrom}source{/block:RebloggedFrom}">
             {block:ContentSource}
             {lang:Source}
             <a href="{SourceURL}" title="{lang:Source}">{SourceTitle}</a>
@@ -195,7 +192,7 @@
         <img class="photo" src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}" />
         {block:LinkURL}</a>{/block:LinkURL}
         <br>
-        <a class="high-res-url" target="_blank" href="{PhotoURL-HighRes}">{PhotoWidth-HighRes}x{PhotoHeight-HighRes}</a>
+        <span class="high-res-url"><a target="_blank" href="{PhotoURL-HighRes}">{PhotoWidth-HighRes}x{PhotoHeight-HighRes}</a></span>
         {block:Caption}<figcaption>{Caption}</figcaption>{/block:Caption}
     </figure>
     {/block:Photo}
