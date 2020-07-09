@@ -54,6 +54,7 @@
             color: {color:Meta link};
             border-bottom: dotted 1px;
         }
+        article .source { text-transform: lowercase; }
         article footer { margin-top: 10px; }
         article iframe {
             max-width: 100%;
@@ -88,8 +89,6 @@
         }
         pre { white-space: pre-wrap; }
 
-        .source { text-transform: lowercase; }
-        .source:before { content: '\2013'; } /* &ndash; */
         a.tag {
             text-transform: lowercase;
             margin-right: 0.5em;
@@ -154,18 +153,20 @@
                 title="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero} {24HourWithZero}:{Minutes}:{Seconds}.{Beats}">
             {ShortMonth} {DayOfMonth}, {ShortYear}</a>
         {block:NoteCount}&ndash; {NoteCountWithLabel}{/block:NoteCount}
-        <span class="{block:ContentSource}source{/block:ContentSource} {block:RebloggedFrom}source{/block:RebloggedFrom}">
-            {block:ContentSource}
-            {lang:Source}
+        {block:ContentSource}
+        <span class="source">
+            &ndash; {lang:Source}
             <a href="{SourceURL}" title="{lang:Source}">{SourceTitle}</a>
-            {/block:ContentSource}
-            {block:RebloggedFrom}
-            {lang:Via}
+        </span>
+        {/block:ContentSource}
+        {block:RebloggedFrom}
+        <span class="source">
+            &ndash; {lang:Via}
             <a href="{ReblogParentURL}" title="{lang:Reblogged from ReblogParentTitle}">{ReblogParentName}</a>
             /
             <a href="{ReblogRootURL}" title="{lang:Originally from ReblogRootTitle}">{ReblogRootName}</a>
-            {/block:RebloggedFrom}
         </span>
+        {/block:RebloggedFrom}
     </header>
     {/block:Date}
 
